@@ -1,0 +1,6 @@
+a[href="#"].md-nav__link {
+  pointer-events: none;
+  text-decoration: none;
+  cursor: pointer !important;
+  color: gray !important;
+}

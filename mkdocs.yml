@@ -1,0 +1,109 @@
+# Site Informate
+site_name: mkdocs
+site_dir: release
+
+docs_dir: website
+
+# Configuration
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.tabs.instant
+    - navigation.top
+    - navigation.expand
+    - navigation.tabs.sticky
+    - content.code.annotate
+    - content.code.copy
+    - content.footnote.tooltips
+    - search.highlight
+    - search.share
+    - search.suggest
+  highlightjs: true
+  locale: en
+
+extra_javascript:
+  - javascripts/highlight.min.js
+  - javascripts/cpp.min.js
+  - javascripts/bash.min.js
+  - javascripts/diff.min.js
+  - javascripts/markdown.min.js
+  - javascripts/llvm.min.js
+  - javascripts/http.min.js
+  - javascripts/loader.js
+extra_css:
+  - styles/atom-one-dark.min.css
+  - styles/styles.css
+
+markdown_extensions:
+  - md_in_html
+  - admonition
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+
+validation:
+  nav:
+    not_found: warn
+    omitted_files: warn
+    absolute_links: info
+  links:
+    not_found: warn
+    unrecognized_links: info
+    absolute_links: info
+
+# Sitemap
+nav:
+  - index.md
+  - "網頁遊戲引擎原理與實做":
+      - Example: webgame-engine/Test/page.md
+      - Overview:
+          - 介紹: "#"
+          - Cocos Creator 簡介: "#"
+          - Javascript 簡介: "#"
+          - Git: "#"
+          - Coding Style: "#"
+      - TypeScript:
+          - 基礎語法與型別: "#"
+          - 物件與類別: "#"
+          - TS vs JS: "#"
+          - 進階：深入型別: "#"
+          - strict mode: "#"
+          - this & closure: "#"
+          - microTask & macroTask: "#"
+          - promise & async/await: "#"
+      - Design Pattern:
+          - 單例模式: "#"
+          - 組合模式: "#"
+          - 觀察者模式: "#"
+          - 物件池模式: "#"
+      - Cocos Creator:
+          - Node & 坐標系統: "#"
+          - 事件系統: "#"
+          - Component 基礎介紹 , 生命週期: "#"
+          - 常用元件:
+              - UITransform & Anchor: "#"
+              - Layout: "#"
+              - UIOpacity: "#"
+              - Label & RichText: "#"
+              - Sprite: "#"
+              - Button: "#"
+              - EditorBox: "#"
+              - Toggle: "#"
+              - ProgressBar: "#"
+              - Slider: webgame-engine/Slider/page.md
+              - ScrollView: "#"
+              - PageView: "#"
+          - 動畫系統:
+              - Tween: "#"
+              - Animation: "#"
+              - Spine: "#"
+              - Cocos CurveRange Property: "#"
+              - "Optional: Particle System": "#"
+          - 音效系統:
+              - Web Audio Autoplay Policy: "#"
+              - AudioSource: "#"
+          - 資源管理:
+              - NodePool & Prefab: "#"
+              - 動態載入: "#"
+              - Bundle: "#"

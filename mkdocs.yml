@@ -55,7 +55,7 @@ validation:
 # Sitemap
 nav:
   - index.md
-  - "網頁遊戲引擎原理與實做":
+  - "網頁遊戲引擎原理與實作":
       - Example: webgame-engine/Test/page.md
       - Overview:
           - 介紹: "#"

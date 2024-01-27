@@ -62,3 +62,6 @@ nav:
 ```
 
 可以參考 `webgame-engine/overview/cocos-creator.md`
+
+4. 補上參考文件
+請參考 `Extension` 的 `Footnotes`，盡量明確指出使用的圖片素材來自哪個地方

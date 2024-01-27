@@ -1,7 +1,6 @@
 # Site Informate
 site_name: mkdocs
 site_dir: release
-
 docs_dir: website
 
 # Configuration
@@ -15,6 +14,7 @@ theme:
     - navigation.tabs.sticky
     - content.code.annotate
     - content.code.copy
+    - content.code.select
     - content.footnote.tooltips
     - search.highlight
     - search.share
@@ -31,16 +31,32 @@ extra_javascript:
   - javascripts/llvm.min.js
   - javascripts/http.min.js
   - javascripts/loader.js
+
 extra_css:
   - styles/atom-one-dark.min.css
   - styles/styles.css
 
 markdown_extensions:
   - md_in_html
+  - attr_list
   - admonition
   - footnotes
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - glightbox
 
 validation:
   nav:
@@ -56,54 +72,53 @@ validation:
 nav:
   - index.md
   - "網頁遊戲引擎原理與實做":
-      - Example: webgame-engine/Test/page.md
-      - Overview:
-          - 介紹: "#"
-          - Cocos Creator 簡介: "#"
-          - Javascript 簡介: "#"
-          - Git: "#"
-          - Coding Style: "#"
-      - TypeScript:
-          - 基礎語法與型別: "#"
-          - 物件與類別: "#"
-          - TS vs JS: "#"
-          - 進階：深入型別: "#"
-          - strict mode: "#"
-          - this & closure: "#"
-          - microTask & macroTask: "#"
-          - promise & async/await: "#"
-      - Design Pattern:
-          - 單例模式: "#"
-          - 組合模式: "#"
-          - 觀察者模式: "#"
-          - 物件池模式: "#"
+      - webgame-engine/index.md
+      - 課程總覽:
+          - webgame-engine/overview/cocos-creator.md # Cocos Creator
+          - webgame-engine/overview/javascript.md # JavaScript
+          - webgame-engine/overview/git.md # Git
+          - webgame-engine/overview/coding-style.md # Coding style
+      - JavaScript & TypeScript:
+          - webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法
+          - webgame-engine/learn-js/class-and-object.md # 類別與物件
+          - webgame-engine/learn-js/ts-js-compare.md # JS vs TS
+          - webgame-engine/learn-js/dig-deep.md # 進階：深入型別
+          - webgame-engine/learn-js/strict-mode.md # 嚴格模式
+          - webgame-engine/learn-js/this-and-closure.md # This 與 閉包
+          - webgame-engine/learn-js/task-schedule.md # 事件循環
+          - webgame-engine/learn-js/promise.md # 非同步處理
+      - 設計模式:
+          - webgame-engine/pattern/singleton.md # 單例模式
+          - webgame-engine/pattern/composition.md # 組合模式
+          - webgame-engine/pattern/observer.md # 觀察者模式
+          - webgame-engine/pattern/object-pool.md # 物件池模式
       - Cocos Creator:
-          - Node & 坐標系統: "#"
-          - 事件系統: "#"
-          - Component 基礎介紹 , 生命週期: "#"
+          - webgame-engine/cocos/basic.md # Component介紹 & 生命週期
+          - webgame-engine/cocos/node-and-coord.md # Node & 坐標系統
+          - webgame-engine/cocos/events.md # 事件系統
           - 常用元件:
-              - UITransform & Anchor: "#"
-              - Layout: "#"
-              - UIOpacity: "#"
-              - Label & RichText: "#"
-              - Sprite: "#"
-              - Button: "#"
-              - EditorBox: "#"
-              - Toggle: "#"
-              - ProgressBar: "#"
-              - Slider: webgame-engine/Slider/page.md
-              - ScrollView: "#"
-              - PageView: "#"
+              - webgame-engine/cocos/common/ui-transform-and-anchor.md # UITransform & Anchor
+              - webgame-engine/cocos/common/layout.md # Layout
+              - webgame-engine/cocos/common/ui-opacity.md # UIOpacity
+              - webgame-engine/cocos/common/label-and-richtext.md # Label & RichText
+              - webgame-engine/cocos/common/sprite.md # Sprite
+              - webgame-engine/cocos/common/button.md # Button
+              - webgame-engine/cocos/common/editor-box.md # EditorBox
+              - webgame-engine/cocos/common/toggle.md # Toggle
+              - webgame-engine/cocos/common/progress-bar.md # ProgressBar
+              - webgame-engine/cocos/common/slider.md # Slider
+              - webgame-engine/cocos/common/scroll-view.md # ScrollView
+              - webgame-engine/cocos/common/page-view.md # PageView
           - 動畫系統:
-              - Tween: "#"
-              - Animation: "#"
-              - Spine: "#"
-              - Cocos CurveRange Property: "#"
-              - "Optional: Particle System": "#"
+              - webgame-engine/cocos/animate/tween.md # Tween
+              - webgame-engine/cocos/animate/animation.md # Animation
+              - webgame-engine/cocos/animate/spine.md # Spine
+              - webgame-engine/cocos/animate/curve-range.md # Cocos CurveRange Property
+              - webgame-engine/cocos/animate/particle-system.md # Particle System
           - 音效系統:
-              - Web Audio Autoplay Policy: "#"
-              - AudioSource: "#"
+              - webgame-engine/cocos/sound/autoplay-policy.md #Web Audio Autoplay Policy
+              - webgame-engine/cocos/sound/audio-source.md #AudioSource
           - 資源管理:
-              - NodePool & Prefab: "#"
-              - 動態載入: "#"
-              - Bundle: "#"
+              - webgame-engine/cocos/resource/prefab.md # NodePool & Prefab
+              - webgame-engine/cocos/resource/dynamic-load.md # 動態載入
+              - webgame-engine/cocos/resource/bundle.md # Bundle

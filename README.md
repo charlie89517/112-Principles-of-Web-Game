@@ -33,5 +33,32 @@ mkdocs serve
 
 ## Writing standards
 
-1. 請在 `webgame-engine` 下建立 `<group>/<topic>.md` 的檔案，比方說若要撰寫
-2. 
+1. 請先查看 `mkdocs.yml` 的 `nav` 欄位，並建立對應的資料夾與markdown檔案(需注意大小寫)
+
+範例：
+```yaml
+# ... 
+nav:
+  - index.md
+  - "網頁遊戲引擎原理與實做":
+      - webgame-engine/index.md
+      - 課程總覽:
+          - webgame-engine/overview/cocos-creator.md # Cocos Creator
+# ... more content
+```
+
+因此在專案的 `webgame-engine/overview` 中，存在 `cocos-creator.md` 檔案
+該檔案的內容就是你被分配到的工作項目
+
+2. Git lfs - 請依照[Managin large files](https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github)設定 Git LFS
+可以通過設定 `git lfs install --skip-smudge`，在 pull / clone 專案時，不必把其他協作者的圖片素材也拉下來，僅在必要時使用 `git lfs pull` 即可
+
+3. 圖片素材
+統一放置在 `webgame-engine/assets` 底下，目前有一個範例圖片 `lfs.png`
+可以在該 `assets` 目錄底下額外新增資料夾，用來管理你的圖片素材。使用  Markdown 時，只需要使用絕對路徑引用即可
+
+```md
+![alter name](/webgame-engine/assets/path/to/my-image.png)
+```
+
+可以參考 `webgame-engine/overview/cocos-creator.md`

@@ -70,7 +70,8 @@ validation:
 
 # Sitemap
 nav:
-  - index.md
+  - 首頁:
+    - index.md
   - "網頁遊戲引擎原理與實做":
       - webgame-engine/index.md
       - 課程總覽:
@@ -79,6 +80,7 @@ nav:
           - webgame-engine/overview/git.md # Git
           - webgame-engine/overview/coding-style.md # Coding style
       - JavaScript & TypeScript:
+          - webgame-engine/learn-js/index.md # 基礎型別與語法
           - webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法
           - webgame-engine/learn-js/class-and-object.md # 類別與物件
           - webgame-engine/learn-js/ts-js-compare.md # JS vs TS
@@ -87,13 +89,16 @@ nav:
           - webgame-engine/learn-js/this-and-closure.md # This 與 閉包
           - webgame-engine/learn-js/task-schedule.md # 事件循環
           - webgame-engine/learn-js/promise.md # 非同步處理
+          - webgame-engine/learn-js/generator.md # 生成器與協程
+          - webgame-engine/learn-js/http-request.md # HTTP & RESTful API
+          - webgame-engine/learn-js/websocket.md # Websocket
       - 設計模式:
           - webgame-engine/pattern/singleton.md # 單例模式
           - webgame-engine/pattern/composition.md # 組合模式
           - webgame-engine/pattern/observer.md # 觀察者模式
           - webgame-engine/pattern/object-pool.md # 物件池模式
       - Cocos Creator:
-          - webgame-engine/cocos/basic.md # Component介紹 & 生命週期
+          - webgame-engine/cocos/basic.md # Component介紹 & 生命週期(包含 schedule & scheduleOnce)
           - webgame-engine/cocos/node-and-coord.md # Node & 坐標系統
           - webgame-engine/cocos/events.md # 事件系統
           - 常用元件:
@@ -110,10 +115,9 @@ nav:
               - webgame-engine/cocos/common/scroll-view.md # ScrollView
               - webgame-engine/cocos/common/page-view.md # PageView
           - 動畫系統:
-              - webgame-engine/cocos/animate/tween.md # Tween
+              - webgame-engine/cocos/animate/tween.md # Tween( 請順便介紹 Easing 與 Cocos CurveRange Property )
               - webgame-engine/cocos/animate/animation.md # Animation
               - webgame-engine/cocos/animate/spine.md # Spine
-              - webgame-engine/cocos/animate/curve-range.md # Cocos CurveRange Property
               - webgame-engine/cocos/animate/particle-system.md # Particle System
           - 音效系統:
               - webgame-engine/cocos/sound/autoplay-policy.md #Web Audio Autoplay Policy

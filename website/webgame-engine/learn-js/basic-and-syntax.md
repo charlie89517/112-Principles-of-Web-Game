@@ -40,8 +40,19 @@
 | try | typeof | var | void | volatile | while | with | yield |
 
 ### **註解(Comments)**
-- **`//` `...` - 單行註解**
-- **`/*` `...` `*/` - 跨行註解** 
+- **單行註解**
+>
+```js
+// ...
+```
+- **跨行註解** 
+>
+```js
+/* ...
+...
+...
+... */
+```
 
 
 ## **語法(Syntax)**
@@ -361,7 +372,7 @@ When all her robes are gone.`
         return Math.sqrt(leg1 * leg1 + leg2 * leg2);
     }
     
-    calcHypotenuse(3, 4)
+    console.log(calcHypotenuse(3, 4))
     ```
 
 [^1]: New Features in ES5 and ES6.

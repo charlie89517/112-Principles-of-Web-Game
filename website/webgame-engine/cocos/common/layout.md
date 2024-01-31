@@ -55,7 +55,7 @@ Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素�
 
 ## ResizeMode
 
-接下來會展示**Typ**與**ResizeMode**之間的關係，以下的介紹將以Type設定為`Horizontal`
+接下來會展示**Type**與**ResizeMode**之間的關係，以下的介紹將以Type設定為`Horizontal`
 
 ### CHILDREN
 

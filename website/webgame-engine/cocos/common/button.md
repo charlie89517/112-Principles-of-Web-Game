@@ -45,7 +45,7 @@ Button 的 Transition 用來指定 Button 時，不同狀態時要如何表現�
 
 Button 只支援 Click 事件，每當被點擊後放開後才會使用相對應Function。
 
-##### Event Structure
+##### Button Event Structure
 
 ![Event Structure](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/button/button-event.png)
 

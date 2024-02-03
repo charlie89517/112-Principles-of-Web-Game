@@ -15,14 +15,14 @@
 
 ```TypeScript
 // 載入 SpriteFrame
-resources.load("test_assets/image/spriteFrame", SpriteFrame, (err, spriteFrame) => {
+resources.load('test_assets/image/spriteFrame', SpriteFrame, (err, spriteFrame) => {
     this.node.getComponent(Sprite).spriteFrame = spriteFrame;
 });
 ```
 
 ```TypeScript
 // 載入 Texture2D
-resources.load("test_assets/image/texture", Texture2D, (err, texture) => {
+resources.load('test_assets/image/texture', Texture2D, (err, texture) => {
     const spriteFrame = new SpriteFrame();
     spriteFrame.texture = texture;
     this.node.getComponent(Sprite).spriteFrame = spriteFrame;
@@ -37,7 +37,7 @@ resources.load("test_assets/image/texture", Texture2D, (err, texture) => {
 ```TypeScript
 // 載入SpriteAtlas(圖集)，並取得其中一個SpriteFrame
 // 注意atlas資源(plist)通常會和一個同名的圖片文件(png) 放在同一個目錄下，所以要在第二個參數指定資源類型
-resources.load("test_assets/sheep", SpriteAtlas, (err, atlas) => {
+resources.load('test_assets/sheep', SpriteAtlas, (err, atlas) => {
     const frame = atlas.getSpriteFrame('sheep_down_0');
     this.node.getComponent(Sprite).spriteFrame = frame;
 });
@@ -55,17 +55,17 @@ resources.load("test_assets/sheep", SpriteAtlas, (err, atlas) => {
 
 ```TypeScript
 // 載入模型中的網格資源
-resources.load("Monster/monster", Mesh, (err, mesh) => {
+resources.load('Monster/monster', Mesh, (err, mesh) => {
     this.node.getComponent(MeshRenderer).mesh = mesh;
 });
 
 // 載入模型中的材質資源
-resources.load("Monster/monster-effect", Material, (err, material) => {
+resources.load('Monster/monster-effect', Material, (err, material) => {
     this.node.getComponent(MeshRenderer).material = material;
 });
 
 // 載入模型中的骨骼資源
-resources.load("Monster/Armature", Skeleton, (err, skeleton) => {
+resources.load('Monster/Armature', Skeleton, (err, skeleton) => {
     this.node.getComponent(SkinnedMeshRenderer).skeleton = skeleton;
 });
 ```
@@ -75,12 +75,12 @@ resources.load("Monster/Armature", Skeleton, (err, skeleton) => {
 
 ```TypeScript
 // 載入 test_assets 目錄下所有資源
-resources.loadDir("test_assets", function (err, assets) {
+resources.loadDir('test_assets', (err, assets) {
     // ...
 });
 
 // 載入 test_assets 目錄下所有 SpriteFrame，並且取得它們的路徑
-resources.loadDir("test_assets", SpriteFrame, function (err, assets) {
+resources.loadDir('test_assets', SpriteFrame, (err, assets) {
     // ...
 });
 ```

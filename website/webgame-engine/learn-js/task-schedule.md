@@ -1,10 +1,31 @@
 # Task Schedule
 
-![js-v8](/webgame-engine/assets/task-schedule/js-visual-representation.svg)
+## JavaScript 執行環境概念（Runtime concepts）
 
 JavaScript 是單線程（single threaded runtime）的程式語言，所有的程式碼片段都會在堆疊中（stack）被執行，而且一次只會執行一個程式碼片段。
 
-**堆疊**
+!!! quote
+
+    如果JavaScript是單執行緒的，那麼我們如何像在Java中那樣創建和運行執行緒？
+
+    我們使用events或設定一段程式碼在給定時間執行，這種非同步性在 JavaScript 中稱為 event loop。
+
+![js-v8](/webgame-engine/assets/task-schedule/js-visual-representation.svg)
+
+JavaScript 是由 堆疊（Stack）、堆積（Heap）、任務佇列（Task Queue） 所組成的：
+
+- Stack：用來是一種類似於數組的結構，用於追蹤當前正在執行的函數；
+- Heap ：用來分配 `new` 創建的對象；
+- Task Queue ：是用來處理非同步任務的，當該任務完成時，會指定對應回調進入佇列。
+
+!!! info
+
+    現代 JavaScript 引擎實作了及很大程度地最佳化了該圖所描述的語意。
+
+
+
+
+### 堆疊
 
 ```js
 function foo(b) {
@@ -24,7 +45,7 @@ console.log(bar(7));
 當呼叫 bar 時，會產生一個含有 bar 的參數及區域變數的 frame，而在 bar 呼叫了 foo 時，含有 foo 參數及變數的第二個 frame 就會被置於堆疊的最上面。當 foo 回傳後，最上面的 frame 會被抽離堆疊（僅留下 bar 的呼叫 frame）。然後當 bar 返回之後，堆疊就會清空。
 
 
-**阻塞**
+### 阻塞
 
 模擬一個情境：
 
@@ -39,7 +60,7 @@ cin 會嘗試取得使用者輸入, 然後輸出 "Hello, world"。但是使用�
 
 但是到了 GUI 卻相當嚴重, 比方說登入頁面, 在你輸入帳號、密碼之前, 畫面上其他部分都停止繪製, 這不是一個好的體驗
 
-**非同步與同步**
+## 概述非同步與同步
 
 為了解決阻塞的問題，我們可以透過非同步（Asynchronous）的方式來解決
 
@@ -71,7 +92,7 @@ cin 會嘗試取得使用者輸入, 然後輸出 "Hello, world"。但是使用�
 店員同樣一次也只能做一件事情，但在開始炸薯條之後他可以利用等待炸薯條的時間去煎肉排或倒飲料。
 
 
-### JavaScript 引擎架構
+## JavaScript 引擎架構
 
 ![js-v8](/webgame-engine/assets/task-schedule/js-v8.png)
 
@@ -160,3 +181,4 @@ console.log('Done')
 
 !!! info
     這邊分享一個提供視覺化更方便瞭解整個流程的工具 [Loupe](http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+

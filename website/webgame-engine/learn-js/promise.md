@@ -456,7 +456,7 @@ promise
 - `onFulfilled`：成功的值
 - `onRejected`：失敗的原因
 
-![js-promises](/webgame-engine/assets/task-schedule/js-promises.png)
+![js-promises](/webgame-engine/assets/promise/js-promises.png)
 
 這裡引用 MDN 的 Promise 流程圖：起初在 pending 狀態,接下來根據 fulfill 或是 reject,調用 onFulfillment 或是 onRejection,此時就被稱為 settled 狀態
 
@@ -749,7 +749,7 @@ fetch(targetUrl)
 
 執行結果
 
-![response](/webgame-engine/assets/task-schedule/response.png)
+![response](/webgame-engine/assets/promise/response.png)
 
 !!! note
     如果請求的站點出現404 NOT FOUND, 那麼當次 fetch 的狀態是 fulfilled
@@ -951,7 +951,7 @@ function measureTime(){
 setInterval(measureTime,1000)
 ```
 
-![timeout-problem](/webgame-engine/assets/task-schedule/timeput-problem.svg)
+![timeout-problem](/webgame-engine/assets/promise/timeout-problem.png)
 
 標籤頁在背景執行越久間隔時間會變得越來越久。
 

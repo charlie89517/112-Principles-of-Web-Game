@@ -20,7 +20,7 @@ JavaScript 是由 堆疊（Stack）、堆積（Heap）、任務佇列（Task Que
 
 !!! info
 
-    現代 JavaScript 引擎實作了及很大程度地最佳化了該圖所描述的語意。
+    現代 JavaScript 引擎實作及很大程度地最佳化了該圖所描述的語意。
 
 
 

@@ -1,14 +1,14 @@
-# Class and Object
+# 類別與物件
 
-## **類別(Class)**
+## 類別(Class)
 
 ---
 
-- **類別實際上是一種特別的 [函式(Functions)](/webgame-engine/learn-js/basic-and-syntax/#functions)**
-- **函式宣告和類別宣告的一個重要差別在於函式宣告是 提升(Hoisted) 的，但類別宣告不是**
-- **類別可用兩種方式定義，分別是 [類別宣告(Class declarations)](#class_declarations) 和 [類別表達(Class expressions)](#class_expressions)**
+- 類別實際上是一種特別的 [函式(Functions)](/webgame-engine/learn-js/basic-and-syntax/#functions)
+- 函式宣告和類別宣告的一個重要差別在於函式宣告是 可提升(Hoisted) 的，但類別宣告不是
+- 類別可用兩種方式定義，分別是 [類別宣告(Class declarations)](#class_declarations) 和 [類別表達(Class expressions)](#class_expressions)
 
-### **類別宣告(Class declarations)**
+### 類別宣告(Class declarations)
 > e.g.  
 ```js
 class Person {
@@ -19,7 +19,7 @@ class Person {
 }
 ```
 
-### **類別表達(Class expressions)**
+### 類別表達(Class expressions)
 > e.g.  
 ```js
 // unnamed(anonymous)
@@ -40,7 +40,7 @@ const Person = class PersonDetail {
 };
 ```
 
-### **方法定義(Method definitions)**
+### 方法定義(Method definitions)
 > e.g.  
 ```js
 class Person {
@@ -79,7 +79,7 @@ console.log(person.bmi); // 22.642192971863302
 console.log(person.calcBmi()); // 22.642192971863302
 ```
 
-### **欄位宣告(Field declarations)**
+### 欄位宣告(Field declarations)
 > e.g.  
 ```js
 class Person {
@@ -102,7 +102,7 @@ console.log(person.height); // 182
 console.log(person.#weight); // Syntax error
 ```
 
-### **繼承(Inheritance)**
+### 繼承(Inheritance)
 > e.g.  
 ```js
 // 父類別
@@ -146,14 +146,14 @@ console.log(adult.str()); // "Adult"
 ```
 
 
-## **物件(Object)**
+## 物件(Object)
 
 ---
 
 - 物件是用於儲存各種帶鍵容器和更複雜的資料型別
 - 物件由 建構子(Constructor) 、 靜態方法(Static methods) 、 實例屬性(Instance properties) 和 實例方法(Instance methods) 組成
 
-### **建構子(Constructor)**
+### 建構子(Constructor)
 - `Object()`
 > e.g.  
 ```js
@@ -162,7 +162,7 @@ obj.num = 15;
 console.log(obj); // { num: 15 }
 ```
 
-### **靜態方法(Static methods)**
+### 靜態方法(Static methods)
 - `Object.assign()`  
 將一個或多個來源物件的所有可枚舉自有屬性的值複製到目標物件中
 
@@ -229,11 +229,11 @@ console.log(obj); // { num: 15 }
 - `Object.values()`  
 傳回包含給定物件所有自有可枚舉字串屬性的值的陣列
 
-### **實例屬性(Instance properties)**
+### 實例屬性(Instance properties)
 - `Object.prototype.constructor`  
 建立該實例物件的建構子，對於普通的 `Object` 實例，初始值為 `Object` 建構子，其它建構函式的實例都會從它們各自的 `Constructor.prototype` 物件繼承 `constructor` 屬性
 
-### **實例方法(Instance methods)**
+### 實例方法(Instance methods)
 - `Object.prototype.hasOwnProperty()`  
 傳回布林值，用來表示一個物件本身是否包含指定的屬性，該方法並不會尋找原型鏈上繼承來的屬性
 
@@ -251,3 +251,76 @@ console.log(obj); // { num: 15 }
 
 - `Object.prototype.valueOf()`  
 傳回指定物件的基本類型值
+
+### 標準內建物件(Standard built-in objects)
+- 數值屬性(Value properties)
+    - `Infinity`
+    - `NaN`
+    - `undefined`
+    - `null`
+- 函式屬性(Function properties)
+    - `isFinite()`
+    - `isNaN()`
+    - `parseFloat()`
+    - `parseInt()`
+    - `decodeURI()`
+    - `decodeURIComponent()`
+    - `encodeURI()`
+    - `encodeURIComponent()`
+- 基礎物件(Fundamental objects)
+    - `Object`
+    - `Function`
+    - `Boolean`
+    - `Symbol`
+- 錯誤物件(Error objects)
+    - `Error`
+    - `EvalError`
+    - `InternalError`
+    - `RangeError`
+    - `ReferenceError`
+    - `SyntaxError`
+    - `TypeError`
+    - `URIError`
+- 數字、文字與日期物件(Number, text and date objects)
+    - `Number`
+    - `Math`
+    - `String`
+    - `RegExp`
+    - `Date`
+- 具索引的容器(Indexed collections)
+    - `Array`
+    - `Int8Array`
+    - `Uint8Array`
+    - `Uint8ClampedArray`
+    - `Int16Array`
+    - `Uint16Array`
+    - `Int32Array`
+    - `Uint32Array`
+    - `Float32Array`
+    - `Float64Array`
+- 具鍵值的容器(Keyed collections)
+    - `Map`
+    - `Set`
+    - `WeakMap`
+    - `WeakSet`
+- 結構化資料物件(Structured data objects)
+    - `ArrayBuffer`
+    - `SharedArrayBuffer`
+    - `Atomics`
+    - `DataView`
+    - `JSON`
+- 控制抽象化物件(Control abstraction objects)
+    - `Iterator`
+    - `AsyncIterator`
+    - `Promise`
+    - `GeneratorFunction`
+    - `AsyncGeneratorFunction`
+    - `Generator`
+    - `AsyncGenerator`
+    - `AsyncFunction`
+- 記憶體管理物件(Managing memory objects)
+    - `WeakRef`
+    - `FinalizationRegistry`
+- 映射物件(Reflection objects)
+    - `Reflect`
+    - `Proxy`

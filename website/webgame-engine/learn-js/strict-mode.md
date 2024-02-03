@@ -1,6 +1,6 @@
-# Strict Mode
+# 嚴格模式
 
-## **調用方式(Invoking)**
+## 調用方式(Invoking)
 >  
 ```js
 "use strict";
@@ -10,7 +10,7 @@
 */
 ```
 
-## **行為改變(Behavior changes)**
+## 行為改變(Behavior changes)
 - 將下列 先前可接受的誤用(previously-accepted mistakes) 轉變為 錯誤(errors)
     - 不允許賦值給未宣告的變數
     - 不允許賦值給無法賦值的物件屬性

@@ -49,14 +49,14 @@ console.log(bar(7));
 
 模擬一個情境：
 
-在 C++ 中, 可能使用 cin 或是 scanf 來得到使用者的輸入, 程式碼如下：
+在 C++ 中, 可能使用 `cin` 或是 `scanf` 來得到使用者的輸入, 程式碼如下：
 
 ```cpp
 cin >> num;
 cout << "Hello, world" << endl;
 ```
 
-cin 會嘗試取得使用者輸入, 然後輸出 "Hello, world"。但是使用者輸入之前, 畫面是不會繼續渲染的, 這在交互式的 command interface 不是問題
+`cin` 會嘗試取得使用者輸入, 然後輸出 `"Hello, world"`。但是使用者輸入之前, 畫面是不會繼續渲染的, 這在交互式的 command interface 不是問題
 
 但是到了 GUI 卻相當嚴重, 比方說登入頁面, 在你輸入帳號、密碼之前, 畫面上其他部分都停止繪製, 這不是一個好的體驗
 
@@ -127,12 +127,35 @@ console.log('Bye')
 1. setTimeout 中的 callback function 會被放到 WebAPIs 中，這時候，setTimeout 這個 function 就已經執行結束，並從堆疊中脫離
 2. 當計時器的時間到時，會把要執行的 callback function 放到工作佇列（task queue）
 3. 每次 Eventloop 的週期, 如果堆疊（stack）是空的，它便把佇列（queue）中的第一個項目放到堆疊當中；堆疊（stack）便會去執行這個項目。
+   
+
+證明 call stack 結束後, 才會執行 task queue 的工作如下：
+
+```js
+let arr = [];
+setTimeout(() => arr.push(1), 0); // Enqueue - job thread
+setTimeout(() => arr.push(2), 0); // Enqueue - job thread
+setTimeout(() => arr.push(3), 0); // Enqueue - job thread
+arr.push(4) // main thread
+console.log(arr) // [4, 1, 2, 3]
+```
+
+該程式碼揭露的：因為前面三次push是放在job thread的, 因此狀況就好像：
+
+```js
+Call Stack = [fn, fn, fn];
+Task Queue = [fn];
+
+```
+
+必須等到 Call Stack 清空後, 才會依序執行 Task Queue 內的工作
 
 !!! info
     setTimeout 與 setInterval：
 
     1. setTimeout - 經過至少多少毫秒後, 應該調用 function
     2. setInterval - 每隔至少多少毫秒後, 應該調用 function
+
 
 
 

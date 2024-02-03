@@ -36,17 +36,17 @@ obj.fn2() // 300, 因為此時 outerFn 繫結於 obj 的成員位址
 outerFn() // Error, this 並沒有 prop 這個成員
 
 ```
-this的判斷, 是先依照是不是作為某個物件的屬性或方法被調用
+`this`的判斷, 是先依照是不是作為某個物件的屬性或方法被調用
 
-在上述的例子中, 因為 outerFn 是直接以一個 function 被調用, 而不是某個物件底下的方法, 所以 this 的值為 undefined
+在上述的例子中, 因為 `outerFn` 是直接以一個 function 被調用, 而不是某個物件底下的方法, 所以 `this` 的值為 `undefined`
 
-但經過 obj.fn2 指向 outerFn, 此時 obj.fn2 同樣是調用 outerFn, 但是是以 obj的成員被調用
+但經過 `obj.fn2` 指向 `outerFn`, 此時 `obj.fn2` 同樣是調用 `outerFn`, 但是是以 `obj`的成員被調用
 
-因此 this 的值相當於 obj
+因此 `this` 的值相當於 `obj`
 
 !!! tip
 
-    this 的查找優先以上層物件的調用為主
+    `this` 的查找優先以上層物件的調用為主
 
 舉例來說：
 
@@ -81,7 +81,7 @@ obj.sub.foo() // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 
 
 !!! danger
 
-    在上述的例中, 通過 proto 屬性直接修改一個物件的原型(Prototype)
+    在上述的例中, 通過 **proto** 屬性直接修改一個物件的原型(Prototype)
 
     但真正開發中, 直接改變物件的原型是一件很不建議的事情, 同時也會影響到所有參照原型的實例
 
@@ -114,7 +114,7 @@ obj.sayName(); // 輸出 "Alice"
 
 **明確綁定：**
 
-使用 call、apply、bind，明確指出要綁定給 this 的物件。
+使用 `call`、`apply`、`bind`，明確指出要綁定給 this 的物件。
 
 ```js
 function sayName() {
@@ -131,9 +131,9 @@ sayName.bind(obj3)(); // 輸出 "Kevin"
 
 ```
 
-**new 綁定：**
+**`new` 綁定：**
 
-使用new 運算符生成構造函式時，this指向新創建的物件。
+使用`new` 運算符生成構造函式時，this指向新創建的物件。
 
 ```js
 function Person(name, age) {
@@ -167,11 +167,11 @@ obj.sayName(); // 輸出 "Alice"
 ## This指向
 
 !!! quote
-    在函式執行的過程中，this一旦被確定，那就不能更改了
+    在函式執行的過程中，`this`一旦被確定，那就不能更改了
 
-**全域中的this**
+**全域中的`this`**
 
-1. 嚴格模式下：全域中的this指向undefined，並非全域物件
+1. 嚴格模式下：全域中的`this`指向`undefined`，並非全域物件
    
 ```js
 'use strict';
@@ -179,9 +179,9 @@ obj.sayName(); // 輸出 "Alice"
 console.log(this === undefined); // 輸出 true
 
 ```
-1. 嚴格模式下：區域中的this指向全域物件，瀏覽器環境下是window，在 Node.js 環境中，全域物件是 global 物件。
+1. 嚴格模式下：區域中的this指向全域物件，瀏覽器環境下是`window`，在 Node.js 環境中，全域物件是 global 物件。
 
-**函式中的this**
+**函式中的`this`**
 
 
 !!! note
@@ -231,7 +231,7 @@ const returnObj = ( user ) => ({
 this對於一般函式來說, this 有幾種可能值：
 
 - 作為 new 建構子來說, this指向物件本身
-- 對於strict mode下直接調用函式, 函式中的 this 是 undefined
+- 對於strict mode下直接調用函式, 函式中的 this 是 `undefined`
 - 作為物件的方法呼叫時, 參考至物件上
   
 而 arrow function () => {} 的行為, 是基於詞法域(lexical), 而非語法語境(context)
@@ -240,7 +240,7 @@ this對於一般函式來說, this 有幾種可能值：
 
     箭頭函式當中的 this 綁定的是是定義時的物件，而不是使用時的物件。也就是說，在箭頭函式中，this 指稱的對象在被定義時就固定了，而不會隨著使用時的脈絡而改變。
 
-    且function a() {} 以及 let a = () => {} 絕對是不同的東西
+    且`function a() {}` 以及 `let a = () => {}` 絕對是不同的東西
 
 !!! note 
 
@@ -250,10 +250,10 @@ this對於一般函式來說, this 有幾種可能值：
 
     1. 在物件中, 方法要參照物件本身
     2. 在類別中, 宣告成員函式的情景
-    3. 使用到 Generator function* 的情況
+    3. 使用到 Generator `function*` 的情況
     4. 使用 arguments 的情況
    
-    除此之外, 都可以直接使用() => {} Arrow Function 的形式來宣告函式
+    除此之外, 都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
 
     但原則上來說, 盡可能使用展開運算替代arguments, 因此動態參數的情況, 也可以使用 arrow function
 
@@ -261,7 +261,7 @@ this對於一般函式來說, this 有幾種可能值：
 
 ### 語法域與詞法域
 
-通俗的解釋, 語法域代表的是執行期間動態決定的行為, 比方說普通函式的this、建構式的super
+通俗的解釋, 語法域代表的是執行期間動態決定的行為, 比方說普通函式的`this`、建構式的`super`
 
 而詞法域代表的是封閉範圍的前後文, 如同變數的查找一樣, 舉例來說：
 
@@ -302,9 +302,12 @@ a, b 在同一個 block, 而 c 在的block可以看到外部(block 1)
 
     當一個函式在訪問它所在的詞法環境之外的變數時，就形成了閉包。簡單來說，閉包就是一個函式能夠訪問其父級作用域中的變數
 
+
 一個閉包通常由兩個部分組成：`函式本身和創建函式時的作用域`。
 
 如果在函式內部定義了一個函式，並且這個函式訪問了父級函式的變數或參數，那麼這個內部函式就會形成一個閉包，因為它需要在父級函式執行完畢後，仍然能夠訪問到父級函式中的變數或參數。
+
+
 
 !!! info
 
@@ -316,7 +319,6 @@ a, b 在同一個 block, 而 c 在的block可以看到外部(block 1)
     4. 可能導致記憶體洩漏和性能問題。如果閉包長時間持有對大型數據結構的引用，則可能會導致記憶體洩漏。此外，閉包可能會對程序性能產生一定程度的影響，因為每個閉包都需要維護一個作用域鏈。
 
 !!! note
-
 
     **閉包的優缺點**
 
@@ -356,9 +358,9 @@ counter(); // 輸出 1
 counter(); // 輸出 2
 ```
 
-創建createCounter 函式，該函式定義變數 count 和一個內部函式 increment。當我們調用 createCounter 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 count 變數的引用。由於 count 變數是在 createCounter 函式內部定義的，因此它不會被其他代碼所訪問。
+創建`createCounter` 函式，該函式定義變數 `count` 和一個內部函式 increment。當我們調用 `createCounter` 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 `count` 變數的引用。由於 `count` 變數是在 `createCounter` 函式內部定義的，因此它不會被其他代碼所訪問。
 
-每次調用 counter 函式時，它都會執行 increment 中的代碼，並在控制台輸出當前計數器的值。由於 increment 函式捕獲了 count 變數，因此它可以增加計數器的值並在每次調用時輸出正確的結果。
+每次調用 `counter` 函式時，它都會執行 increment 中的代碼，並在控制台輸出當前計數器的值。由於 increment 函式捕獲了 `count` 變數，因此它可以增加計數器的值並在每次調用時輸出正確的結果。
 
 **模組封裝**
 

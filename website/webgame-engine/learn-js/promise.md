@@ -937,6 +937,24 @@ async function processData() {
 而瀏覽器 setTimeout 及 setInterval 會因為瀏覽器的優化策略而受到影響，導致計時器的執行時間間隔被延長。
 也就是說在背景執行的標籤頁中所使用的計時器任務有可能不會按照原先所設定的間隔時間來做執行。
 
+如下範例顯示：
+
+
+```js
+let lastTime = new Date() * 1
+function measureTime(){
+    let currentTime = new Date() * 1
+    console.log(currentTime-lastTime)
+    lastTime=currentTime
+}
+
+setInterval(measureTime,1000)
+```
+
+![timeout-problem](/webgame-engine/assets/task-schedule/timeput-problem.svg)
+
+標籤頁在背景執行越久間隔時間會變得越來越久。
+
 ### 解決方法
 
 如果需要在標籤頁背景執行時定時任務，並且定時器按照先前設定的時間間隔了時間間隔來做執行，可以考慮使用下面兩個方式

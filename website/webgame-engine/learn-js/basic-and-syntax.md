@@ -77,7 +77,7 @@ false
 0b111100 //二進制
 ```
 ```js
-074 //八進制
+0o74 //八進制
 ```
 ```js
 0x3C //十六進制
@@ -340,7 +340,7 @@ When all her robes are gone.`
 > `((x + 8) / 2) ** 2` return `25`  
 
 ### **陳述式(Statements)**
-- 陳述式通常以下列關鍵字開頭，用於決定要執行的操作
+- **陳述式通常以下列關鍵字開頭，用於決定要執行的操作**
     - var - 詳見[宣告方式(Declaring ways)](#declaring_ways)
     - let - 詳見[宣告方式(Declaring ways)](#declaring_ways)
     - const - 詳見[宣告方式(Declaring ways)](#declaring_ways)
@@ -358,21 +358,34 @@ When all her robes are gone.`
         - 包圍在括號(`()`)中，並由逗號(`,`)區隔的函式參數列表
         - 包圍在大括號(`{}`)中，定義函式功能的 [陳述式(statements)](#statements)
 
-        > e.g.  
-        ```js
-        function calcHypotenuse(leg1, leg2) {
-            return Math.sqrt(leg1 * leg1 + leg2 * leg2);
-        }
-        ```
-
-2. 呼叫函式(Calling functions)
-> e.g.  
+    > e.g.  
     ```js
     function calcHypotenuse(leg1, leg2) {
         return Math.sqrt(leg1 * leg1 + leg2 * leg2);
     }
-    
-    console.log(calcHypotenuse(3, 4))
+    ```
+
+2. 呼叫函式(Calling functions)
+> e.g.  
+```js
+function calcHypotenuse(leg1, leg2) {
+    return Math.sqrt(leg1 * leg1 + leg2 * leg2);
+}
+
+console.log(calcHypotenuse(3, 4)) // 5
+```
+
+3. 提升(Hoisting)
+    - **讓變數和函數的宣告在編譯階段就被放入記憶體，但實際位置和程式碼中完全一樣**
+
+    > e.g.  
+    ```js
+    // 因為 calcHypotenuse 在編譯階段被 Hoisting，所以能被正常執行而不報錯
+    console.log(calcHypotenuse(3, 4)) // 5
+
+    function calcHypotenuse(leg1, leg2) {
+        return Math.sqrt(leg1 * leg1 + leg2 * leg2);
+    }
     ```
 
 [^1]: New Features in ES5 and ES6.

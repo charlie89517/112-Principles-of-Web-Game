@@ -1,9 +1,9 @@
 
-## 介紹
+## Slider 介紹
 
 ![Slider實例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/slider/slider-inspector.png)
 
-### 屬性
+### Slider 屬性
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -12,16 +12,38 @@
 |**Progress**| 當前的進度值，區間為`0~1` |
 |**ClickEvent**| Slider滑動事件的列表 |
 
-##### Slider Event Structure
+#### Slider Event Structure
 
 ![Event Structure](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/slider/slider-event.png)
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
-| `Target` | 带有Script的Node。|
+| `Target` | 帶有Script的Node。|
 | `Component` | 該Node底下Script的名稱。|
 | `Handler` | Script底下欲call的function名稱。|
 | `CustomEventData` | 可以指定任意的字符作為最後一個參數傳入。 |
 
-### API
-[Button API](https://docs.cocos.com/creator/3.6/api/zh/class/Slider)
+### Slider 範例
+
+```ts
+import { _decorator, Component, Slider } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('SliderHandler')
+export class SliderHandler extends Component {
+  onLoad() {
+    const slider = this.getComponent(Slider);
+    if (slider) {
+      slider.node.on('slide', this.onSliderChange, this);
+    }
+  }
+
+  onSliderChange(slider: Slider) {
+    // slider.progress表示的是目前slider所在位置對於整個bar的比例
+    console.log('Slider value:', slider.progress);
+  }
+}
+```
+
+### Slider API
+[Slider API](https://docs.cocos.com/creator/3.6/api/zh/class/Slider)

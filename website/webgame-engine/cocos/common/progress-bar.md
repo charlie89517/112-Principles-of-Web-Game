@@ -1,11 +1,11 @@
 
-## 介紹
+## ProgressBar 介紹
 
 可以添加該component用來實現讀取條/進度條的效果
 
 ![ProgressBar示例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/progress/add-progressbar.png)
 
-## 屬性
+### ProgressBar 屬性
 
 | 屬性 | 功能說明 |
 | ------------------- | ------------------------------------- |
@@ -18,13 +18,13 @@
 !!! Note
     ***ProgressBar***的**Mode**選擇`FILLED`的情况下，**Bar Sprite**的**Type**也需要設定為`FILLED`，否則會出現警告。
 
-## 水平與垂直模式 `HORIZONTAL` & `VERTICAL`
+#### 水平與垂直模式 `HORIZONTAL` & `VERTICAL`
 
 當我們選擇`HORIZONTAL`or`VERTICAL`時***ProgressBar***會透過修改**Bar Sprite**的尺寸來感變進度條的顯示長度
 
 在這在個模式底下**Total Length**的單位是pixel，用來指定當進度條到100%時**Bar Sprite**的長度
 
-## 填充模式 FILLED
+#### 填充模式 FILLED
 
 與`HORIZONTAL`、`VERTICAL`不同的是`FILLED`會通過一定的比例進行裁剪**Bar Sprite**，因此我們需要對**Bar Sprite**中引用的****Sprite*** component做設定
 

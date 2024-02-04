@@ -1,9 +1,9 @@
 
-## 介紹
+## **Toggle 介紹**
 
 ![Toggle實例](../../assets/ToggleUIExample.png)
 
-### 屬性
+### **Toggle 屬性**
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -16,6 +16,30 @@
 
 > 注意 : 因為Toggle繼承自Button，所以其他屬性請移駕至 [Button](button.md)
 
-### API 文件
+### **Toggle 範例**
+
+![Toggle Example](../../assets/Toggle.gif)
+
+```ts
+import { _decorator, Component, Toggle } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('ToggleHandler')
+export class ToggleHandler extends Component {
+  onLoad() {
+    const toggle = this.getComponent(Toggle);
+    if (toggle) {
+      toggle.node.on('toggle', this.onToggleChange, this);
+    }
+  }
+
+  onToggleChange(toggle: Toggle) {
+    const isChecked = toggle.isChecked;
+    console.log('Toggle state changed:', isChecked ? 'On' : 'Off');
+  }
+}
+```
+
+### **Toggle API**
 
 [Toggle API](https://docs.cocos.com/creator/3.6/api/zh/class/Toggle)

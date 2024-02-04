@@ -71,7 +71,7 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
       npm install --save-dev eslint-config-prettier
       ```
 
-4. 下載[`.eslintrc.js`](/webgame-engine/assets/coding-style/.eslintrc.js)。如檔案名稱開頭少了`.`，請手動重新命名為`.eslintrc.js`
+4. 下載[`.eslintrc.js`](/webgame-engine/assets/coding-style/.eslintrc.js)，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.eslintrc.js`
 
     ![Prettier Extension](/webgame-engine/assets/coding-style/eslint13.png)
 

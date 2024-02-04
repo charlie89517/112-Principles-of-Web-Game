@@ -3,21 +3,25 @@
 ## 介紹
 WebSocket 是一種在 Web 應用程式中實現雙向通訊的協議。
 
-傳統的 HTTP 協議是一種無狀態的協議，每次請求都需要重新建立連線，並且由伺服器主動回應。
+傳統的 HTTP 協議是一種**無狀態**的協議，每次請求都需要重新建立連線，並且由伺服器主動回應。
 
-允許伺服器和客戶端之間**建立持久的連線**，以實現即時的、雙向的通訊。
+WebSocket允許伺服器和客戶端之間**建立持久的連線**，以實現即時的、雙向的通訊。
 
 * Client 不用一直發 request
 * Server 可以主動傳給 Client
 
+適用需要持續連線的場景: 聊天室、網路遊戲
+
 ## 創建一個新的WebSocket物件
 ```js
-var socket = new WebSocket('ws://example.com/websocket');
+let socket = new WebSocket('ws://example.com/websocket');
 ```
 
 * ws://example.com 
 
 * wss://example.com (有SSL加密的websocket)
+
+* 若網站用了http則不能使用wss(安全性層級不同)
 
 ## WebSocket打開連接後的處理
 ```js
@@ -61,10 +65,10 @@ function sendMessage(message) {
 ## Websocket readyState Value
 |  Value   | State  | Description |
 |  :----:  | :----:  | :----: |
-|0|CONNECTING|Socket has been created. The connection is not yet open.|
-|1|OPEN|The connection is open and ready to communicate.|
-|2|CLOSING|The connection is in the process of closing.|
-|3|CLOSED|The connection is closed or couldn't be opened.|
+|0|CONNECTING|Socket 已創建，連線尚未開啟。|
+|1|OPEN|連線已開啟並準備好進行通訊。|
+|2|CLOSING|連線正在關閉的過程中。|
+|3|CLOSED|連線已關閉或無法開啟。|
 
 ## 關閉WebSocket連接
 ```js
@@ -76,7 +80,7 @@ function closeConnection() {
 
 
 ## reference
-1. [https://forum.cocos.org/t/topic/84649](https://forum.cocos.org/t/topic/84649)
-2. [https://developer.mozilla.org/zh-TW/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications](https://developer.mozilla.org/zh-TW/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications)
-3. [https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState)
-4. [https://www.letswrite.tw/websocket/](https://www.letswrite.tw/websocket/)
+
+1. [https://developer.mozilla.org/zh-TW/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications](https://developer.mozilla.org/zh-TW/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications)
+2. [https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket/readyState)
+3. [https://www.letswrite.tw/websocket/](https://www.letswrite.tw/websocket/)

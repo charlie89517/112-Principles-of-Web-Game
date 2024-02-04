@@ -17,7 +17,6 @@
 - 有三種方法可以去指定型別 分別為 型別推斷(Type Inference) 、 型別註解(Type Annotation) 、 型別斷言(Type Assertions)
 
     1. 型別推斷(Type Inference)
-    > e.g.  
     ```ts
     // TypeScript 能依據變數宣告的值來推斷型別
     let num = 6;
@@ -25,7 +24,6 @@
     ```
 
     2. 型別註解(Type Annotation)
-    > e.g.  
     ```ts
     // TypeScript 透過能透過 冒號(:) 來手動指定型別
     let isHealth: boolean = true; // boolean variable
@@ -34,7 +32,6 @@
     ```
 
     3. 型別斷言(Type Assertions)
-    > e.g.  
     ```ts
     // 語法1: 值 as 型別
     const num = 1 as number;

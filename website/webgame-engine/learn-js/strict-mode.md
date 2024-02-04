@@ -1,7 +1,6 @@
 # 嚴格模式
 
 ## 調用方式(Invoking)
->  
 ```js
 "use strict";
 

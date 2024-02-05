@@ -1,11 +1,11 @@
-## Sprite 介紹
+## **Sprite 介紹**
 
 Sprite是 2D/3D 遊戲最常見的顯示圖像的方式，在節點上添加 Sprite 組件，就可以在場景中顯示項目資源中的圖片。
 
 <!-- 路徑要調整 -->
 ![Sprite實例](/webgame-engine/assets/cocos/common/Sprite/SpriteUIExample.PNG)
 
-### Sprite 屬性
+### **Sprite 屬性**
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -48,5 +48,5 @@ Type 屬性選擇填滿模式後，會出現一組新的屬性可供設定：
 
 而 `RADIAL` 類型中 `FillStart` 只決定開始填充的方向，`FillStart` 為 0 時，從 x 軸正方向開始填充。 `FillRange` 決定填滿總量，值為 1 時將填滿整個圓形。`FillRange` 為正值時逆時針填充，為負值時順時針填充。
 
-### Sprite API
+### **Sprite API**
 [Sprite API](https://docs.cocos.com/creator/3.6/api/zh/class/Sprite)

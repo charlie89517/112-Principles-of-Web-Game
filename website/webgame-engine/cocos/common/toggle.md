@@ -1,7 +1,6 @@
 
 ## **Toggle 介紹**
 
-<!-- 路徑要調整 -->
 ![Toggle實例](/webgame-engine/assets/cocos/common/Toggle/ToggleUIExample.png)
 
 ### **Toggle 屬性**
@@ -19,7 +18,6 @@
 
 ### **Toggle 範例**
 
-<!-- 路徑要調整 -->
 ![Toggle Example](/webgame-engine/assets/cocos/common/Toggle/Toggle.gif)
 
 ```ts

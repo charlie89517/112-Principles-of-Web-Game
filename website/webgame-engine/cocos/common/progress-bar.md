@@ -1,11 +1,11 @@
 
-## ProgressBar 介紹
+## **ProgressBar 介紹**
 
 可以添加該component用來實現讀取條/進度條的效果
 
 ![ProgressBar示例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/progress/add-progressbar.png)
 
-### ProgressBar 屬性
+### **ProgressBar 屬性**
 
 | 屬性 | 功能說明 |
 | ------------------- | ------------------------------------- |

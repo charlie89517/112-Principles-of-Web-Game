@@ -1,9 +1,9 @@
 
-## Slider 介紹
+## **Slider 介紹**
 
 ![Slider實例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/slider/slider-inspector.png)
 
-### Slider 屬性
+### **Slider 屬性**
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -12,7 +12,7 @@
 |**Progress**| 當前的進度值，區間為`0~1` |
 |**ClickEvent**| Slider滑動事件的列表 |
 
-#### Slider Event Structure
+#### **Slider Event Structure**
 
 ![Event Structure](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/slider/slider-event.png)
 
@@ -23,7 +23,7 @@
 | `Handler` | Script底下欲call的function名稱 |
 | `CustomEventData` | 可以指定任意的字符作為最後一個參數傳入 |
 
-### Slider 範例
+### **Slider 範例**
 
 ```ts
 import { _decorator, Component, Slider } from 'cc';
@@ -45,5 +45,5 @@ export class SliderHandler extends Component {
 }
 ```
 
-### Slider API
+### **Slider API**
 [Slider API](https://docs.cocos.com/creator/3.6/api/zh/class/Slider)

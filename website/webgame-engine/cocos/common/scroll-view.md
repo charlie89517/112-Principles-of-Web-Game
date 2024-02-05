@@ -1,5 +1,5 @@
 
-## ScrollView 介紹
+## **ScrollView 介紹**
 
 ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在有限的顯示區域內瀏覽更多的內容。 通常 ScrollView 會與 Mask 元件搭配使用，同時也可以加入 ScrollBar 元件來顯示瀏覽內容的位置。
 
@@ -23,7 +23,6 @@ ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在
 
 #### **ScrollView Event Structure**
 
-<!-- 路徑要調整 -->
 ![ScrollView Event Structure](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewEventExample.PNG)
 
 | 屬性   | 功能說明 |
@@ -33,6 +32,7 @@ ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在
 | `Handler` | Script 底下欲 call 的 function 名稱 |
 | `CustomEventData` | 可以指定任意的 string 作為最後一個參數傳入 |
 
+### **ScrollView 範例**
 
 ```ts
 import { _decorator, Component, ScrollView } from 'cc';

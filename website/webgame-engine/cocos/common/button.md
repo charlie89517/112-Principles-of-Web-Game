@@ -1,14 +1,14 @@
 
 ## **Button 介紹**
 
-![Button實例](../../assets/ButtonUIExample.png)
+![Button範例](/webgame-engine/assets/cocos/common/Button/ButtonUIExample.png)
 
 ### **Button 屬性**
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
-|**Target**| 點擊時需要作用於哪個目標 |
-|**Interactable**| Button 是否可以互動 |
+|**Target**| 目標Node，點擊時需要作用於哪個目標 |
+|**Interactable**| 可互動性，這個決定了Button是否可以與用戶互動 |
 |**Transition**| 選項包括`NONE`、`COLOR`、`SPRITE `、`SCALE` |
 |**ClickEvent**| Button 按鈕點擊事件的列表 |
 
@@ -47,16 +47,18 @@ Button 只支援 Click 事件，每當被點擊後放開後才會使用相對應
 
 ##### Button Event Structure
 
-![Event Structure](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/button/button-event.png)
+![ButtonEvent範例](/webgame-engine/assets/cocos/common/Button/ButtonEventExample.PNG)
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
-| `Target` | 帶有 Script 的 Node |
-| `Component` | 該 Node 底下 Script 的名稱 |
-| `Handler` | Script 底下欲 call 的 function 名稱 |
-| `CustomEventData` | 可以指定任意的字符作為最後一個參數傳入 |
+|`Target`| 事件目標是指當事件發生時應該執行哪個節點上的腳本 |
+|`Component`| 填入腳本組件的名稱，這個腳本包含了將要執行的事件處理函數 |
+|`Handler`| 選擇當事件發生時，應該使用的函數或方法 |
+|`CustomEventData`| 欄位通常是用來傳遞一個 string |
 
-### 範例
+### **Button 範例**
+
+![ButtonClickEvent範例](/webgame-engine/assets/cocos/common/Button/ButtonClickExample.gif)
 
 ```ts
 import { _decorator, Component, Button } from 'cc';
@@ -76,5 +78,6 @@ export class ButtonClickHandler extends Component {
 }
 ```
 
-### API
+### **Button API**
+
 [Button API](https://docs.cocos.com/creator/3.6/api/zh/class/Button)

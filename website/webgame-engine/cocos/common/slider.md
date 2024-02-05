@@ -18,10 +18,10 @@
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
-| `Target` | 帶有Script的Node。|
-| `Component` | 該Node底下Script的名稱。|
-| `Handler` | Script底下欲call的function名稱。|
-| `CustomEventData` | 可以指定任意的字符作為最後一個參數傳入。 |
+| `Target` | 帶有Script的Node |
+| `Component` | 該Node底下Script的名稱 |
+| `Handler` | Script底下欲call的function名稱 |
+| `CustomEventData` | 可以指定任意的字符作為最後一個參數傳入 |
 
 ### Slider 範例
 

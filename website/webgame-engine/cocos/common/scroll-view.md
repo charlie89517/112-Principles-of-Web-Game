@@ -23,7 +23,8 @@ ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在
 
 #### **ScrollView Event Structure**
 
-![ScrollView Event Structure](/webgame-engine/assets/cocos/common/ScrollViewEventExample.PNG)
+<!-- 路徑要調整 -->
+![ScrollView Event Structure](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewEventExample.PNG)
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -42,11 +43,11 @@ export class ScrollViewHandler extends Component {
   onLoad() {
     const scrollView = this.getComponent(ScrollView);
     if (scrollView) {
-      scrollView.node.on('scrolling', this.onScrolling, this);
-      scrollView.node.on('touch-up', this.onTouchUP, this);
-      scrollView.node.on('scroll-began', this.onScrollBegan, this);
-      }
+      scrollView.node.on(ScrollView.EventType.SCROLLING, this.onScrolling, this);
+      scrollView.node.on(ScrollView.EventType.TOUCH_UP, this.onTouchUP, this);
+      scrollView.node.on(ScrollView.EventType.SCROLL_BEGAN, this.onScrollBegan, this);
     }
+  }
 
   onScrolling(scrollView : ScrollView) {
     console.log("scrolling");

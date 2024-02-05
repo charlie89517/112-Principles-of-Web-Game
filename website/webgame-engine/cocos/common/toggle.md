@@ -1,7 +1,8 @@
 
 ## **Toggle 介紹**
 
-![Toggle實例](../../assets/ToggleUIExample.png)
+<!-- 路徑要調整 -->
+![Toggle實例](/webgame-engine/assets/cocos/common/Toggle/ToggleUIExample.png)
 
 ### **Toggle 屬性**
 
@@ -18,7 +19,8 @@
 
 ### **Toggle 範例**
 
-![Toggle Example](../../assets/Toggle.gif)
+<!-- 路徑要調整 -->
+![Toggle Example](/webgame-engine/assets/cocos/common/Toggle/Toggle.gif)
 
 ```ts
 import { _decorator, Component, Toggle } from 'cc';

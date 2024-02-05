@@ -1,9 +1,9 @@
 
-## 介紹
+## **Layout 介紹**
 
 Layout 是用於 UI 容器節點的組件。這個組件為容器提供了各種布局功能，以自動排列所有子節點，從而使開發者可以方便地製作列表、頁面、網格容器等。
 
-## 屬性
+### **Layout 屬性**
 
 > 注意 : 屬性會跟著**Type**切換有所不同
 
@@ -29,11 +29,9 @@ Layout 是用於 UI 容器節點的組件。這個組件為容器提供了各種
 !!! note
     Layout 組件的某些屬性更改後會在下一幀更新，如果要立即更新請使用 `updateLayout` API
 
-## Layout Type 
+### **Layout Type** 
 
-
-
-### Horizontal Layout
+#### Horizontal Layout
 
 Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素之間的距離或尺寸有變化時，Layout 組件可以自動調整，確保布局的整齊性。
 
@@ -48,20 +46,24 @@ Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素�
 - 當子元素的 `Widget` 組件有變化時，子元素的位置會自動調整，保持布局的一致性。
 
 
-### Vertical Layout
+#### Vertical Layout
 
 與Horizontal基本布局相似，不再贅述
 
+#### Grid Layout
 
-## ResizeMode
+<!-- 要補充 -->
+
+
+#### ResizeMode
 
 接下來會展示**Type**與**ResizeMode**之間的關係，以下的介紹將以Type設定為`Horizontal`
 
-### CHILDREN
+#### CHILDREN
 
 會使Layout母節點的大小調整至與子節點的大小吻合[下左]
 
-### CONTAINER
+#### CONTAINER
 
 會使Layout子節點的大小調整至與母節點吻合[下右]
 

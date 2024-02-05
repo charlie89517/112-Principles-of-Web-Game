@@ -78,12 +78,12 @@ const { ccclass, property } = _decorator;
 export class RichTextHandler extends Component {
   onLoad() {
     const richText = this.getComponent(RichText);
-      if (richText) {
-        richText.string = "Hello, <color=#00ff00>World</color>!";
-        richText.fontSize = 80;
-        richText.lineHeight = 80;
-      }
-   }
+    if (richText) {
+      richText.string = "Hello, <color=#00ff00>World</color>!";
+      richText.fontSize = 80;
+      richText.lineHeight = 80;
+    }
+  }
 }
 ```
 

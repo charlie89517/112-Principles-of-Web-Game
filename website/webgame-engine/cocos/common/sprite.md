@@ -2,7 +2,8 @@
 
 Sprite是 2D/3D 遊戲最常見的顯示圖像的方式，在節點上添加 Sprite 組件，就可以在場景中顯示項目資源中的圖片。
 
-![Sprite實例](/webgame-engine/assets/cocos/common/SpriteUIExample.PNG)
+<!-- 路徑要調整 -->
+![Sprite實例](/webgame-engine/assets/cocos/common/Sprite/SpriteUIExample.PNG)
 
 ### Sprite 屬性
 

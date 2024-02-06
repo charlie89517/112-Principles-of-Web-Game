@@ -13,7 +13,11 @@ graph LR
   A[Client] -->|request| B[Server];
 ```
 
-* 請求格式
+* 請求格式[^1]
+[^1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png
+
+[^1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png
+
 ![請求格式](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png)
 
 * Server向Client回應
@@ -25,7 +29,10 @@ graph LR
 
 ```
 
-* 回應格式
+* 回應格式[^2]
+
+[^2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_response.png
+
 ![回傳格式](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_response.png)
 
 
@@ -174,5 +181,3 @@ fetch(url, options)
 1. [https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch)
 
 1. [https://aws.amazon.com/tw/what-is/restful-api/](https://aws.amazon.com/tw/what-is/restful-api/)
-
-1. [https://isoneet.org/web-learning/sections/related-work/URL.html](https://isoneet.org/web-learning/sections/related-work/URL.html)

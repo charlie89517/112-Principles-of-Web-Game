@@ -143,8 +143,8 @@ console.log(arr) // [4, 1, 2, 3]
 該程式碼揭露的：因為前面三次push是放在job thread的, 因此狀況就好像：
 
 ```js
-Call Stack = [fn, fn, fn];
-Task Queue = [fn];
+Task Queue = [fn, fn, fn];
+Call Stack = [fn];
 
 ```
 

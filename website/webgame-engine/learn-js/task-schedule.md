@@ -133,14 +133,14 @@ console.log('Bye')
 
 ```js
 let arr = [];
-setTimeout(() => arr.push(1), 0); // Enqueue - job thread
-setTimeout(() => arr.push(2), 0); // Enqueue - job thread
-setTimeout(() => arr.push(3), 0); // Enqueue - job thread
-arr.push(4) // main thread
+setTimeout(() => arr.push(1), 0); // Enqueue - task queue
+setTimeout(() => arr.push(2), 0); // Enqueue - task queue
+setTimeout(() => arr.push(3), 0); // Enqueue - task queue
+arr.push(4) // call stack
 console.log(arr) // [4, 1, 2, 3]
 ```
 
-該程式碼揭露的：因為前面三次push是放在job thread的, 因此狀況就好像：
+該程式碼揭露的：因為前面三次push是放在task queue的, 因此狀況就好像：
 
 ```js
 Task Queue = [fn, fn, fn];

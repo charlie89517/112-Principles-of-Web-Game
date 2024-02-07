@@ -54,19 +54,23 @@
 
 
 ## AJAX
-政府有提供一系列的開放資料,可供查詢：[台北市資料大平台](https://data.taipei/#/dataset)
 
-我們這邊就使用河川水位即時資料的API來做舉例
+https://fhy.wra.gov.tw/WraApi/v1/Basic/City?$top=30
+政府有提供一系列的開放資料,可供查詢：[水利署](https://fhy.wra.gov.tw/WraApi#/)
+
+我們這邊就使用台灣雨量站的API來做舉例
 
 剛好符合即將要做的事情：透過網路從遠端取得一些資料
 
-經由 河川水位即時資料API：[https://wic.heo.taipei/OpenData/API/Water/Get?stationNo=&loginId=river&dataKey=9E2648AA](https://wic.heo.taipei/OpenData/API/Water/Get?stationNo=&loginId=river&dataKey=9E2648AA) 可以得到以下的資料：
+經由 台灣雨量站API：[https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30](https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30) 可以得到以下的資料：
 
-| 站碼 | 站台名稱       | 記錄時間      | 外水位值 |
-|-----|--------------|--------------|---------|
-| 033 | 忠三街橋     | 202402071600 |  9.98   |
-| 029 | 汐湖二橋     | 202402071550 |  1.15   |
-| 031 | 彩虹橋       | 202402071550 | -0.26   |
+
+
+| 雨量站所在地址 | 縣市代碼 |    緯度    |    經度    | 測站代碼 | 測站中文名稱 | 流域代碼 | 流域名稱 |
+|--------------|---------|------------|------------|---------|------------|---------|---------|
+| 南投縣集集鎮   |  10008  | 23.8263889 |   120.775  |  00H710 |   集集(2)   |  1510   |  濁水溪 |
+| 南投縣仁愛鄉   |  10008  | 24.0908333 | 121.032222 |  00H810 |   惠蓀(2)   |  1430   |   烏溪  |
+| 屏東縣屏東市   |  10013  |   22.655   |  120.466   |  00Q070 |   屏東(5)   |  1730   |  高屏溪 |
 
 倘若是將該表格做成網頁,內容可能會是：
 
@@ -76,36 +80,42 @@
     <div>
       <!-- 其他資料 -->
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>站碼</th>
-          <th>站台名稱</th>
-          <th>記錄時間</th>
-          <th>外水位值</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>033</td>
-          <td>忠三街橋</td>
-          <td>202402071600</td>
-          <td>9.98</td>
-        </tr>
-        <tr>
-          <td>029</td>
-          <td>汐湖二橋</td>
-          <td>202402071550</td>
-          <td>1.15</td>
-        </tr>
-        <tr>
-          <td>031</td>
-          <td>彩虹橋</td>
-          <td>202402071550</td>
-          <td>-0.26</td>
-        </tr>
-      </tbody>
-    </table>
+   <table>
+  <thead>
+    <tr>
+      <th>雨量站所在地址</th>
+      <th>縣市代碼</th>
+      <th>緯度</th>
+      <th>經度</th>
+      <th>測站代碼</th>
+      <th>測站中文名稱</th>
+      <th>流域代碼</th>
+      <th>流域名稱</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>南投縣仁愛鄉</td>
+      <td>10008</td>
+      <td>24.090833333333332</td>
+      <td>121.03222222222222</td>
+      <td>00H810</td>
+      <td>惠蓀(2)</td>
+      <td>1430</td>
+      <td>烏溪</td>
+    </tr>
+    <tr>
+      <td>屏東縣屏東市</td>
+      <td>10013</td>
+      <td>22.654999999999998</td>
+      <td>120.46638888888889</td>
+      <td>00Q070</td>
+      <td>屏東(5)</td>
+      <td>1730</td>
+      <td>高屏溪</td>
+    </tr>
+  </tbody>
+</table>
     <div>
       <!-- 其他資料 -->
     </div>
@@ -161,9 +171,9 @@
 概念如下：透過背景發起Network I/O,並等到伺服器回應後,再把資料取出來使用,實現的程式碼如下
 
 ```js
-const domain = 'wic.heo.taipei';
-const apiPath = 'OpenData/API/Water/Get';
-const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
+const domain = 'fhy.wra.gov.tw';
+const apiPath = 'WraApi/v1/Rain/Station';
+const query = '$top=30';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
@@ -729,9 +739,9 @@ result
 這就是最常用來抓取伺服器資料的方法,比方說上面那個抓取政府運輸資料的程式可改為：
 
 ```js
-const domain = 'wic.heo.taipei';
-const apiPath = 'OpenData/API/Water/Get';
-const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
+const domain = 'fhy.wra.gov.tw';
+const apiPath = 'WraApi/v1/Rain/Station';
+const query = '$top=30';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
@@ -764,9 +774,9 @@ fetch("httpp://www.google.com")
 這個例子中,誤把 http 打成 httpp,一個未知的協定,因此無法發出請求 導致直接進入 catch 階段
 
 ```js
-const domain = 'wic.heo.taipei';
-const apiPath = 'OpenData/API/Water/Get';
-const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
+const domain = 'fhy.wra.gov.tw';
+const apiPath = 'WraApi/v1/Rain/Station';
+const query = '$top=30';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 

@@ -55,7 +55,6 @@
 
 ## AJAX
 
-https://fhy.wra.gov.tw/WraApi/v1/Basic/City?$top=30
 政府有提供一系列的開放資料,可供查詢：[水利署](https://fhy.wra.gov.tw/WraApi#/)
 
 我們這邊就使用台灣雨量站的API來做舉例

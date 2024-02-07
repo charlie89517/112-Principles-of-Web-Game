@@ -30,6 +30,8 @@ extra_javascript:
   - javascripts/markdown.min.js
   - javascripts/llvm.min.js
   - javascripts/http.min.js
+  - javascripts/javascript.min.js
+  - javascripts/typescript.min.js
   - javascripts/loader.js
 
 extra_css:
@@ -80,7 +82,6 @@ nav:
           - webgame-engine/overview/git.md # Git
           - webgame-engine/overview/coding-style.md # Coding style
       - JavaScript & TypeScript:
-          - webgame-engine/learn-js/index.md # 基礎型別與語法
           - webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法
           - webgame-engine/learn-js/class-and-object.md # 類別與物件
           - webgame-engine/learn-js/ts-js-compare.md # JS vs TS

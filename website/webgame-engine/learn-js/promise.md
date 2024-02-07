@@ -161,9 +161,9 @@
 概念如下：透過背景發起Network I/O,並等到伺服器回應後,再把資料取出來使用,實現的程式碼如下
 
 ```js
-const domain = 'ptx.transportdata.tw';
-const apiPath = 'MOTC/v2/Bus/StationGroup/InterCity';
-const query = '$top=3&$format=JSON';
+const domain = 'wic.heo.taipei';
+const apiPath = 'OpenData/API/Water/Get';
+const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
@@ -729,9 +729,9 @@ result
 這就是最常用來抓取伺服器資料的方法,比方說上面那個抓取政府運輸資料的程式可改為：
 
 ```js
-const domain = 'ptx.transportdata.tw';
-const apiPath = 'MOTC/v2/Bus/StationGroup/InterCity';
-const query = '$top=3&$format=JSON';
+const domain = 'wic.heo.taipei';
+const apiPath = 'OpenData/API/Water/Get';
+const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
@@ -764,9 +764,9 @@ fetch("httpp://www.google.com")
 這個例子中,誤把 http 打成 httpp,一個未知的協定,因此無法發出請求 導致直接進入 catch 階段
 
 ```js
-const domain = 'ptx.transportdata.tw';
-const apiPath = 'MOTC/v2/Bus/StationGroup/InterCity';
-const query = '$top=3&$format=JSON';
+const domain = 'wic.heo.taipei';
+const apiPath = 'OpenData/API/Water/Get';
+const query = 'stationNo=&loginId=river&dataKey=9E2648AA';
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 

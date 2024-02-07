@@ -52,19 +52,21 @@
 
 ---
 
+
 ## AJAX
+政府有提供一系列的開放資料,可供查詢：[台北市資料大平台](https://data.taipei/#/dataset)
 
-政府有提供一系列的開放資料,可供查詢運輸的相關資料：[MOTC API](https://ptx.transportdata.tw/MOTC/)
+我們這邊就使用河川水位即時資料的API來做舉例
 
-這剛好符合即將要做的事情：透過網路從遠端取得一些資料
+剛好符合即將要做的事情：透過網路從遠端取得一些資料
 
-經由 MOTC 的 API：[https://ptx.transportdata.tw/MOTC/v2/Bus/StationGroup/InterCity?$top=3&$format=JSON](https://ptx.transportdata.tw/MOTC/v2/Bus/StationGroup/InterCity?$top=3&$format=JSON) 可以得到以下的資料：
+經由 河川水位即時資料API：[https://wic.heo.taipei/OpenData/API/Water/Get?stationNo=&loginId=river&dataKey=9E2648AA](https://wic.heo.taipei/OpenData/API/Water/Get?stationNo=&loginId=river&dataKey=9E2648AA) 可以得到以下的資料：
 
-|     識別碼  | 站點代碼 | 站點名稱 | 經度 | 緯度 | 更新時間 |
-| ----------- | -------- | ------ | ------ | ------ | ------------------------- |
-| THB100－006 | 100-006  | 台電大樓 | 121.53 |	25.01 |	2022-07-31T07:15:28+08:00 |
-| THB100－009 | 100-009  | 仁愛新生路口 | 121.53 |	25.03 |	2022-07-31T07:15:28+08:00 |
-| THB100－009 | 100-013  | 捷運忠孝新生站 | 121.53 | 25.04 | 2022-07-31T07:15:28+08:00 |
+| 站碼 | 站台名稱       | 記錄時間      | 外水位值 |
+|-----|--------------|--------------|---------|
+| 033 | 忠三街橋     | 202402071600 |  9.98   |
+| 029 | 汐湖二橋     | 202402071550 |  1.15   |
+| 031 | 彩虹橋       | 202402071550 | -0.26   |
 
 倘若是將該表格做成網頁,內容可能會是：
 
@@ -77,38 +79,30 @@
     <table>
       <thead>
         <tr>
-          <th>識別碼</th>
-          <th>站點代碼</th>
-          <th>站點名稱</th>
-          <th>經度</th>
-          <th>緯度</th>
-          <th>更新時間</th>
+          <th>站碼</th>
+          <th>站台名稱</th>
+          <th>記錄時間</th>
+          <th>外水位值</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>THB100－006</td>
-          <td>100-006</td>
-          <td>台電大樓</td>
-          <td>121.53</td>
-          <td>25.01</td>
-          <td>2022-07-31T07:15:28+08:00</td>
+          <td>033</td>
+          <td>忠三街橋</td>
+          <td>202402071600</td>
+          <td>9.98</td>
         </tr>
         <tr>
-          <td>THB100－009</td>
-          <td>100-009</td>
-          <td>仁愛新生路口</td>
-          <td>121.53</td>
-          <td>25.03</td>
-          <td>2022-07-31T07:15:28+08:00</td>
+          <td>029</td>
+          <td>汐湖二橋</td>
+          <td>202402071550</td>
+          <td>1.15</td>
         </tr>
         <tr>
-          <td>THB100－013</td>
-          <td>100-013</td>
-          <td>捷運忠孝新生站</td>
-          <td>121.53</td>
-          <td>25.04</td>
-          <td>2022-07-31T07:15:28+08:00</td>
+          <td>031</td>
+          <td>彩虹橋</td>
+          <td>202402071550</td>
+          <td>-0.26</td>
         </tr>
       </tbody>
     </table>

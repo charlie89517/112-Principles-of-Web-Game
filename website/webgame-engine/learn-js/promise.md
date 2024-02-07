@@ -941,9 +941,9 @@ async function processData() {
 
 
 ```js
-let lastTime = new Date() * 1
+let lastTime = new Date().now()
 function measureTime(){
-    let currentTime = new Date() * 1
+    let currentTime = new Date().now()
     console.log(currentTime-lastTime)
     lastTime=currentTime
 }

@@ -2,7 +2,6 @@
 
 Sprite是 2D/3D 遊戲最常見的顯示圖像的方式，在節點上添加 Sprite 組件，就可以在場景中顯示項目資源中的圖片。
 
-<!-- 路徑要調整 -->
 ![Sprite實例](/webgame-engine/assets/cocos/common/Sprite/SpriteUIExample.PNG)
 
 ### **Sprite 屬性**
@@ -53,7 +52,7 @@ Type 屬性選擇填滿模式後，會出現一組新的屬性可供設定：
 | `FillRange` | 填滿範圍的標準化數值（同樣從 0 ~ 1），設為 1，就會填滿最多整個原始影像的範圍 |
 | `Filled` | 填滿中心點，此屬性只有選擇了 `RADIAL` 填滿類型才能修改。 決定了扇形填滿時會環繞 Sprite 上的哪個點 |
 
-![Type Filled](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/sprite/radial.png)
+![Type Filled][Filled Example]
 
 #### Fill Range 填充範圍補充說明
 
@@ -94,9 +93,21 @@ Type 屬性選擇填滿模式後，會出現一組新的屬性可供設定：
 
 在預設情況下，Creator 在構建的時候輸出的是原始圖片。如果在構建時需要對某一張圖片或者自動圖集進行壓縮，可以在 資源管理器 中選中這張圖片或圖集，然後在 屬性檢查器 中勾選 useCompressTexture，再在 presetId 中選擇圖片的紋理壓縮預設。設定完成後點擊右上角的綠色打勾按鈕，即可應用。
 
-![useCompressTexture](https://docs.cocos.com/creator/3.6/manual/zh/asset/compress-texture/compress-texture.png)
+![useCompressTexture][useCompressTexture Example]
 
 ### **Sprite API**
 [Sprite API](https://docs.cocos.com/creator/3.6/api/zh/class/Sprite)
 
-[ref 圖片比較參考資料](https://medium.com/coding-girl-life/%E9%97%9C%E6%96%BC%E9%80%99%E4%BA%9B%E5%9C%96%E7%89%87%E6%A0%BC%E5%BC%8Fpng-jpeg-jpeg-xr-jpeg2000-svg-webp-%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2-88c63021f868)
+### REF
+
+[Filled Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/sprite/radial.png "圖片來源 : Sprite 组件参考"
+
+[useCompressTexture Example]: https://docs.cocos.com/creator/3.6/manual/zh/asset/compress-texture/compress-texture.png "圖片來源 : 压缩纹理"
+
+[圖片比較參考資料](https://medium.com/coding-girl-life/%E9%97%9C%E6%96%BC%E9%80%99%E4%BA%9B%E5%9C%96%E7%89%87%E6%A0%BC%E5%BC%8Fpng-jpeg-jpeg-xr-jpeg2000-svg-webp-%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2-88c63021f868)
+
+[Sprite 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/sprite.html?h=sprite)
+
+[图集资源（Atlas）](https://docs.cocos.com/creator/3.6/manual/zh/asset/atlas.html)
+
+[压缩纹理](https://docs.cocos.com/creator/3.6/manual/zh/asset/compress-texture.html)

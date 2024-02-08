@@ -3,7 +3,7 @@
 
 可以添加該component用來實現讀取條/進度條的效果
 
-![ProgressBar示例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/progress/add-progressbar.png)
+![ProgressBar示例](/webgame-engine/assets/cocos/common/ProgressBar/ProgressBarUIExample.png)
 
 ### **ProgressBar 屬性**
 
@@ -32,4 +32,13 @@
 
 > 下圖的範例顯示了當**Bar Sprite**的**Type**設定為`RADIAL`時不同的**Total Length**對其影響
 
-![FILLED範例](https://docs.cocos.com/creator/2.4/manual/zh/ui/ui-components/filled_radial.png)
+![FILLED範例][Filled Example]
+
+### REF
+
+[Filled Example]: https://docs.cocos.com/creator/2.4/manual/zh/ui/ui-components/filled_radial.png "圖片來源 : 常用 UI 控件(2.4)"
+
+[常用 UI 控件(2.4)](https://docs.cocos.com/creator/2.4/manual/zh/ui/ui-components.html)
+
+[ProgressBar 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/progress.html)
+

@@ -30,8 +30,9 @@ PageView 是一種頁面的容器
 |**Handler**| 選擇當事件發生時，應該使用的函數或方法 |
 |**CustomEventData**| 欄位通常是用來傳遞一個 string |
 
-> 注意 : 不建議使用，因不好debug
-
+!!!tip
+    建議此類的事件一率寫在 script 中，不要使用拉 Node 的方式綁定事件，方便 debug
+    
 ### **PageView 範例**
 
 ![PageViewEvent範例](/webgame-engine/assets/cocos/common/PageView/PageViewEventExample.PNG)
@@ -56,3 +57,7 @@ export class PageViewHandler extends Component {
 ### **PageView API**
 
 [PageView API](https://docs.cocos.com/creator/3.6/api/zh/class/PageView)
+
+### REF
+
+[PageView 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/pageview.html?h=page)

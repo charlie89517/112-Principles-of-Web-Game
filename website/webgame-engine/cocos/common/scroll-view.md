@@ -3,8 +3,8 @@
 
 ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在有限的顯示區域內瀏覽更多的內容。 通常 ScrollView 會與 Mask 元件搭配使用，同時也可以加入 ScrollBar 元件來顯示瀏覽內容的位置。
 
-![ScrollView 呈現範例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scroll/scrollview-content.png)
-![ScrollView UI範例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scroll/scrollview-inspector.png)
+![ScrollView 呈現範例][ScrollView Example]
+![ScrollView UI範例](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewUIExample.PNG)
 
 ### **ScrollView 屬性**
 
@@ -67,6 +67,11 @@ export class ScrollViewHandler extends Component {
 }
 ```
 
-
 ### ScrollView API
 [Slider API](https://docs.cocos.com/creator/3.6/api/zh/class/ScrollView)
+
+### REF
+
+[ScrollView Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scroll/scrollview-content.png "圖片來源 : ScrollView 组件参考"
+
+[ScrollView 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scrollview.html?h=scroll)

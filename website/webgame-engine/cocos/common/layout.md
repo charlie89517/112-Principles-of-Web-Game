@@ -37,7 +37,7 @@ Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素�
 
 - **AutoAlignment（自動對齊）**：在設定為橫向或縱向布局時有效，下圖為AutoAlignment取消後自行調整子節點的高度設定
 
-![無使用AutoAlignment後可自行設定其高度](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/auto-layout/horizontal-no-align.png)
+![NoAutoAlignment][horizontal-no-align]
 
 水平布局的幾個常見使用場景包括：
 
@@ -52,7 +52,25 @@ Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素�
 
 #### Grid Layout
 
-Grid Layout會在固定容器大小内，根据 `HorizontalDirection` 和 `VerticalDirection` 组合决定布局起点，根据 StartAxis 属性决定布局方向。
+Layout 依照子節點在 Hierarchy 中顯示的順序以及 StartAxis 屬性設定的起點和對齊方向來排列子節點。
+
+1. **StartAxis** : 設定為`HORIZONTAL`或`VERTICAL`方向。 前者將水平對齊，後者垂直對齊。
+
+2. Start point : 起點是透過組合 **Horizo​​​​ntalDirection** 和 **VerticalDirection** 創建的。
+
+    假設 **Horizo​​ntalDirection** 為 `LEFT_TO_RIGHT`，**VerticalDirection** 為 `TOP_TO_BOTTOM`，則起點為左上角。
+
+    假設 **Horizo​​ntalDirection** 為 `RIGHT_TO_LEFT`，**VerticalDirection** 為 `BOTTOM_TO_TOP`，則起點為右下角。
+
+結合對齊方向給出兩個範例：
+
+ - 如果 **Horizo​​ntalDirection** 為 `LEFT_TO_RIGHT`， **VerticalDirection** 為 `TOP_TO_BOTTOM`，**StartAxis** 為 `HORIZONTAL`。 這告訴組件從容器的左上角（左下方）開始水平排序。
+
+ - 如果目前設定的 **Horizo​​ntalDirection** 為`RIGHT_TO_LEFT`， **VerticalDirection** 為 `BOTTOM_TO_TOP`，**StartAxis** 為 `VERTICAL` ，則告訴組件從容器的右下角（下圖右側）開始垂直排序。
+
+## Footnotes
+
+![Grid範例][Grid Example]
 
 #### ResizeMode
 
@@ -66,6 +84,16 @@ Grid Layout會在固定容器大小内，根据 `HorizontalDirection` 和 `Verti
 
 會使Layout子節點的大小調整至與母節點吻合[下右]
 
-###
+![ResizeMode實例][ResizeMode Example]
 
-![ResizeMode實例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/auto-layout/horizontal-resizemode.png)
+### REF
+
+[horizontal-no-align]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/auto-layout/horizontal-no-align.png "圖片來源：自动布局容器"
+
+[Grid Example]: https://docs.cocos.com/creator/3.6/manual/en/ui-system/components/engine/auto-layout/grid-layout.png "圖片來源：自动布局容器"
+
+[ResizeMode Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/auto-layout/horizontal-resizemode.png "圖片來源：自动布局容器"
+
+[Layout 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/layout.html)
+
+[自动布局容器](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/auto-layout.html)

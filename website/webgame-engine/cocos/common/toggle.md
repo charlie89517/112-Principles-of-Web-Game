@@ -43,3 +43,7 @@ export class ToggleHandler extends Component {
 ### **Toggle API**
 
 [Toggle API](https://docs.cocos.com/creator/3.6/api/zh/class/Toggle)
+
+### REF
+
+[Toggle 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/toggle.html?h=toggle)

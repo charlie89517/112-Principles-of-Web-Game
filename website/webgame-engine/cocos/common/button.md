@@ -56,6 +56,9 @@ Button 只支援 Click 事件，每當被點擊後放開後才會使用相對應
 |`Handler`| 選擇當事件發生時，應該使用的函數或方法 |
 |`CustomEventData`| 欄位通常是用來傳遞一個 string |
 
+!!!tip
+    建議此類的事件一率寫在 script 中，不要使用拉 Node 的方式綁定事件，方便 debug
+
 ### **Button 範例**
 
 ![ButtonClickEvent範例](/webgame-engine/assets/cocos/common/Button/ButtonClickExample.gif)
@@ -96,3 +99,7 @@ export class ButtonClickHandler extends Component {
 ### **Button API**
 
 [Button API](https://docs.cocos.com/creator/3.6/api/zh/class/Button)
+
+### Ref
+
+[Button](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/button.html)

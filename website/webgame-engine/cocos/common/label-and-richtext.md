@@ -2,7 +2,7 @@
 
 Label 組件用來顯示一段文字，文字可以是系統字體、TrueType 字體、BMFont 字體或藝術數字。另外，Label 還具有排版功能。
 
-![Label 範例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label/label-property.png)
+![Label 範例][Label Example]
 
 ### **Label 屬性**
 
@@ -24,6 +24,17 @@ Label 組件用來顯示一段文字，文字可以是系統字體、TrueType �
 |**IsBold**| 是否使用粗體，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 |**IsItalic**| 是否使用斜體，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 |**IsUnderline**| 是否使用底線，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
+
+### **Label 排版**
+
+| 屬性   | 功能說明 |
+| ------------------- | ------------------------------ |
+| `CLAMP` | 文字大小不會隨著 **UITransform** `contentSize` 的變化而放大/縮小。</br>當停用**Wrap Text**時，超出寬度的文字將根據正常字元佈局進行剪裁。</br>當啟用**Wrap Text**時，它將嘗試將超出邊界的文字換行到下一行。 如果垂直空間不夠，超出範圍的文字也會被隱藏 |
+| `SHRINK` | 文字大小可以隨著 **UITransform** `contentSize` 的變化而縮小（不會自動放大，顯示的最大大小由 **FontSize** 指定）。</br>當啟用**Wrap Text**時，如果寬度不夠，它會先嘗試將文字換行到下一行。</br>那麼無論文字是否換行，如果文字仍然超過 **UITransform** 的 `contentSize`，則會自動縮小以適合邊界。</br>注意：此模式在標籤刷新時可能會消耗較多的CPU資源。 |
+| `RESIZE_HEIGHT` | **UITransform** `contentSize` 將進行調整，以確保文字完全顯示在其邊界中。 開發者無法手動更改 **UITransform**  中文字的高度，它是由內部演算法自動計算的。 |
+
+!!! note
+    若 **Overflow** 設定為 `NONE`，`Content Size` 將自動計算，從而導致 **HorizontalAlign** 看不出效果，這時可以透過調整 `Anchor Point` 將設定`Content`的起始點達到置左置右的功能
 
 ### **Label 範例**
 
@@ -56,7 +67,7 @@ export class LabelHandler extends Component {
 
 RichText 組件用來顯示一段帶有不同樣式效果的文字，你可以通過一些簡單的 [BBCode 標籤](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richtext.html#bbcode-%E6%A0%87%E7%AD%BE%E6%A0%BC%E5%BC%8F)來設置文字的樣式。目前支持的樣式有：顏色（color）、字體大小（size）、字體描邊（outline）、加粗（b）、斜體（i）、下劃線（u）、換行（br）、圖片（img）和點擊事件（on），並且不同的 BBCode 標籤是可以支持相互嵌套的。
 
-![RichText 範例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richText/richtext.png)
+![RichText 範例][RichText Example]
 
 ### **RichText 屬性**
 
@@ -96,3 +107,13 @@ export class RichTextHandler extends Component {
 ### **RichText API**
 
 [RichText API](https://docs.cocos.com/creator/3.6/api/zh/class/RichText)
+
+### REF
+
+[Label Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label/label-property.png "圖片來源：Label 组件参考"
+
+[RichText Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richText/richtext.png "圖片來源：RichText 组件参考"
+
+[Label 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label.html?h=label)
+
+[RichText 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richtext.html?h=rich)

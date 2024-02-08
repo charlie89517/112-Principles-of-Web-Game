@@ -31,6 +31,9 @@
 |**Editing Did Ended**| 取消輸入(按下回車或是點擊其他地方)時觸發 |
 |**Text Changed**| 每一次的文字變更都會觸發 |
 
+!!!tip
+    建議此類的事件一率寫在 script 中，不要使用拉 Node 的方式綁定事件，方便 debug
+
 ```ts
 import { _decorator, Component, EditBox, Label } from 'cc';
 const { ccclass, property } = _decorator;
@@ -65,3 +68,7 @@ export class EditorboxHandler extends Component {
 ### **Editor box API**
 
 [EditBox API](https://docs.cocos.com/creator/3.6/api/zh/class/EditBox)
+
+### REF
+
+[EditBox 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/editbox.html?h=edit)

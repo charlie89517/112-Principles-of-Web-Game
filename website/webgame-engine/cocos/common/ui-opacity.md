@@ -3,7 +3,7 @@
 
 可以透過該component調整UI的透明度，而實現淡入淡出的效果
 
-![ProgressBar示例](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/uiopacity/ui-opacity.png)
+![UIOpacity示例][UIOpacity Example]
 
 
 ### **UIOpacity 屬性**
@@ -27,3 +27,10 @@ opacityComp.opacity = 157;
 ### **UIOpacity API**
 
 [UIOpacity API](https://docs.cocos.com/creator/3.6/api/zh/class/UIOpacity)
+
+
+### REF
+
+[UIOpacity Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/uiopacity/ui-opacity.png "圖片來源：UIOpacity（透明度设置）组件参考"
+
+[UIOpacity（透明度设置）组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/ui-opacity.html)

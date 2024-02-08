@@ -20,26 +20,32 @@ Label 組件用來顯示一段文字，文字可以是系統字體、TrueType �
 |**EnableWrapText**| 是否啟用換行（在**Overflow**設定為 `CLAMP`、`SHRINK` 時生效） |
 |**Font**| 指定文本渲染需要的[字體資源](https://docs.cocos.com/creator/3.6/manual/zh/asset/font.html)。若要使用藝術數字字體，請參考[藝術數字資源](https://docs.cocos.com/creator/3.6/manual/zh/asset/label-atlas.html)進行設定。如果使用系統字體，則此屬性可以為空 |
 |**UseSystemFont**| 是否使用系统字型 |
-|**CacheMode**| 文本暫存類型，只對**系统字体** 或**TTF**字型有效，BMFont 字型不須設定。選項包括`NONE`、`BITMAP`、`CHAR`，詳情請參考[Cache Mode](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label.html#%E6%96%87%E6%9C%AC%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B%EF%BC%88cache-mode%EF%BC%89) |
+|**CacheMode**| *進階用多數用來做效能優化* 文本暫存類型，只對**系统字体** 或**TTF**字型有效，BMFont 字型不須設定。選項包括`NONE`、`BITMAP`、`CHAR`，詳情請參考[Cache Mode](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label.html#%E6%96%87%E6%9C%AC%E7%BC%93%E5%AD%98%E7%B1%BB%E5%9E%8B%EF%BC%88cache-mode%EF%BC%89) |
 |**IsBold**| 是否使用粗體，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 |**IsItalic**| 是否使用斜體，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 |**IsUnderline**| 是否使用底線，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 
 ### **Label 範例**
 
+!!! note
+    Color 有提供靜態屬性快速使用，詳情請參考[Color](https://docs.cocos.com/creator/3.6/api/zh/class/math.Color)
+
 ```ts
-import { _decorator, Component, RichText } from 'cc';
+import { _decorator, Color, Component, Label } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('RichTextHandler')
-export class RichTextHandler extends Component {
+@ccclass('LabelHandler')
+export class LabelHandler extends Component {
   onLoad() {
-    const richText = this.getComponent(RichText);
-    if (richText) {
-      richText.string = "Hello, <color=#00ff00>World</color>!";
+    const label = this.getComponent(Label);
+    if (label) {
+      label.string= "Hello, World!";
+      // 可透過程式控制更改其顏色
+      label.color = Color.GRAY;
     }
   }
 }
+
 ```
 
 ### **Label API**

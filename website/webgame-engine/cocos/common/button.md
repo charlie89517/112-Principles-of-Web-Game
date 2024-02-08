@@ -41,7 +41,7 @@ Button 的 Transition 用來指定 Button 時，不同狀態時要如何表現�
 | `Duration` | 	Button 狀態切換所需要的時間。|
 | `ZoomScale` | 當 Button 被點擊後， Button 會縮放到一個值，這個值等於 Button 的 scale * `zoomScale`，`zoomScale` 可以 < 0。|
 
-#### Button ClickEvent
+#### Button Event
 
 Button 只支援 Click 事件，每當被點擊後放開後才會使用相對應Function。
 
@@ -77,6 +77,21 @@ export class ButtonClickHandler extends Component {
   }
 }
 ```
+
+#### Button 使用技巧
+
+##### 按鈕的交互性(interactable)與事件處理
+
+ - 當 Button 的 **interactable** 屬性設置為 `false` 時，按鈕將處於禁用(disabled)狀態，這意味著按鈕的 Transition 狀態也會變成 `disabled` ，並且 **Button.EventType.CLICK** 事件將不會被觸發。
+ - 即使按鈕處於禁用狀態，一般的 **Node.EventType** 系列事件（如 **TOUCH_END**）仍然可以被觸發。
+ - 通常，開發者會通過程式碼動態控制按鈕的 `interactable` 屬性（button.interactable = boolean）來啟用或禁用按鈕。
+ - 當需要處理點擊事件時，建議優先使用 **Button.EventType.CLICK** 而非 **Node.EventType** 系列事件。
+
+##### 事件發泡與阻止機制
+
+ - Button組件會阻止事件的進一步傳遞（事件發泡），就是當你點擊按鈕時，parent Node不會接收到該事件。
+ - 有些開發者利用這一特性，通過在需要禁止點擊的區域覆蓋一個透明按鈕來阻止事件的觸發。
+
 
 ### **Button API**
 

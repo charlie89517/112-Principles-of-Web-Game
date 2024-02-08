@@ -18,6 +18,19 @@ Sprite是 2D/3D 遊戲最常見的顯示圖像的方式，在節點上添加 Spr
 |**SizeMode**| 指定 Sprite 的尺寸： <br> `Trimmed` 表示會使用原始圖片資源裁剪透明像素後的尺寸 <br> `Raw` 表示會使用原始圖片未經裁剪的尺寸 <br> `Custom` 表示會使用自定義尺寸。當用戶手動修改過 Size 屬性後，Size Mode 會被自動設置為 `Custom`，除非再次指定為前兩種尺寸 |
 |**Trim**| 是否渲染原始圖像周圍的透明像素區域，請參考[圖像自動剪裁](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/engine/trim.html) |
 
+#### Cocos Sprite圖片處理
+
+自動裁剪透明區域：
+
+ - 在Cocos引擎中，為了優化資源的使用，引擎會自動裁掉Sprite圖片周圍的無用透明區域。
+
+> 注意 : 這樣的自動裁剪可能會造成圖片在遊戲中對位錯誤，尤其是在進行逐幀動畫時，因為每一幀的尺寸可能會因為裁剪而不一致，為避免此類狀況會把**Size Mode**設成 `Raw` & `Trim` = `false` ，他就會用原始圖片處理
+
+資源優化的目的：
+
+ - 進行裁剪的主要目的是為了節省記憶體和其他資源。
+ - 一般來說，Texture（紋理）多半使用的是RGBA8888格式，這意味著每個像素（px）會佔用32bit = 4Byte，以 500x500 為例 他的記憶體就會佔掉  500x500x4Byte = 1MB
+
 #### Sprite Type
 
 Sprite 元件支援以下幾種**Type**：
@@ -48,5 +61,42 @@ Type 屬性選擇填滿模式後，會出現一組新的屬性可供設定：
 
 而 `RADIAL` 類型中 `FillStart` 只決定開始填充的方向，`FillStart` 為 0 時，從 x 軸正方向開始填充。 `FillRange` 決定填滿總量，值為 1 時將填滿整個圓形。`FillRange` 為正值時逆時針填充，為負值時順時針填充。
 
+#### 常見的圖片格式
+
+| 圖片格式 | 說明 |
+| ------------------- | ------------------------------ |
+| PNG | 靜態影像格式，是以非破壞性壓縮進行壓縮，導致 PNG 的檔案大小相較於 JPG大了一些 |
+| JPG | 靜態影像壓縮格式，一種針對相片影像而廣泛使用的一種失真壓縮標準方法。由於是採用失真壓縮演算法，因此壓縮率比 PNG 還要大 |
+| WebP | Google 推出的一種圖檔規格，跟相當普級的 JPEG 同樣採用失真壓縮(Lossy Compression)的技術，讓圖片檔案能變小，在相同品質的情況下，可以比 JPEG 再小 25%~34% |
+
+!!! note
+    - 一般含透明的圖片以WebP優先
+    - 非透明圖片則使用JPG
+    - 在構建項目的階段處理
+    
+#### SpriteAtlas
+
+圖集，亦稱為 **Sprite Sheet**，是遊戲開發中常用的美術資源。
+
+它是通過專門的工具將多張圖片合併成一張大圖，並利用如**plist**文件格式來索引這些圖片。
+
+在 Cocos Creator 中使用的圖集資源一般由**plist**和**png**文件組成。
+
+| 優點 | 說明 |
+| ------------------- | ------------------------------ |
+| 節省空間 | 合成圖集時會刪除每張圖片周圍的空白區域，並且可以實施各種優化算法，從而大幅度減少遊戲的包體大小和內存佔用。 |
+| 渲染優化 | 當多個 Sprite 渲染的是來自同一張圖集的圖片時，這些 Sprite 可以通過同一個渲染批次來處理，這樣可以顯著降低CPU的運算時間，提升遊戲運行的效率。 |
+
+!!! note
+    - TexturePacker
+
+#### Compress Texture
+
+在預設情況下，Creator 在構建的時候輸出的是原始圖片。如果在構建時需要對某一張圖片或者自動圖集進行壓縮，可以在 資源管理器 中選中這張圖片或圖集，然後在 屬性檢查器 中勾選 useCompressTexture，再在 presetId 中選擇圖片的紋理壓縮預設。設定完成後點擊右上角的綠色打勾按鈕，即可應用。
+
+![useCompressTexture](https://docs.cocos.com/creator/3.6/manual/zh/asset/compress-texture/compress-texture.png)
+
 ### **Sprite API**
 [Sprite API](https://docs.cocos.com/creator/3.6/api/zh/class/Sprite)
+
+[ref 圖片比較參考資料](https://medium.com/coding-girl-life/%E9%97%9C%E6%96%BC%E9%80%99%E4%BA%9B%E5%9C%96%E7%89%87%E6%A0%BC%E5%BC%8Fpng-jpeg-jpeg-xr-jpeg2000-svg-webp-%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2-88c63021f868)

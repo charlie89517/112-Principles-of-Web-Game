@@ -34,6 +34,10 @@ ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在
 
 ### **ScrollView 範例**
 
+!!! note
+    類似ScrollView 這種比較複雜的UI元件，建議右鍵新增直接選ScrollView的話他會建一個完整的範例出來，就不用新增Component後還要手動新增節點
+
+
 ```ts
 import { _decorator, Component, ScrollView } from 'cc';
 const { ccclass, property } = _decorator;

@@ -31,6 +31,37 @@
 |**Editing Did Ended**| 取消輸入(按下回車或是點擊其他地方)時觸發 |
 |**Text Changed**| 每一次的文字變更都會觸發 |
 
+```ts
+import { _decorator, Component, EditBox, Label } from 'cc';
+const { ccclass, property } = _decorator;
+
+@ccclass('EditorboxHandler')
+export class EditorboxHandler extends Component {
+  @property(EditBox)
+  private editBox : EditBox = null;
+  @property(Label)
+  private label : Label = null;
+
+  onLoad(): void {
+    this.editBox.node.on(EditBox.EventType.TEXT_CHANGED, this.onTextChanged);
+    this.editBox.node.on(EditBox.EventType.EDITING_DID_BEGAN, this.onEditingBagan, this);
+    this.editBox.node.on(EditBox.EventType.EDITING_DID_ENDED, this.onEditingEnded, this);
+  }
+
+  private onTextChanged(editbox: EditBox) {
+    this.label.string = editbox.string === '' ?`甚麼也沒輸入`:`您輸入了:${editbox.string}`;
+  }
+  
+  private onEditingBagan(editBox: EditBox) {
+    this.label.string = `點選了EditBox，請輸入吧!`;
+  }
+
+  private onEditingEnded(editBox: EditBox) {
+    this.label.string = `EditBox輸入完畢!`;
+  }
+}
+```
+
 ### **Editor box API**
 
 [EditBox API](https://docs.cocos.com/creator/3.6/api/zh/class/EditBox)

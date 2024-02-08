@@ -52,8 +52,7 @@ Layout Type 設置為 Horizontal 時，允許子元素橫向排列。當元素�
 
 #### Grid Layout
 
-<!-- 要補充 -->
-
+Grid Layout會在固定容器大小内，根据 `HorizontalDirection` 和 `VerticalDirection` 组合决定布局起点，根据 StartAxis 属性决定布局方向。
 
 #### ResizeMode
 

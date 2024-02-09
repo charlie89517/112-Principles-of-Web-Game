@@ -42,6 +42,19 @@ Cocos 依據 Node 的 Active 狀態及 Component 本身的 enable 屬性對 Comp
   　當所在節點或組件本身調用了`destroy()`時觸發
   　在觸發的這一幀結束時會回收組件
 
+
+```mermaid
+graph LR;
+    A((onLoad)) --> B((onEnable));
+    B --> C((start));
+    C --> D(("update(dt)"));
+    D --> E(("lateUpdate(dt)"));
+    E --> |下\n一\n幀| D;
+    E --> |被\n禁\n用| F((onDisable));
+    F --> G((onDestroy));
+```
+<center>▲ 生命週期執行順序</center>
+
 ## Component 裝飾器
 
 Cocos 使用裝飾器的方式讓編輯器能夠識別特定的對象，如 Component 或是其屬性等。因此可以發現，所有的 Component Class 上一行都會有 `@ccclass` 之類的語法，即為讓編輯器能夠辨識出該 Component 的方式。`@ccclass` 提供一個可選參數，可以指定 Component 的名稱，若無指定時預設會依 Component 的 Class Name 作為 Component Name。

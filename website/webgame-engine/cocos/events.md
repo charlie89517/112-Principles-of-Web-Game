@@ -114,14 +114,34 @@ private onKeyboardDown(event: EventKeyboard) {
 }
 ```
 
+## 事件捕捉
+
+事件系統的處理流程大致上可分為`事件捕捉`、`事件冒泡` 2個階段。
+以點擊事件為例，當使用者按下滑鼠點擊畫面中的某個元素時，事件系統會以最上層的根節點作為起點，經過一層一層的檢測後找出實際上使用者點擊到的元素，這個流程被稱作`捕捉階段`。
+
+
 ## 事件冒泡[^1]
 
-當滑鼠或手指在 c 節點區域內按下時，事件將首先在 c 節點觸發，c 節點接收到事件。 接著 c 節點會將事件傳遞到其父節點， b 節點會將事件再傳遞給父節點 a 。 這就是最基本的事件冒泡過程。 需要強調的是，在觸摸事件冒泡的過程中不會有觸摸檢測，這意味著即使觸點不在 a b 節點區域內，a b 節點也會透過觸摸事件冒泡的機制接收到這個事件。
+當事件捕捉完成後，事件會傳遞到使用者按下的實際元素上，此時會開始`冒泡階段`。在這個階段事件會從目標元素上開始被觸發，目標元素觸發完之後會往上使父節點觸發事件直至根節點。
+
+以下圖場景為例，當滑鼠或手指在 c 節點區域內按下時，事件將首先在 c 節點觸發，c 節點接收到事件。 接著 c 節點會將事件傳遞到其父節點， b 節點會將事件再傳遞給父節點 a 。 這就是最基本的事件冒泡過程。 需要強調的是，在觸摸事件冒泡的過程中不會有觸摸檢測，這意味著即使觸點不在 a b 節點區域內，a b 節點也會透過觸摸事件冒泡的機制接收到這個事件。
 ![事件冒泡](https://i.imgur.com/6KBmLTe.png)
 要關閉事件冒泡，可以將 `event.propagationStopped` 設為 `true`
 ![關閉事件冒泡](https://i.imgur.com/2VTqJNy.png)
 
+![w3c eventflow](https://www.w3.org/TR/DOM-Level-3-Events/images/eventflow.svg)
+<center>▲ 事件捕捉與事件冒泡 [^2]</center>
+
+!!! Warning
+
+    由於事件冒泡是從目標節點往根節點層層傳遞，因此就算畫面視覺上兩個元素可能是重疊的，也不會冒泡到同一層級的節點，在設計場景結構時需多加注意。
+
 ## 事件應用的正反例
+
+### 不使用事件系統時
+
+- 控制遊戲流程的核心：需要呼叫底下的所有子元件進行處理，高度耦合。
+  ![事件系統-反例](https://i.imgur.com/Fdio6nw.png)
 
 ### 使用事件系統時
 
@@ -130,9 +150,5 @@ private onKeyboardDown(event: EventKeyboard) {
 - 各個子元件：只需要監聽事件發生。
   ![事件系統-正例子物件](https://i.imgur.com/WRCs1kb.png)
 
-### 不使用事件系統時
-
-- 控制遊戲流程的核心：需要呼叫底下的所有子元件進行處理，高度耦合。
-  ![事件系統-反例](https://i.imgur.com/Fdio6nw.png)
-
-[^1]: https://docs.cocos.com/creator/3.6/manual/zh/engine/event/event-builtin.html
+[^1]: Cocos Creator 節點事件系統 https://docs.cocos.com/creator/3.6/manual/zh/engine/event/event-builtin.html
+[^2]: W3C - Event Flow https://www.w3.org/TR/DOM-Level-3-Events/#event-flow

@@ -1,9 +1,11 @@
+# Toggle
 
-## **Toggle 介紹**
+Toggle 是繼承自 Button 的 UI Component，在 Button 的基礎上提供了選取（isChecked）狀態，常被用於開關按鈕。
+
+## Toggle 屬性
 
 ![Toggle實例](/webgame-engine/assets/cocos/common/Toggle/ToggleUIExample.png)
 
-### **Toggle 屬性**
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -16,7 +18,7 @@
 
 > 注意 : 因為Toggle繼承自Button，所以其他屬性請移駕至 [Button](button.md)
 
-### **Toggle 範例**
+## Toggle 範例
 
 ![Toggle Example](/webgame-engine/assets/cocos/common/Toggle/Toggle.gif)
 
@@ -26,24 +28,24 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ToggleHandler')
 export class ToggleHandler extends Component {
-  onLoad() {
+  protected onLoad(): void {
     const toggle = this.getComponent(Toggle);
     if (toggle) {
-      toggle.node.on('toggle', this.onToggleChange, this);
+      // Toggle.EventType 也有提供從 Button 繼承過來的 CLICK
+      toggle.node.on(Toggle.EventType.TOGGLE, this.onToggleChange, this);
     }
   }
 
-  onToggleChange(toggle: Toggle) {
+  private onToggleChange(toggle: Toggle): void {
     const isChecked = toggle.isChecked;
     console.log('Toggle state changed:', isChecked ? 'On' : 'Off');
   }
 }
 ```
 
-### **Toggle API**
+## 參考資訊
 
-[Toggle API](https://docs.cocos.com/creator/3.6/api/zh/class/Toggle)
+[Cocos Creator 官方－Toggle](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/toggle.html?h=toggle)
 
-### REF
 
-[Toggle 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/toggle.html?h=toggle)
+[Cocos Creator 官方－Toggle API](https://docs.cocos.com/creator/3.6/api/zh/class/Toggle)

@@ -1,12 +1,13 @@
 
-## **ScrollView 介紹**
+# ScrollView
 
 ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在有限的顯示區域內瀏覽更多的內容。 通常 ScrollView 會與 Mask 元件搭配使用，同時也可以加入 ScrollBar 元件來顯示瀏覽內容的位置。
 
 ![ScrollView 呈現範例][ScrollView Example]
-![ScrollView UI範例](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewUIExample.PNG)
 
-### **ScrollView 屬性**
+## ScrollView 屬性
+
+![ScrollView UI範例](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewUIExample.PNG)
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -14,28 +15,18 @@ ScrollView 是一種具有捲動功能的容器，它提供一種方式可以在
 |**Horizontal**| 是否允許橫向捲動 |
 |**Vertical**| 是否允許縱向滾動 |
 |**Inertia**| 捲動的時候是否有加速度 |
-|**Brake**| 滾動後的減速係數。 範圍為 `0-1`，如果是 1 則立刻停止滾動，如果是 0，則會一直滾動到 content 的邊界 |
+|**Brake**| 滾動後的減速係數。 範圍為 `0-1`，如果是 1 則立刻停止滾動，如果是 0，則會一直滾動到 `content` 的邊界 |
 |**Elastic**| 是否會回彈 |
 |**BounceDuration**| Float，回彈所需要的時間。範圍是 `0-10` |
-|**HorizontalScrollBar**| 帶有ScrollBar的Node，來顯示 content 在水平方向上的位置 |
-|**VerticalScrollBar**|  帶有ScrollBar的Node，來顯示 content 在垂直方向上的位置 |
-|**ScrollEvents**|  帶有ScrollBar的Node，來顯示 content 在垂直方向上的位置 |
+|**HorizontalScrollBar**| 帶有 ScrollBar 的 Node，來顯示 content 在水平方向上的位置 |
+|**VerticalScrollBar**|  帶有 ScrollBar 的 Node，來顯示 content 在垂直方向上的位置 |
+|**ScrollEvents**| 滾動事件註冊列表 |
 
-#### **ScrollView Event Structure**
-
-![ScrollView Event Structure](/webgame-engine/assets/cocos/common/ScrollView/ScrollViewEventExample.PNG)
-
-| 屬性   | 功能說明 |
-| ------------------- | ------------------------------ |
-| `Target` | 帶有 Script 的 Node |
-| `Component` | 該 Node 底下 Script 的名稱 |
-| `Handler` | Script 底下欲 call 的 function 名稱 |
-| `CustomEventData` | 可以指定任意的 string 作為最後一個參數傳入 |
-
-### **ScrollView 範例**
+## ScrollView 範例
 
 !!! note
-    類似ScrollView 這種比較複雜的UI元件，建議右鍵新增直接選ScrollView的話他會建一個完整的範例出來，就不用新增Component後還要手動新增節點
+
+    ScrollView 這種比較複雜的UI元件，建議右鍵新增直接選ScrollView，編輯器會直接建一個完整的範例出來，就不用在新增 Component 後還要手動新增 `content` 等相關節點。
 
 
 ```ts
@@ -44,34 +35,35 @@ const { ccclass, property } = _decorator;
 
 @ccclass('ScrollViewHandler')
 export class ScrollViewHandler extends Component {
-  onLoad() {
+  protected onLoad(): void {
     const scrollView = this.getComponent(ScrollView);
+    // 尋找節點上是否有附加 ScrollView，有的話才監聽事件
     if (scrollView) {
-      scrollView.node.on(ScrollView.EventType.SCROLLING, this.onScrolling, this);
-      scrollView.node.on(ScrollView.EventType.TOUCH_UP, this.onTouchUP, this);
-      scrollView.node.on(ScrollView.EventType.SCROLL_BEGAN, this.onScrollBegan, this);
+      this.node.on(ScrollView.EventType.SCROLLING, this.onScrolling, this);
+      this.node.on(ScrollView.EventType.TOUCH_UP, this.onTouchUP, this);
+      this.node.on(ScrollView.EventType.SCROLL_BEGAN, this.onScrollBegan, this);
     }
   }
 
-  onScrolling(scrollView : ScrollView) {
+  private onScrolling(scrollView : ScrollView): void {
     console.log("scrolling");
   }
 
-  onTouchUP(scrollView: ScrollView) {
+  private onTouchUP(scrollView: ScrollView): void {
     console.log("onTouch_UP");
   }
 
-  onScrollBegan(scrollView: ScrollView) {
+  private onScrollBegan(scrollView: ScrollView): void {
     console.log("ScrollBegan");
   }
 }
 ```
 
-### ScrollView API
-[Slider API](https://docs.cocos.com/creator/3.6/api/zh/class/ScrollView)
+## 參考資訊
 
-### REF
+[Cocos Creator 官方－ScrollView](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scrollview.html?h=scroll)
+
+[Cocos Creator 官方－ScrollView API](https://docs.cocos.com/creator/3.6/api/zh/class/ScrollView)
+
 
 [ScrollView Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scroll/scrollview-content.png "圖片來源 : ScrollView 组件参考"
-
-[ScrollView 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/scrollview.html?h=scroll)

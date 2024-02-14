@@ -127,3 +127,4 @@ nav:
               - webgame-engine/cocos/resource/prefab.md # NodePool & Prefab
               - webgame-engine/cocos/resource/dynamic-load.md # 動態載入
               - webgame-engine/cocos/resource/bundle.md # Bundle
+              - webgame-engine/cocos/resource/load-scene.md # 場景載入

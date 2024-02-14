@@ -57,25 +57,28 @@ class SingletonClass {
 
 ### 使用建議
 
-單例模式唯一性的優點除了節省資源外，有時是必需要保持該元件的唯一性，例如輸入控制器、音效控制器等如果有多個同時實例存在，會造成許多意外錯誤。而使用時較容易導致測試困難的部分，下面舉一個正反例，假設遊戲中控制音效的模組被稱作`AudioManager`，所有與音效相關的功能都由該Class負責時：
+單例模式唯一性的優點除了節省資源外，有時是必需要保持該元件的唯一性，例如輸入控制器、音效控制器等如果有多個同時實例存在，會造成許多意外錯誤。而使用時較容易導致測試困難的部分，下面舉一個正反例，假設遊戲中控制音效的模組被稱作`AudioManager`，所有與音效相關的功能都由該 Class 負責時：
 
 - 使用單例模式：每個要播音效的模組都要 Import `AudioManager`。
+
 ```ts
 class MainShip {
   // 發射子彈
   public shoot() {
     // ...發射子彈的各種處理
-    AudioManager.Instance.playEffect('ShootBullet'); // 播放發射子彈的音效
+    AudioManager.Instance.playEffect("ShootBullet"); // 播放發射子彈的音效
   }
 }
 ```
-- 使用服務定位器模式：透過一個全域的Class取用音效模組，無須認定是`AudioManager`還是其他的Class。
+
+- 使用服務定位器模式：透過一個全域的 Class 取用音效模組，無須認定是`AudioManager`還是其他的 Class。
+
 ```ts
 class MainShip {
   // 發射子彈
   public shoot() {
     // ...發射子彈的各種處理
-    Game.audio.playEffect('ShootBullet'); // 播放發射子彈的音效
+    Game.audio.playEffect("ShootBullet"); // 播放發射子彈的音效
     // 無須強制指定，而是透過Game進行存取
     // 所以只要保持介面一致，就算Game.audio的實例不是AudioManager也可以使用
     // 當AudioManager被替換時，可以省掉到處修改Import的時間

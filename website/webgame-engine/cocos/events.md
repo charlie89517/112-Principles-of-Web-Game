@@ -116,9 +116,8 @@ private onKeyboardDown(event: EventKeyboard) {
 
 ## 事件捕捉
 
-事件系統的處理流程大致上可分為`事件捕捉`、`事件冒泡` 2個階段。
+事件系統的處理流程大致上可分為`事件捕捉`、`事件冒泡` 2 個階段。
 以點擊事件為例，當使用者按下滑鼠點擊畫面中的某個元素時，事件系統會以最上層的根節點作為起點，經過一層一層的檢測後找出實際上使用者點擊到的元素，這個流程被稱作`捕捉階段`。
-
 
 ## 事件冒泡[^1]
 
@@ -130,6 +129,7 @@ private onKeyboardDown(event: EventKeyboard) {
 ![關閉事件冒泡](https://i.imgur.com/2VTqJNy.png)
 
 ![w3c eventflow](https://www.w3.org/TR/DOM-Level-3-Events/images/eventflow.svg)
+
 <center>▲ 事件捕捉與事件冒泡 [^2]</center>
 
 !!! Warning

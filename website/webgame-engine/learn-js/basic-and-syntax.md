@@ -180,7 +180,7 @@ false;
 
 ```js
 // 基本字串
-`In JavaScript '\n' is a line-feed.`// 多行字串
+`In JavaScript '\n' is a line-feed.` // 多行字串
 `My Love in her attire doth show her wit,
 It doth so well become her;
 For every season she hath dressings fit,

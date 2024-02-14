@@ -1,41 +1,41 @@
 # This 與 閉包
 
-## 關於This
+## 關於 This
 
-!!! quote 
-    
+!!! quote
+
     this 值由被呼叫的函式來決定。它不能在執行期間被指派，每次函式呼叫調用的值也可能不同
 
     this是一個特殊的值, 無法於執行期間被覆蓋
 
     在 **嚴格模式** 與 **非嚴格模式**下有所不同
 
-### This的查找
+### This 的查找
 
-對於一般的function, 查找this的範圍會從調用者(caller)往上查找：
+對於一般的 function, 查找 this 的範圍會從調用者(caller)往上查找：
 
 ```javascript
 "use strict";
 let obj = {
   prop: 300,
-  fn: function() {
+  fn: function () {
     return this.prop;
-  }
-}
+  },
+};
 
 function outerFn() {
   return this.prop;
 }
 
-obj.fn() // 300;
+obj.fn(); // 300;
 
 obj.fn2 = outerFn;
 
-obj.fn2() // 300, 因為此時 outerFn 繫結於 obj 的成員位址
+obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
 
-outerFn() // Error, this 並沒有 prop 這個成員
-
+outerFn(); // Error, this 並沒有 prop 這個成員
 ```
+
 `this`的判斷, 是先依照是不是作為某個物件的屬性或方法被調用
 
 在上述的例子中, 因為 `outerFn` 是直接以一個 function 被調用, 而不是某個物件底下的方法, 所以 `this` 的值為 `undefined`
@@ -60,23 +60,22 @@ let obj = {
   foo: fn,
   sub: {
     prop: 200,
-    foo: fn
-  }
-}
+    foo: fn,
+  },
+};
 
-obj.foo();  // 100, 因為此時是以 "obj" 的成員被調用, this = obj.sub
+obj.foo(); // 100, 因為此時是以 "obj" 的成員被調用, this = obj.sub
 
-obj.sub.foo();  // 200, 因為此時是以 "obj.sub" 的成員被調用, this = obj.sub
+obj.sub.foo(); // 200, 因為此時是以 "obj.sub" 的成員被調用, this = obj.sub
 
 // 修改obj.sub為
 obj.sub = {
-  foo: fn
-}
-obj.sub.foo() // undefined, 此時同樣以 "obj.sub" 的成員被調用, 但是 obj.sub 已經不存在 prop 屬性了
+  foo: fn,
+};
+obj.sub.foo(); // undefined, 此時同樣以 "obj.sub" 的成員被調用, 但是 obj.sub 已經不存在 prop 屬性了
 
 obj.sub.__proto__.prop = 300;
-obj.sub.foo() // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 但是原型鏈(__proto__)存在prop成員
-
+obj.sub.foo(); // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 但是原型鏈(__proto__)存在prop成員
 ```
 
 !!! danger
@@ -85,10 +84,9 @@ obj.sub.foo() // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 
 
     但真正開發中, 直接改變物件的原型是一件很不建議的事情, 同時也會影響到所有參照原型的實例
 
+### This 的綁定
 
-### This的綁定
-
-五種this的綁定方式
+五種 this 的綁定方式
 
 1. 預設綁定（Default Binding）
 2. 隱含綁定（Implicit Binding）
@@ -98,18 +96,17 @@ obj.sub.foo() // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 
 
 **隱含綁定：**
 
-當函式作為對象的方法被調用時，this指向該物件
+當函式作為對象的方法被調用時，this 指向該物件
 
 ```js
 const obj = {
-  name: 'Alice',
+  name: "Alice",
   sayName() {
     console.log(this.name);
-  }
+  },
 };
 
 obj.sayName(); // 輸出 "Alice"
-
 ```
 
 **明確綁定：**
@@ -121,29 +118,27 @@ function sayName() {
   console.log(this.name);
 }
 
-const obj1 = {name: 'Alice'};
-const obj2 = {name: 'Bob'};
-const obj3 = {name: 'Kevin'};
+const obj1 = { name: "Alice" };
+const obj2 = { name: "Bob" };
+const obj3 = { name: "Kevin" };
 
 sayName.call(obj1); // 輸出 "Alice"
 sayName.apply(obj2); // 輸出 "Bob"
 sayName.bind(obj3)(); // 輸出 "Kevin"
-
 ```
 
 **`new` 綁定：**
 
-使用`new` 運算符生成構造函式時，this指向新創建的物件。
+使用`new` 運算符生成構造函式時，this 指向新創建的物件。
 
 ```js
 function Person(name, age) {
   this.name = name;
   this.age = age;
 }
-const person = new Person('Alice', 20);
+const person = new Person("Alice", 20);
 console.log(person.name); // 輸出 "Alice"
 ```
-
 
 **箭頭函式綁定：**
 
@@ -151,40 +146,36 @@ console.log(person.name); // 輸出 "Alice"
 
 ```js
 const obj = {
-  name: 'Alice',
+  name: "Alice",
   sayName() {
     const innerFunc = () => {
       console.log(this.name);
     };
     innerFunc();
-  }
+  },
 };
 
 obj.sayName(); // 輸出 "Alice"
-
 ```
 
-## This指向
+## This 指向
 
 !!! quote
-    在函式執行的過程中，`this`一旦被確定，那就不能更改了
+在函式執行的過程中，`this`一旦被確定，那就不能更改了
 
 **全域中的`this`**
 
--  嚴格模式下：全域中的`this`指向`undefined`，並非全域物件
-   
+- 嚴格模式下：全域中的`this`指向`undefined`，並非全域物件
+
 ```js
-'use strict';
+"use strict";
 
 console.log(this === undefined); // 輸出 true
-
 ```
 
-- 非嚴格模式下：全域中的this指向全域物件，瀏覽器環境下是`window`，在 Node.js 環境中，全域物件是 `global` 物件。
-
+- 非嚴格模式下：全域中的 this 指向全域物件，瀏覽器環境下是`window`，在 Node.js 環境中，全域物件是 `global` 物件。
 
 **函式中的`this`**
-
 
 !!! note
 
@@ -196,46 +187,44 @@ console.log(this === undefined); // 輸出 true
 
     當箭頭函式被調用時，this指向箭頭函式的執行上下文
 
-箭頭函式下，this的指向固定為箭頭函式的上下文，也就是箭頭函式外層的執行上下文中的this，不會根據函式的調用方式決定
-
+箭頭函式下，this 的指向固定為箭頭函式的上下文，也就是箭頭函式外層的執行上下文中的 this，不會根據函式的調用方式決定
 
 ## 箭頭函式(Arrow Function)
 
 箭頭函式表示法：
 
-```javascript 
+```javascript
 // ex.1
 const sum = (a, b) => {
   return a + b;
 };
 
 // ex.2 當 `=>` 後接的是 expression 時, 可以當作回傳值
-const sum = (a, b) => a + b // 行為同 ex.1
+const sum = (a, b) => a + b; // 行為同 ex.1
 
 // ex.3
-const sayHello = (name) => `Hello, ${name}`
+const sayHello = (name) => `Hello, ${name}`;
 
 // ex.4
-const sayHello = name => `Hello, ${name}` // 只有一個參數時, 可以省略()
+const sayHello = (name) => `Hello, ${name}`; // 只有一個參數時, 可以省略()
 
 // ex.5
-const returnObj = ( user ) => ({
-  name: user.first + ' ' + user.last,
+const returnObj = (user) => ({
+  name: user.first + " " + user.last,
   age: user.age,
-})
+});
 
 // 倘若使用 user => {}, 此時的 {} 會被視作 block statement, 使用 ({}) 則視為 object expression
-
 ```
 
-### 箭頭函式對this的影響
+### 箭頭函式對 this 的影響
 
-this對於一般函式來說, this 有幾種可能值：
+this 對於一般函式來說, this 有幾種可能值：
 
-- 作為 new 建構子來說, this指向物件本身
-- 對於strict mode下直接調用函式, 函式中的 this 是 `undefined`
+- 作為 new 建構子來說, this 指向物件本身
+- 對於 strict mode 下直接調用函式, 函式中的 this 是 `undefined`
 - 作為物件的方法呼叫時, 參考至物件上
-  
+
 而 arrow function () => {} 的行為, 是基於詞法域(lexical), 而非語法語境(context)
 
 !!! info
@@ -244,7 +233,7 @@ this對於一般函式來說, this 有幾種可能值：
 
     且`function a() {}` 以及 `let a = () => {}` 絕對是不同的東西
 
-!!! note 
+!!! note
 
     要快速釐清 arrow function 與 一般 function 的使用時機時：
 
@@ -254,7 +243,7 @@ this對於一般函式來說, this 有幾種可能值：
     2. 在類別中, 宣告成員函式的情景
     3. 使用到 Generator `function*` 的情況
     4. 使用 arguments 的情況
-   
+
     除此之外, 都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
 
     但原則上來說, 盡可能使用展開運算替代arguments, 因此動態參數的情況, 也可以使用 arrow function
@@ -268,32 +257,37 @@ this對於一般函式來說, this 有幾種可能值：
 而詞法域代表的是封閉範圍的前後文, 如同變數的查找一樣, 舉例來說：
 
 ```js
-{                     // -- block 1
+{
+  // -- block 1
   let a = 100;
   let b = 200;
-  {                   // -- block 2
+  {
+    // -- block 2
     let c = 300;
-    function fn() {   // -- block 2.1
+    function fn() {
+      // -- block 2.1
       console.log(a, b, c);
     }
-    fn() // 100, 200, 300
+    fn(); // 100, 200, 300
   }
-  {                   // -- block 3
-    function fn() {   // -- block 3.1
+  {
+    // -- block 3
+    function fn() {
+      // -- block 3.1
       console.log(a, b, c);
     }
-    fn() // 錯誤, c 不存於該 block 3.1 以及 block 3
+    fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
   }
 }
-
 ```
 
-a, b 在同一個 block, 而 c 在的block可以看到外部(block 1)
+a, b 在同一個 block, 而 c 在的 block 可以看到外部(block 1)
 所以第一個 block 2 可以看到 a,b,c, 但是第二個僅能看到 a,b
 
 這就是詞法域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
 
 而閉包則複雜一點, 以上面的例子來說, 可以觀察出：
+
 - block 允許巢狀
 - 內部的 block 可以存取外部的 block
 - 外部的 block 不可以存取內部的 block
@@ -304,12 +298,9 @@ a, b 在同一個 block, 而 c 在的block可以看到外部(block 1)
 
     當一個函式在訪問它所在的詞法環境之外的變數時，就形成了閉包。簡單來說，閉包就是一個函式能夠訪問其父級作用域中的變數
 
-
 一個閉包通常由兩個部分組成：`函式本身` 和 `創建函式時的作用域`。
 
 如果在函式內部定義了一個函式，並且這個函式訪問了父級函式的變數或參數，那麼這個內部函式就會形成一個閉包，因為它需要在父級函式執行完畢後，仍然能夠訪問到父級函式中的變數或參數。
-
-
 
 !!! info
 
@@ -369,7 +360,7 @@ counter(); // 輸出 2
 利用閉包封裝了私有變數和方法，以便可以在需要時安全地公開公共介面。
 
 ```js
-let myModule = (function() {
+let myModule = (function () {
   let privateVariable = "I am private";
 
   function privateFunction() {
@@ -378,13 +369,13 @@ let myModule = (function() {
 
   return {
     publicVariable: "I am public",
-    publicFunction: function() {
+    publicFunction: function () {
       console.log("This is a public function.");
     },
-    accessPrivate: function() {
+    accessPrivate: function () {
       console.log(privateVariable);
       privateFunction();
-    }
+    },
   };
 })();
 
@@ -392,6 +383,7 @@ console.log(myModule.publicVariable); // 輸出 "I am public"
 myModule.publicFunction(); // 輸出 "This is a public function."
 myModule.accessPrivate(); // 輸出 "I am private" 和 "This is a private function."
 ```
+
 自調用函式表達式（Immediately Invoked Function Expression, IIFE）創建一個立即執行的函式，並使用閉包創建一個模組。在模組中，定義了一個私有變數 privateVariable 和一個私有方法 privateFunction。然後，我們返回一個具有公共變數和方法的對象字面量，以便可以在需要時從外部訪問它們。最後，我們將對象字面量賦給 myModule 變數，以便可以在其他代碼中使用它。
 
 可以從外部訪問公共變數和方法，而不能直接訪問私有變數和方法。這樣可以確保私有狀態不會被意外修改或洩漏，並提高了代碼的可維護性和安全性。

@@ -76,7 +76,7 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
 7.  想查看 ESLint 提示，可以於 VSCode 中打開 Problems 視窗（Ctrl+Shift+M），檢查建議。
     現在，VSCode 中已配置 ESLint，將即時提醒你可能的語法錯誤和問題。
-        ![Prettier Extension](/webgame-engine/assets/coding-style/eslint11.png)
+    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint11.png)
 
 <!--
 

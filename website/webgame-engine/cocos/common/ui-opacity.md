@@ -1,22 +1,20 @@
+# UIOpacity
 
-# UIOpacity 
-
-可以透過該component調整UI的透明度，而實現半透明的效果。
+可以透過該 component 調整 UI 的透明度，而實現半透明的效果。
 與 **UITransform** 一樣是在 Cocos 3.X 時從 Node 中分離出來的屬性
 
 ![UIOpacity示例][UIOpacity Example]
 
-
 ## UIOpacity 屬性
 
-| 屬性      | 功能說明   |
-| ------------------- | ------------------- |
-|**Opacity**|透明度`0-255`(透明)~(不透明)| 
+| 屬性        | 功能說明                     |
+| ----------- | ---------------------------- |
+| **Opacity** | 透明度`0-255`(透明)~(不透明) |
 
 ## UIOpacity 範例
 
 !!! note
-    
+
     Parent Node 透明度被調整的話 會連帶影響到底下所有 Child Node
 
 ```ts

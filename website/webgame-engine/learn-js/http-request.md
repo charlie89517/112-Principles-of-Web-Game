@@ -16,7 +16,7 @@ graph LR
 - 請求格式
   [^1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
 
- ![請求格式](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png)
+![請求格式](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_request.png)
 
 - Server 向 Client 回應
 
@@ -27,7 +27,7 @@ graph LR
 
 ```
 
-* 回應格式[^1]
+- 回應格式[^1]
 
 ![回傳格式](https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview/http_response.png)
 

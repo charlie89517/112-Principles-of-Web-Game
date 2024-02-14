@@ -42,7 +42,6 @@ Cocos 依據 Node 的 Active 狀態及 Component 本身的 enable 屬性對 Comp
   　當所在節點或組件本身調用了`destroy()`時觸發
   　在觸發的這一幀結束時會回收組件
 
-
 ```mermaid
 graph LR;
     A((onLoad)) --> B((onEnable));
@@ -53,6 +52,7 @@ graph LR;
     E --> |被\n禁\n用| F((onDisable));
     F --> G((onDestroy));
 ```
+
 <center>▲ 生命週期執行順序</center>
 
 ## Component 裝飾器

@@ -1,13 +1,13 @@
-# Prefab
-## Prefab
+# **Prefab**
+## **Prefab**
 Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，你可以在場景中多次使用相同的物件，而不必每次都從頭開始創建。這使得遊戲開發更加高效，特別是當你需要多次使用相同物件時，例如重複的敵人、道具或UI元素。
 
 由Prefab資源(Prefab Asset)生成的實例(Prefab Instance)可以繼承模板的數據，又可以有自己客製化的數據修改。
 
-### 建立Prefab資源
+### **建立Prefab資源**
 有兩個方法能建立Prefab資源
 
-1. 使用場景中現有節點建立
+1. **使用場景中現有節點建立**
 
     在場景中將節點編輯好之後，直接將節點從 **層級管理器** 拖曳到 **資源管理器** 中即可完成Prefab資源的建立。
 
@@ -18,7 +18,7 @@ Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，�
         <figcaption>使用場景中現有節點建立[^note1]</figcaption>
     </figure>
 
-2. 於資源管理器建立
+2. **於資源管理器建立**
 
     點選 **資源管理器** 左上方的 **+** 按鈕，選擇 **Node Prefab** 建立；
     
@@ -29,7 +29,7 @@ Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，�
         <figcaption>於資源管理器建立[^note1]</figcaption>
     </figure>
 
-### 使用Prefab資源
+### **使用Prefab資源**
 將Prefab資源從 **資源管理器** 拖曳到 **層級管理器** 或 **場景編輯器** ，即可在場景中產生一個Prefab實例。
 
 >使用Prefab資源建立的實例在 **層級管理器** 中以綠色呈現
@@ -39,7 +39,7 @@ Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，�
     <figcaption>使用Prefab資源<sup id="fnref3:note1"><a class="footnote-ref" href="#fn:note1" role="doc-noteref">1</a></sup></figcaption>
 </figure>
 
-### 編輯Prefab資源
+### **編輯Prefab資源**
 在 **資源管理器** 中按兩下Prefab資源即可從場景編輯模式切換到Prefab編輯模式(左上方顯示PREFAB字樣)。
 
 編輯完成後，點選左上方的 **Save** 按鈕即可儲存編輯後的Prefab資源，之後點選 **Close** 按鈕即可返回場景編輯模式。
@@ -51,7 +51,7 @@ Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，�
     <figcaption>編輯Prefab資源<sup id="fnref4:note1"><a class="footnote-ref" href="#fn:note1" role="doc-noteref">1</a></sup></figcaption>
 </figure>
 
-### 編輯Prefab實例
+### **編輯Prefab實例**
 
 #### 通用操作
 在 **層級管理器** 中點選Prefab實例，**屬性檢查器** 的頂部會出現5個可操作的按鈕。
@@ -101,14 +101,14 @@ Prefab是一種可重複使用的物件模板。使用Prefab的好處在於，�
 | ![reset](/webgame-engine/assets/prefab/reset.png)  | 在實例中還原刪除的元件。 |
 | ![update](/webgame-engine/assets/prefab/update.png)  | 將該刪除的元件在Prefab資源中同步刪除。 |
 
-## NodePool 
+## **NodePool** 
 NodePool用於節點管理，將不需要的節點回收進NodePool，需要使用時再從NodePool中取出，避免反覆創建及銷毀。
 
 NodePool特別適用於節點需要反覆創建和刪除的場景，如遊戲中的子彈。
 
 >不同的節點應使用不同的NodePool存放
 
-### 使用方法
+### **使用方法**
 - import
 
     ![import](/webgame-engine/assets/prefab/NodePool/import.png)
@@ -143,4 +143,4 @@ NodePool特別適用於節點需要反覆創建和刪除的場景，如遊戲中
     ![clear()](/webgame-engine/assets/prefab/NodePool/clear.png)
 
 [^note1]: [Cocos Creator 3.6 Manual - Prefab](https://docs.cocos.com/creator/3.6/manual/en/asset/prefab.html)
-[^note2]: [Cocos Creator 3.6 API - NodePool](https://docs.cocos.com/creator/3.6/api/en/class/NodePool?id=class-nodepool)
+[^note2]: [Cocos Creator 3.6 API - NodePool](https://docs.cocos.com/creator/3.6/api/en/class/NodePool)

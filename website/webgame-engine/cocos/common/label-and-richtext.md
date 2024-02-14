@@ -1,10 +1,10 @@
-## **Label 介紹**
+# Label
 
 Label 組件用來顯示一段文字，文字可以是系統字體、TrueType 字體、BMFont 字體或藝術數字。另外，Label 還具有排版功能。
 
 ![Label 範例][Label Example]
 
-### **Label 屬性**
+## Label 屬性
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -25,7 +25,7 @@ Label 組件用來顯示一段文字，文字可以是系統字體、TrueType �
 |**IsItalic**| 是否使用斜體，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 |**IsUnderline**| 是否使用底線，支援系统字型以及部分**TTF**字型。當**CacheMode**為`CHAR`時不生效 |
 
-### **Label 排版**
+## Label 排版
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -36,7 +36,7 @@ Label 組件用來顯示一段文字，文字可以是系統字體、TrueType �
 !!! note
     若 **Overflow** 設定為 `NONE`，`Content Size` 將自動計算，從而導致 **HorizontalAlign** 看不出效果，這時可以透過調整 `Anchor Point` 將設定`Content`的起始點達到置左置右的功能
 
-### **Label 範例**
+## Label 範例
 
 !!! note
     Color 有提供靜態屬性快速使用，詳情請參考[Color](https://docs.cocos.com/creator/3.6/api/zh/class/math.Color)
@@ -59,17 +59,13 @@ export class LabelHandler extends Component {
 
 ```
 
-### **Label API**
-
-[Label API](https://docs.cocos.com/creator/3.6/api/zh/class/Label)
-
-## **RichText 介紹**
+## RichText
 
 RichText 組件用來顯示一段帶有不同樣式效果的文字，你可以通過一些簡單的 [BBCode 標籤](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richtext.html#bbcode-%E6%A0%87%E7%AD%BE%E6%A0%BC%E5%BC%8F)來設置文字的樣式。目前支持的樣式有：顏色（color）、字體大小（size）、字體描邊（outline）、加粗（b）、斜體（i）、下劃線（u）、換行（br）、圖片（img）和點擊事件（on），並且不同的 BBCode 標籤是可以支持相互嵌套的。
 
 ![RichText 範例][RichText Example]
 
-### **RichText 屬性**
+## RichText 屬性
 
 | 屬性   | 功能說明 |
 | ------------------- | ------------------------------ |
@@ -85,7 +81,7 @@ RichText 組件用來顯示一段帶有不同樣式效果的文字，你可以�
 |**ImageAtlas**| 對於 img 標籤裡面的 src 屬性名稱，都需要在 imageAtlas 裡面找到一個有效的 spriteFrame，否則 img 標籤會判定為無效 |
 |**HandleTouchEvent**| 選中此選項後，RichText 將阻止節點邊界框中的所有輸入事件（滑鼠和觸控），從而防止輸入事件穿透到底層節點 |
 
-### **RichText 範例**
+## RichText 範例
 
 ```ts
 import { _decorator, Component, RichText } from 'cc';
@@ -104,16 +100,16 @@ export class RichTextHandler extends Component {
 }
 ```
 
-### **RichText API**
+## 參考資訊
 
-[RichText API](https://docs.cocos.com/creator/3.6/api/zh/class/RichText)
+[Cocos Creator 官方－Label](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label.html?h=label)
 
-### REF
+[Cocos Creator 官方－Label API](https://docs.cocos.com/creator/3.6/api/zh/class/Label)
+
+[Cocos Creator 官方－RichText](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richtext.html?h=rich)
+
+[Cocos Creator 官方－RichText API](https://docs.cocos.com/creator/3.6/api/zh/class/RichText)
 
 [Label Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label/label-property.png "圖片來源：Label 组件参考"
 
 [RichText Example]: https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richText/richtext.png "圖片來源：RichText 组件参考"
-
-[Label 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/label.html?h=label)
-
-[RichText 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/richtext.html?h=rich)

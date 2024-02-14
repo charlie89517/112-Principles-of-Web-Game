@@ -1,9 +1,9 @@
 
-## **Editor box 介紹**
+# EditorBox
 
 一個 UI 組件，可以讓用戶輸入文字的文本框。
 
-### **Editor box 屬性**
+## EditorBox 屬性
 
 | 屬性   | 功能說明 |
 | --- | --- |
@@ -23,7 +23,7 @@
 |**TabIndex**| 用修改 DOM 輸入元素的 tabIndex，這個屬性只有在 Web 上面修改才有意義 |
 |**TextLabel**| 用來顯示用戶輸入文本的 Label 組件 |
 
-### **Editor box 事件**
+## EditorBox 事件
 
 | 屬性   | 功能說明 |
 | --- | --- |
@@ -31,7 +31,8 @@
 |**Editing Did Ended**| 取消輸入(按下回車或是點擊其他地方)時觸發 |
 |**Text Changed**| 每一次的文字變更都會觸發 |
 
-!!!tip
+!!! tip
+  
     建議此類的事件一率寫在 script 中，不要使用拉 Node 的方式綁定事件，方便 debug
 
 ```ts
@@ -65,10 +66,8 @@ export class EditorboxHandler extends Component {
 }
 ```
 
-### **Editor box API**
+## 參考資訊
 
-[EditBox API](https://docs.cocos.com/creator/3.6/api/zh/class/EditBox)
+[Cocos Creator 官方－EditBox](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/editbox.html?h=edit)
 
-### REF
-
-[EditBox 组件参考](https://docs.cocos.com/creator/3.6/manual/zh/ui-system/components/editor/editbox.html?h=edit)
+[Cocos Creator 官方－EditBox API](https://docs.cocos.com/creator/3.6/api/zh/class/EditBox)

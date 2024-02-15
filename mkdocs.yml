@@ -73,7 +73,7 @@ validation:
 # Sitemap
 nav:
   - 首頁:
-    - index.md
+      - index.md
   - "網頁遊戲引擎原理與實作":
       - 介紹: webgame-engine/index.md
       - 環境安裝:
@@ -125,6 +125,6 @@ nav:
               - webgame-engine/cocos/sound/audio-source.md #AudioSource
           - 資源管理:
               - 節點池與預製體: webgame-engine/cocos/resource/prefab.md # NodePool & Prefab
-              - 載入場景: webgame-engine/cocos/resource/load-scene.md # 場景載入
+              - 場景加載與切換: webgame-engine/cocos/resource/load-scene.md # 場景載入
               - 動態載入: webgame-engine/cocos/resource/dynamic-load.md # 動態載入
               - 資源包: webgame-engine/cocos/resource/bundle.md # Bundle

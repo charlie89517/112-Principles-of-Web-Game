@@ -28,7 +28,6 @@
 
 ```TypeScript
 function loadAssetBundle (hasResourcesBundle, hasStartSceneBundle) {
-    let promise = Promise.resolve();
     const mainBundleRoot = 'http://myserver.com/assets/main';
     const resourcesBundleRoot = 'http://myserver.com/assets/resources';
     const bundleRoot = hasResourcesBundle ? [resourcesBundleRoot, mainBundleRoot] : [mainBundleRoot];

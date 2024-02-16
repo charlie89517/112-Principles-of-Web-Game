@@ -29,3 +29,9 @@
 簡易來說**看的影片越久，網站分數就越高。而當分數超過一定的數值時，就會啟動自動撥放。**
 
 Chrome的使用者可以訪問**chrome://media-engagement/**查看自己的MEI 
+
+--- 
+
+### 參考網站:
+1. [Chrome 自動播放政策](https://developer.chrome.com/blog/autoplay?hl=zh-tw)
+2. [瀏覧器影音自動播放之研究手札 (Chrome、Firefox)](https://blog.maki0419.com/2022/01/media-autoplay-on-browser.html)

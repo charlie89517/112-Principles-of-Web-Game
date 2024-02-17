@@ -96,10 +96,6 @@ export class TestProperty extends Component {
   　![property array type](https://i.imgur.com/pNa9lkZ.png)
   　![property array type sample](https://i.imgur.com/YdomsFB.png)
 
-!!! Note
-
-    若是屬性有設定
-
 除了 `type` 以外，主要還有以下幾種：
 
 | 參數         | 類型    | 描述                                                                                                                                  |

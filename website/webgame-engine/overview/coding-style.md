@@ -163,6 +163,8 @@ Prettier 和 ESLint 都有能力格式化程式碼，可能會導致格式衝突
 
 違反 ESLint 原則時，VS Code 會標註紅色（Error）或黃色（Warning）底線，可以透過滑鼠懸浮於上找到違反原則的提示，也可以點擊超連結查看 ESLint 官方的使用範例。
 
+![ESLint Error](https://i.imgur.com/W1vhTlF.png)
+
 !!! Warning
 
     若使用 `eslint-disable` 之類的註解強行使 ESLint 原則失效時，將視同違反原則進行扣分。<br/>

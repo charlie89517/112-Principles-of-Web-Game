@@ -80,6 +80,7 @@ nav:
           - Cocos Creator: webgame-engine/overview/cocos-creator.md # Cocos Creator
           - JavaScript: webgame-engine/overview/javascript.md # JavaScript
           - Git: webgame-engine/overview/git.md # Git
+          - Git安裝: webgame-engine/overview/git-install.md # Git安裝
           - "Code Format": webgame-engine/overview/coding-style.md # Coding style
       - JavaScript & TypeScript:
           - 基礎型別與語法: webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法

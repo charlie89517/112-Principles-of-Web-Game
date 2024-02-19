@@ -92,3 +92,8 @@ protected start(): void {
     * 需要在各個有用到 AudioSoruce 的組件中手動初始化
     * => 自定義一個組件，繼承自 AudioSource
         * 在start階段初始化音量及監聽事件
+
+--- 
+
+### 參考網站:
+1. [Cocos Creator 3.6 Manual - AudioSource](https://docs.cocos.com/creator/3.6/manual/zh/audio-system/audiosource.html)

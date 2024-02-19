@@ -186,4 +186,10 @@ tween(this.node)
   .start();
 ```
 
-![](/webgame-engine/assets/tween/tween-16.gif)
+![](../../assets/tween/tween-16.gif)
+
+--- 
+
+### 參考網站:
+1. [Cocos Creator 3.6 Manual - decorator](https://docs.cocos.com/creator/3.6/manual/zh/scripting/decorator.html)
+2. [Easings範例網站](https://easings.net/)

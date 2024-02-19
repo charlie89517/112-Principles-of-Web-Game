@@ -36,7 +36,19 @@
 
 ## Particle System - 常用接口
 
-- **play()**： 播放粒子特效
-- **stop()**： 停止粒子特效
-- **clear()**： 清除現有的粒子
-- **pause()**： 暫停粒子特效
+- play()
+  - 播放粒子特效
+- stop()
+  - 停止粒子特效
+- clear()
+  - 清除粒子特效
+- pause()
+  - 暫停粒子特效
+
+---
+
+### 參考網站:
+1. [Cocos Creator 3.6 Manual - ParticleSystem2D](https://docs.cocos.com/creator/3.6/manual/zh/particle-system/2d-particle/2d-particle.html)
+2. [Cocos Creator 3.6 Manual - ParticleSystem3D](https://docs.cocos.com/creator/3.6/manual/zh/particle-system/overview.html)
+3. [Cocos Creator粒子系统介绍](https://www.cgjoy.com/thread-245975-1-1.html)
+

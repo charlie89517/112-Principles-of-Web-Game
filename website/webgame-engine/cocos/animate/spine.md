@@ -106,6 +106,12 @@
     - 掛上的節點會跟隨 Spine 表演
       ![](/webgame-engine/assets/spine/spine-6.gif)
 
-    - 範例：將圖片掛到右手上
-      ![](/webgame-engine/assets/spine/spine-7.png)
-      ![](/webgame-engine/assets/spine/spine-8.png)
+- 範例：將圖片掛到右手上
+  ![](../../assets/spine/spine-7.png)
+  ![](../../assets/spine/spine-8.png)
+
+---
+
+### 參考網站:
+1. [Cocos Creator 3.6 Manual - spine](https://docs.cocos.com/creator/3.6/manual/zh/asset/spine.html)
+2. [Cocos Creator 3.6 Manual - components - spine](https://docs.cocos.com/creator/3.6/manual/zh/editor/components/spine.html)

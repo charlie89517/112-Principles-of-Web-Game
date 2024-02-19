@@ -90,3 +90,8 @@ animation.on(
   }
 );
 ```
+
+---
+
+### 參考網站:
+1. [Cocos Creator 3.6 Manual - animation](https://docs.cocos.com/creator/3.6/manual/zh/animation/animation-create.html)

@@ -1,30 +1,40 @@
 # Particle System
 
-## **介紹**
+## 介紹
 
 粒子系統是指計算機圖學中模擬特定現象的技術，時常用來模擬自然現象(火、煙、水等等自然現象)
 
-## **優勢**
+!!! Warning
+
+    Cocos Creator 3.X 有提供兩種粒子系統：ParticleSystem 、ParticleSystem2D，分別對應3D及2D的粒子系統。其中2D的粒子系統 `ParticleSystem2D` 於 Cocos Creator 2.X 的版本時命名為 `ParticleSystem`，初學者使用時可能會產生混淆，需多加注意。
+    本文所提到的粒子系統為2D的 `ParticleSystem2D`，其屬性設定相對較少，比較適合入門上手。
+
+## 優勢
+
+!!! Info
+
+    要使用粒子系統，請先確認`項目設置`中，`功能裁減`分頁是否有將對應的粒子系統啟用。
+    <center>![](/webgame-engine/assets/tween/tween-7.png)</center>
 
 - 模擬爆炸、煙火、水流比較有真實性
 - 相比其他特效更節省空間
 - 修改播放時間比 Spine 更加便捷
 
-## **應用**
+## 應用
 
 - 先建立粒子元件
 
-![](../../assets/particleSystem/particleSystem-1.png)
+![](/webgame-engine/assets/particleSystem/particleSystem-1.png)
 
 - 就可以看到粒子系統的樣子
 
-![](../../assets/particleSystem/particleSystem-2.gif)
+![](/webgame-engine/assets/particleSystem/particleSystem-2.gif)
 
 - 打勾**Custom**就可以自訂粒子特效樣貌
 
-![](../../assets/particleSystem/particleSystem-3.png)
+![](/webgame-engine/assets/particleSystem/particleSystem-3.png)
 
-## **Particle System - 常用接口**
+## Particle System - 常用接口
 
 - play()
   - 播放粒子特效
@@ -41,3 +51,4 @@
 1. [Cocos Creator 3.6 Manual - ParticleSystem2D](https://docs.cocos.com/creator/3.6/manual/zh/particle-system/2d-particle/2d-particle.html)
 2. [Cocos Creator 3.6 Manual - ParticleSystem3D](https://docs.cocos.com/creator/3.6/manual/zh/particle-system/overview.html)
 3. [Cocos Creator粒子系统介绍](https://www.cgjoy.com/thread-245975-1-1.html)
+

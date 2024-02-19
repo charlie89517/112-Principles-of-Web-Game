@@ -1,13 +1,13 @@
 # Tween
 
-## **主要的用處**
+## 主要的用處
 
 - 直接用腳本完全控制動畫內容
 - 針對指定的屬性變化提供緩動效果
 - 適合應用於較為不固定、需計算數值的動畫
 - 不適合處理複雜的動畫需求
 
-## **Tween 使用方式**
+## Tween 使用方式
 
 - 透過 tween(target)構造一個實例
 
@@ -29,7 +29,7 @@
     .start(); // 開始執行緩動
   ```
 
-## **Tween 常用組件接口**
+## Tween API
 
 - start() 開始播放緩動
 
@@ -86,7 +86,7 @@
     .start(); // 開始執行緩動
   ```
 
-## **Tween－靜態接口**
+## Tween Static API
 
 - Tween.stopAll()
   - 停止所有緩動
@@ -96,45 +96,46 @@
 - Tween.stopAllByTarget(node: Node)
   - 停止節點上的所有緩動
 
-## **Easing**
+## Easing
 
 - 以較為平滑的方式表演動畫
 
 <center>
-![alter name](../../assets/tween/tween-1.gif)
-![alter name](../../assets/tween/tween-2.gif)
-![alter name](../../assets/tween/tween-3.gif)
+![alter name](/webgame-engine/assets/tween/tween-1.gif)
+![alter name](/webgame-engine/assets/tween/tween-2.gif)
+![alter name](/webgame-engine/assets/tween/tween-3.gif)
 </center>
+<center>▲ [easings.net](https://easings.net/zh-tw) 範例</center>
 
 - 目前 Cocos 支援的緩動類型如下
-  ![alter name](../../assets/tween/tween-4.png)
+  ![alter name](/webgame-engine/assets/tween/tween-4.png)
 
 - Easing 緩動效果
-  ![alter name](../../assets/tween/tween-5.png)
-  [線上範例](https://easings.net/)
+  ![alter name](/webgame-engine/assets/tween/tween-5.png)
+<center>▲ [easings.net](https://easings.net/zh-tw) 範例</center>
 
 - Tween 指定 Easing 效果
   - 於 to()、by()帶入第三個參數指定
   ```ts
   tween(this.node)
-    .to(1, { position: v3(0, -100) }, { easing: "bounceOut" }) // 指定bounceOut緩動
+    .to(1, { position: v3(0, -100) }, { easing: 'bounceOut' }) // 指定bounceOut緩動
     .start();
   ```
-  ![alter name](../../assets/tween/tween-6.gif)
+  ![alter name](/webgame-engine/assets/tween/tween-6.gif)
 
-## **Cocos CurveRange Property**
+## CurveRange Property
 
 應用在目標值的曲線範圍，可以用裝飾器的方式使用
 
-### **事前作業**
+### 事前作業
 
-需開 cocos 引擎中的粒子系統
+需啟用 Cocos 引擎中的3D粒子系統
 
-![](../../assets/tween/tween-7.png)
+![](/webgame-engine/assets/tween/tween-7.png)
 
-![](../../assets/tween/tween-8.png)
+![](/webgame-engine/assets/tween/tween-8.png)
 
-### **裝飾器介紹**
+### 裝飾器介紹
 
 ```ts
 @property(CurveRange)
@@ -143,31 +144,31 @@ private curveRange: CurveRange = new CurveRange();
 
 我們可以看到它有四種模式
 
-![](../../assets/tween/tween-9.png)
+![](/webgame-engine/assets/tween/tween-9.png)
 
 - Constant ：
 
-![](../../assets/tween/tween-10.png)
+![](/webgame-engine/assets/tween/tween-10.png)
 
 - Curve：
 
-![](../../assets/tween/tween-11.png)
+![](/webgame-engine/assets/tween/tween-11.png)
 
 - TwoConstants：
 
-![](../../assets/tween/tween-12.png)
+![](/webgame-engine/assets/tween/tween-12.png)
 
 - TwoCurves：
 
-![](../../assets/tween/tween-13.png)
+![](/webgame-engine/assets/tween/tween-13.png)
 
-### **實際操作**
+### 實際操作
 
-我們選擇 Curve 接著我們可以自定義使用的取線
+我們選擇 Curve 接著我們可以自定義使用的曲線
 
-![](../../assets/tween/tween-14.png)
+![](/webgame-engine/assets/tween/tween-14.png)
 
-![](../../assets/tween/tween-15.png)
+![](/webgame-engine/assets/tween/tween-15.png)
 
 我們可以讓 tween 使用自己設計的曲線
 

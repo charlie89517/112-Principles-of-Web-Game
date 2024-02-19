@@ -150,4 +150,22 @@ Prettier 和 ESLint 都有能力格式化程式碼，可能會導致格式衝突
 
 此方式可讓 Prettier 和 ESLint 合作，確保程式碼風格的一致性，同時提升程式碼品質。
 
-以上，你已經學會如何使用 Prettier 和 ESLint 在 VSCode 中提高程式碼品質和一致性。希望這份教學對你有所幫助
+!!! Note
+
+    建議可將 VSCode 的 `Format On Save` 設定啟用，<br/>
+    當每次存檔時，VSCode 都會自動幫你排版一次，十分方便。
+
+## 課程作業限制的程式碼撰寫風格
+
+本堂課程繳交作業時，程式碼需符合助教所提供的 `.prettierrc` 及 `.eslintrc.js` 設定原則，檢查時若發現有警告或是錯誤，將會進行扣分。
+
+設定檔可以從這裡下載：<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a> | <a href="/webgame-engine/assets/coding-style/.prettierrc" download>.prettierrc</a>
+
+違反 ESLint 原則時，VS Code 會標註紅色（Error）或黃色（Warning）底線，可以透過滑鼠懸浮於上找到違反原則的提示，也可以點擊超連結查看 ESLint 官方的使用範例。
+
+![ESLint Error](https://i.imgur.com/W1vhTlF.png)
+
+!!! Warning
+
+    若使用 `eslint-disable` 之類的註解強行使 ESLint 原則失效時，將視同違反原則進行扣分。<br/>
+    若有擅自修改 ESLint 原則設定時，同樣也將進行扣分，在完成作業時請務必注意！

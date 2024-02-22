@@ -232,14 +232,10 @@ fetch( `${baseUrl}${path}?Authorization=${Authorization}`)
 ![](/webgame-engine/assets/HTTP-request/consoleTest.png)
 
 !!! info 
-    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)的網站，為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP資源。
+    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)的網站，為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP。
+    > 可以在HTTPS存取HTTP圖片、影片資源
 
 ## CORS (Cross-Origin Resource Sharing)
-
-* 出現CORS的錯誤[^4]
-[^4]:https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud
-
-![出現CORS的錯誤](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud)
 
 CORS是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起跨域請求時，瀏覽器會執行同源策略，阻止該請求，以保護使用者的安全。
 
@@ -250,3 +246,8 @@ CORS是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起
 
 在伺服器端可以設定 CORS 的限制，確保僅允許來自特定網域的請求或限制允許的 HTTP 方法和標頭。
 這有助於防止跨站腳本攻擊(XSS)和跨站點請求偽造(CSRF)等安全風險。
+
+* 出現CORS的錯誤[^4]
+[^4]:https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud
+
+![出現CORS的錯誤](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud)

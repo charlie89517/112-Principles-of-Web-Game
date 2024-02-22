@@ -102,8 +102,11 @@ Restful API（Representational State Transfer）是一種基於 HTTP 協議的**
 - PUT (修改)
 - DELETE (刪除)
 
-> 不建議在 GET 中使用登入帳號密碼
-> /login?account="admin"&password="123"
+!!! note
+    不建議在 GET 中使用登入帳號密碼
+
+    例如: /login?account="admin"&password="123"
+
 
 ## 與一般的 API 的差異
 
@@ -129,48 +132,118 @@ RESTful Web 服務允許用戶端和伺服器分離，各部件可以獨立演�
 
 您可以使用各種程式設計語言來編寫用戶端和伺服器應用程式，而不會影響 API 設計。
 
-## 使用 Fetch 發送請求 ( request )
+[^2]: https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch
+
+## POST Request
+
+
 
 ```js
-fetch("http://example.com/movies.json")
+postData("http://example.com/answer", { answer: 42 })
+  .then((data) => console.log(data)) // JSON from `response.json()` call
+  .catch((error) => console.error(error));
+
+function postData(url, data) {
+  // Default options are marked with *
+  return fetch(url, {
+    body: JSON.stringify(data), // must match 'Content-Type' header
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: "same-origin", // include, same-origin, *omit
+    headers: {
+      "user-agent": "Mozilla/4.0 MDN Example",
+      "content-type": "application/json",
+    },
+    method: "POST", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, cors, *same-origin
+    redirect: "follow", // manual, *follow, error
+    referrer: "no-referrer", // *client, no-referrer
+  }).then((response) => response.json());
+}
+```
+
+範例程式碼[^2]中有幾個比較重要的參數
+
+1. url 是 API 的網址
+2. data 是要傳給伺服器的資料
+3. headers 可以放入附加訊息，通常放入 User-Agent Content-Type 等... [Header參數](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+4. method 範例中使用POST
+
+## 氣象資料開放平台 API 實作
+1. 到[氣象資料開放平台](https://opendata.cwa.gov.tw/index)註冊帳號
+![](/webgame-engine/assets/HTTP-request/openWeatherData.png)
+
+2. 註冊一個帳號 [https://pweb.cwa.gov.tw/emember/register](https://pweb.cwa.gov.tw/emember/register)
+![](/webgame-engine/assets/HTTP-request/openWeatherDataRegister.png)
+
+3. 到電子信箱啟用會員後再次[登入](https://opendata.cwa.gov.tw/userLogin)
+![](/webgame-engine/assets/HTTP-request/emailConfirm.png)
+
+4. 登入後取得授權碼並將授權碼複製下來
+![](/webgame-engine/assets/HTTP-request/getToken.png)
+
+5. 前往開發指南查看[api文件](https://opendata.cwa.gov.tw/dist/opendata-swagger.html)
+![](/webgame-engine/assets/HTTP-request/apiDoc.png)
+
+6. 可以在swagger文檔中使用API request
+![](/webgame-engine/assets/HTTP-request/trySwagger1.png)
+
+7. 填入需要的參數後點擊Execute執行
+![](/webgame-engine/assets/HTTP-request/trySwagger2.png)
+
+8. 執行後的回傳結果
+![](/webgame-engine/assets/HTTP-request/result.png)
+
+
+## 執行程式碼
+* BaseUrl
+![](/webgame-engine/assets/HTTP-request/baseUrl.png)
+
+```
+  https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=XXX-XXX-XXX
+   └┬┘   └────────┬────────┘ └┬┘    └────────────┬───────────┘  └──────────┬───────────┘
+Scheme       API domain    BaseUrl             Path                     Query Argument
+```
+
+* BaseUrl
+![](/webgame-engine/assets/HTTP-request/baseUrl.png)
+
+* API Path
+![](/webgame-engine/assets/HTTP-request/apiPath.png)
+
+
+```js
+const baseUrl = "https://opendata.cwa.gov.tw/api/v1/"
+const path = "rest/datastore/F-D0047-063"
+const Authorization = "yourAuthorization"
+fetch( baseUrl + path + "?Authorization=" + Authorization)
   .then(function (response) {
     return response.json();
   })
   .then(function (myJson) {
     console.log(myJson);
-    // 處理資料
+    // 輸出json資料
   });
 ```
 
-## 發 POST Request
+* 結果輸出
+![](/webgame-engine/assets/HTTP-request/consoleTest.png)
 
-```js
-// 設定api URL
-const url = "https://api.example.com/endpoint";
-// 設定body要放的值
-const data = {
-  name: "John",
-  age: 30,
-};
-const options = {
-  method: "POST", // GET、POST、PUT、DELETE
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify(data),
-};
+!!! info 
+    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)
+    
+    安全性層級不同可能會有安全問題
 
-fetch(url, options)
-  .then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-    // 處理資料
-  })
-  .catch((error) => {
-    console.log(error);
-    // 處理錯誤
-  });
-```
+## CORS (Cross-Origin Resource Sharing)
+
+是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起跨域請求時，瀏覽器會執行同源策略，阻止該請求，以保護使用者的安全。
+
+### 同源策略 (Same-Origin Policy)
+同源是指**相同域名(domain)、協議(protocol)跟端口(port)**，
+在同源策略下，僅允許網頁從與它自己相同的原始來源來載入資源。
+在某些情況下，網頁需要與其他來源的資源，例如使用不同網域的 API。
+
+在伺服器端可以設定 CORS 的限制，確保僅允許來自特定網域的請求或限制允許的 HTTP 方法和標頭。
+這有助於防止跨站腳本攻擊(XSS)和跨站點請求偽造(CSRF)等安全風險。
 
 ## reference
 

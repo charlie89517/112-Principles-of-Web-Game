@@ -102,24 +102,29 @@ Restful API（Representational State Transfer）是一種基於 HTTP 協議的**
 - PUT (修改)
 - DELETE (刪除)
 
-!!! note
-    不建議在 GET 中使用登入帳號密碼
+[其他HTTP動詞 https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods)
 
+!!! note
+    不建議在 GET 中使用登入帳號密碼，
+    因為在 GET 請求中，URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
+    
     例如: /login?account="admin"&password="123"
 
-
+    
 ## 與一般的 API 的差異
 
 |            |      一般的 API      |   RESTful API    |
 | :--------: | :------------------: | :--------------: |
 | 創建使用者 | `POST` `/createUser` |  `POST` `/user`  |
-| 更新使用者 | `POST` `/updateUser` |  `PUT` `/user`   |
-| 取得使用者 |  `POST` `/getUser`   |  `GET` `/user`   |
-| 刪除使用者 | `POST` `/deleteUser` | `DELETE` `/user` |
+| 更新使用者 | `POST` `/updateUser` |  `PUT` `/user/{uid}`   |
+| 取得使用者 |  `POST` `/getUser`   |  `GET` `/user/{uid}`   |
+| 刪除使用者 | `POST` `/deleteUser` | `DELETE` `/user/{uid}` |
 
 ## RESTful API 有哪些優勢？
 
-- 可擴展性
+[^3]: https://aws.amazon.com/tw/what-is/restful-api/
+
+- 可擴展性[^3]
 
 伺服器不必保留過去的用戶端請求資訊，透過無狀態和有效的快取機制來減少伺服器負擔，提升系統的擴展能力且減少效能瓶頸。
 
@@ -136,15 +141,13 @@ RESTful Web 服務允許用戶端和伺服器分離，各部件可以獨立演�
 
 ## POST Request
 
-
-
 ```js
 postData("http://example.com/answer", { answer: 42 })
-  .then((data) => console.log(data)) // JSON from `response.json()` call
+  .then((data) => console.log(data))
   .catch((error) => console.error(error));
 
 function postData(url, data) {
-  // Default options are marked with *
+  // 預設值標記為*
   return fetch(url, {
     body: JSON.stringify(data), // must match 'Content-Type' header
     cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
@@ -164,9 +167,9 @@ function postData(url, data) {
 範例程式碼[^2]中有幾個比較重要的參數
 
 1. url 是 API 的網址
-2. data 是要傳給伺服器的資料
+2. data 把OBJ轉成JSON字串作為Body提供給Server
 3. headers 可以放入附加訊息，通常放入 User-Agent Content-Type 等... [Header參數](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
-4. method 範例中使用POST
+4. method 放入HTTP動詞
 
 ## 氣象資料開放平台 API 實作
 1. 到[氣象資料開放平台](https://opendata.cwa.gov.tw/index)註冊帳號
@@ -215,7 +218,7 @@ Scheme       API domain    BaseUrl             Path                     Query Ar
 const baseUrl = "https://opendata.cwa.gov.tw/api/v1/"
 const path = "rest/datastore/F-D0047-063"
 const Authorization = "yourAuthorization"
-fetch( baseUrl + path + "?Authorization=" + Authorization)
+fetch( `${baseUrl}${path}?Authorization=${Authorization}`)
   .then(function (response) {
     return response.json();
   })
@@ -229,13 +232,16 @@ fetch( baseUrl + path + "?Authorization=" + Authorization)
 ![](/webgame-engine/assets/HTTP-request/consoleTest.png)
 
 !!! info 
-    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)
-    
-    安全性層級不同可能會有安全問題
+    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)的網站，為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP資源。
 
 ## CORS (Cross-Origin Resource Sharing)
 
-是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起跨域請求時，瀏覽器會執行同源策略，阻止該請求，以保護使用者的安全。
+* 出現CORS的錯誤[^4]
+[^4]:https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud
+
+![出現CORS的錯誤](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud)
+
+CORS是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起跨域請求時，瀏覽器會執行同源策略，阻止該請求，以保護使用者的安全。
 
 ### 同源策略 (Same-Origin Policy)
 同源是指**相同域名(domain)、協議(protocol)跟端口(port)**，
@@ -244,9 +250,3 @@ fetch( baseUrl + path + "?Authorization=" + Authorization)
 
 在伺服器端可以設定 CORS 的限制，確保僅允許來自特定網域的請求或限制允許的 HTTP 方法和標頭。
 這有助於防止跨站腳本攻擊(XSS)和跨站點請求偽造(CSRF)等安全風險。
-
-## reference
-
-1. [https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch)
-
-1. [https://aws.amazon.com/tw/what-is/restful-api/](https://aws.amazon.com/tw/what-is/restful-api/)

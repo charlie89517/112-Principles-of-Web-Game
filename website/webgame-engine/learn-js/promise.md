@@ -1,21 +1,21 @@
 #非同步程式設計
 
-一個簡單的例子,說明一下"非同步"的情境
+一個簡單的例子，說明一下"非同步"的情境
 
-在假日起床後,你打算做以下幾件事情：
+在假日起床後，你打算做以下幾件事情：
 
 - 刷牙洗臉 (5分鐘)
 - 洗衣服 (1小時15分鐘)
 - 上廁所 (15分鐘)
 - 享用早餐 (25分鐘)
 
-一早起來先盥洗後,放下衣服去洗,上個廁所,然後享用早餐
+一早起來先盥洗後，放下衣服去洗，上個廁所，然後享用早餐
 
-在"同步"的情況下,會發生以下的狀況：
+在"同步"的情況下，會發生以下的狀況：
 
-當盥洗後去洗衣服時,即使肚子餓了也不能用早餐；亦不能去上廁所,因為洗衣服是個阻塞事件
+當盥洗後去洗衣服時，即使肚子餓了也不能用早餐；亦不能去上廁所，因為**洗衣服**是個**阻塞事件**
 
-換句話說,當執行一個 Task,且該 Task 不可被中斷 (阻塞 Block),就可以粗略地說是同步程式
+換句話說，當執行一個 Task，且該 Task 不可被中斷 **(阻塞 Block)**，就可以粗略地說是同步程式
 
 實際上的情況會更加複雜,因為會區分為：
 
@@ -24,31 +24,32 @@
 - 阻塞 (block)
 - 非阻塞 (non-block)
   
-這裡不討論太深入,先理解第一個概念：
+這裡不討論太深入，先理解第一個概念：
 
-!!! info 
-    在程式中,所有的Task都是不可中斷的,就可以說是同步程式設計
+!!! info
+
+    在程式中，所有的Task都是不可中斷的，就可以說是同步程式設計
 
 ## 現實中的狀況
 
-在生活中,也有很多非同步的情境：
+在生活中，也有很多非同步的情境：
 
-- 以上個例子來說,當把衣服丟進洗衣機洗後,就會離開做其他事情了
-- 煮泡麵時,通常不會倒水後,還繼續等待三分鐘都不做其他事情
-- 去銀行時,先抽取號碼牌,等到輪到自己的號碼,才去櫃檯
-- 
-試想一下上面的幾個情境：洗衣服時,要在洗衣機旁等待1小時；去銀行時,要在櫃台排隊直到自己到櫃檯前...
+- 以上個例子來說，當把衣服丟進洗衣機洗後，就會離開做其他事情了
+- 煮泡麵時，通常不會倒水後，還繼續等待三分鐘都不做其他事情
+- 去銀行時，先抽取號碼牌，等到輪到自己的號碼，才去櫃檯
+  
+試想一下上面的幾個情境：洗衣服時，要在洗衣機旁等待1小時；去銀行時，要在櫃台排隊直到自己到櫃檯前...
 
-這些都是很浪費時間的情況,而以程式設計來說,通常非同步設計會用在
+這些都是很浪費時間的情況，而以程式設計來說，通常非同步設計會用在
 
-- I/O 發生時(非常重要)
+- **I/O** 發生時(非常重要)
 - 某個操作耗費時間甚鉅
 
-若 CPU 進行資料的運算需要 10µs,而等待硬碟把資料傳輸到記憶體需要 1 ms
+若 CPU 進行資料的運算需要 10µs，而等待硬碟把資料傳輸到記憶體需要 1 ms
 
-客觀來說,耗時約為 1ms + 10µs = 1.01ms；對於CPU來說,絕大多數的時間都在等待資料傳輸
+客觀來說，耗時約為 1ms + 10µs = 1.01ms；對於CPU來說，絕大多數的時間都在**等待**資料傳輸
 
-對於網頁設計來說,經典的例子是：當網頁上有圖片需要顯示時,不會等待圖片下載完成,而是會先渲染頁面的其餘部分
+對於網頁設計來說，經典的例子是：當網頁上有圖片需要顯示時，不會等待圖片下載完成，而是會先渲染頁面的其餘部分
 
 ---
 
@@ -65,56 +66,56 @@
 
 
 
-| 雨量站所在地址 | 縣市代碼 |    緯度    |    經度    | 測站代碼 | 測站中文名稱 | 流域代碼 | 流域名稱 |
-|--------------|---------|------------|------------|---------|------------|---------|---------|
-| 南投縣集集鎮   |  10008  | 23.8263889 |   120.775  |  00H710 |   集集(2)   |  1510   |  濁水溪 |
-| 南投縣仁愛鄉   |  10008  | 24.0908333 | 121.032222 |  00H810 |   惠蓀(2)   |  1430   |   烏溪  |
-| 屏東縣屏東市   |  10013  |   22.655   |  120.466   |  00Q070 |   屏東(5)   |  1730   |  高屏溪 |
+| 雨量站所在地址 | 縣市代碼 | 緯度       | 經度       | 測站代碼 | 測站中文名稱 | 流域代碼 | 流域名稱 |
+| -------------- | -------- | ---------- | ---------- | -------- | ------------ | -------- | -------- |
+| 南投縣集集鎮   | 10008    | 23.8263889 | 120.775    | 00H710   | 集集(2)      | 1510     | 濁水溪   |
+| 南投縣仁愛鄉   | 10008    | 24.0908333 | 121.032222 | 00H810   | 惠蓀(2)      | 1430     | 烏溪     |
+| 屏東縣屏東市   | 10013    | 22.655     | 120.466    | 00Q070   | 屏東(5)      | 1730     | 高屏溪   |
 
 倘若是將該表格做成網頁,內容可能會是：
 
-```
+```js 
 <html>
   <body>
     <div>
       <!-- 其他資料 -->
     </div>
-   <table>
-  <thead>
-    <tr>
-      <th>雨量站所在地址</th>
-      <th>縣市代碼</th>
-      <th>緯度</th>
-      <th>經度</th>
-      <th>測站代碼</th>
-      <th>測站中文名稱</th>
-      <th>流域代碼</th>
-      <th>流域名稱</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>南投縣仁愛鄉</td>
-      <td>10008</td>
-      <td>24.090833333333332</td>
-      <td>121.03222222222222</td>
-      <td>00H810</td>
-      <td>惠蓀(2)</td>
-      <td>1430</td>
-      <td>烏溪</td>
-    </tr>
-    <tr>
-      <td>屏東縣屏東市</td>
-      <td>10013</td>
-      <td>22.654999999999998</td>
-      <td>120.46638888888889</td>
-      <td>00Q070</td>
-      <td>屏東(5)</td>
-      <td>1730</td>
-      <td>高屏溪</td>
-    </tr>
-  </tbody>
-</table>
+    <table>
+      <thead>
+        <tr>
+          <th>雨量站所在地址</th>
+          <th>縣市代碼</th>
+          <th>緯度</th>
+          <th>經度</th>
+          <th>測站代碼</th>
+          <th>測站中文名稱</th>
+          <th>流域代碼</th>
+          <th>流域名稱</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>南投縣仁愛鄉</td>
+          <td>10008</td>
+          <td>24.090833333333332</td>
+          <td>121.03222222222222</td>
+          <td>00H810</td>
+          <td>惠蓀(2)</td>
+          <td>1430</td>
+          <td>烏溪</td>
+        </tr>
+        <tr>
+          <td>屏東縣屏東市</td>
+          <td>10013</td>
+          <td>22.654999999999998</td>
+          <td>120.46638888888889</td>
+          <td>00Q070</td>
+          <td>屏東(5)</td>
+          <td>1730</td>
+          <td>高屏溪</td>
+        </tr>
+      </tbody>
+    </table>
     <div>
       <!-- 其他資料 -->
     </div>
@@ -123,51 +124,52 @@
 
 ```
 
-這個假設的網頁,可能還包含了該表格以外的資料,使用 <!-- 其他資料 --> 替代,
+這個假設的網頁，可能還包含了該表格以外的資料，使用 <!-- 其他資料 --> 替代，
 
-假設上面的表格是會更新的(Ex. 每 30 分鐘一次),每次都需要重新要求整個頁面,是很浪費效能的
+假設上面的表格是會更新的(Ex. 每 30 分鐘一次)，每次都需要重新要求整個頁面，是很浪費效能的
 
-因為用戶只關心會變化的資料,比方說上面的表格
+因為用戶只關心**會變化的資料**，比方說上面的表格
 
-在之後,會說明什麼是RestAPI,首先知道：
+在之後，會說明什麼是**RestAPI**，首先知道：
 
 !!! info 
-    WEB應用常常依賴伺服器的資料,且這些資料在網頁上可能會常常變化
+
+    WEB應用常常依賴伺服器的資料,且這些資料在網頁上**可能**會常常變化
 
 ## 早期的實現
 
-在過去 YAHOO 帳號還很流行的時候,許多人都會去辦一組信箱：
+在過去 YAHOO 帳號還很流行的時候，許多人都會去辦一組信箱：
 
 流程如下：
 
 - 輸入一個帳號名稱
 - 輸入你的姓名、基本資料
 - 送出表單
-- 喔,你有可能帳號名稱跟別人重複了、或是密碼不符合格式(比方說要包含大小寫英數字)
+- 喔，你有可能帳號名稱跟別人重複了、或是密碼不符合格式(比方說要包含大小寫英數字)
 - 重新填寫表單
-- 在隨後幾年(2010),Google進入大家的生活,同樣的流程：
+- 在隨後幾年(2010)，Google進入大家的生活，同樣的流程：
 
 輸入一個帳號名稱
 準備輸入你的姓名、基本資料
-已經知道該帳號有沒有被註冊過了
+**已經知道該帳號有沒有被註冊過了**
 繼續填寫其他項目
-若表單有錯誤,進行修正
+若表單有錯誤，進行修正
 提交申請表單
-這在現今很常見的技術,由 Google 開始大量使用的技術之一 - AJAX
+這在現今很常見的技術，由 Google 開始大量使用的技術之一 - AJAX
 
-早在 Google 使用該方法之前,早就有這項技術,叫做 Asynchronous JavaScript And XML(AJAX)
+早在 Google 使用該方法之前，早就有這項技術，叫做`Asynchronous JavaScript And XML(AJAX)`
 
-平常使用的網頁,其實大部分的畫面是固定的,僅有一小部分會變化,比方說：
+平常使用的網頁，其實大部分的畫面是固定的，僅有一小部分會變化，比方說：
 
 - 圖書館館藏系統：只有搜尋結果的部分會改變
-- 帳號註冊系統：表單都是一樣的,只是要檢查帳號、密碼合不合格
-- Youtube：搜尋影片時,只有下方的影片清單會改變
+- 帳號註冊系統：表單都是一樣的，只是要檢查帳號、密碼合不合格
+- Youtube：搜尋影片時，只有下方的影片清單會改變
   
-諸多應用,因此提出一個概念：能不能只交換需要的部分？,或是先提交部分資料給伺服器進行處理
+諸多應用，因此提出一個概念：**能不能只交換需要的部分？**，或是先提交**部分資料**給伺服器進行處理
 
-因為早期使用XML做為資料傳輸的格式(近幾年大部分使用JSON),所以稱為AJAX
+因為早期使用XML做為資料傳輸的格式(近幾年大部分使用JSON)，所以稱為AJAX
 
-概念如下：透過背景發起Network I/O,並等到伺服器回應後,再把資料取出來使用,實現的程式碼如下
+概念如下：透過背景發起Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下
 
 ```js
 const domain = 'fhy.wra.gov.tw';
@@ -195,13 +197,13 @@ xhr.send();
 
 ```
 
-看到 onload 成員,當完成後,會發送一個事件,通知程式去把資料取出來
+看到 `onload` 成員，當完成後，會發送一個事件，通知程式去把資料取出來
 
 ## 現在主流的做法
 
-在ES 6(ECMA 2016)之後,推出了一系列的API,其中包含影響甚鉅的 Promise
+在ES 6(ECMA 2016)之後，推出了一系列的API，其中包含影響甚鉅的 `Promise`
 
-而ES 7之後,則推出了 async/await ,更方便進行處理非同步的資料 
+而ES 7之後，則推出了 `async/await` ，更方便進行處理非同步的資料 
 
 ## Promise
 
@@ -227,7 +229,7 @@ Promise有三種狀態：
 ### Promise 的特點
 
 1. promise的狀態不受外界的影響，就像我開頭說的是一個容器，除了非同步操作的結果其他手段無法改變promise的狀態。
-2. 狀態一旦改變 就不會改變，任何時候都會得到這個結果，狀態改變有兩種： 從pending變為fulfilled和從pending變為rejected.
+2. 狀態一旦改變就不會改變，任何時候都會得到這個結果，狀態改變有兩種： 從pending變為fulfilled和從pending變為rejected.
 
 
 ### Prmoise的使用
@@ -243,21 +245,21 @@ let promise = new Promise( executor );
 
 ```
 
-`executor` 的型別是 Function,並接受兩個參數 `resolve` 和 `reject`,兩個參數都是 `function`
+`executor` 的型別是 Function，並接受兩個參數 `resolve` 和 `reject`，兩個參數都是 `function`
 
-`resolve`：當操作成功,應該調用該方法
+`resolve`：當操作成功，應該調用該方法
 
-`reject`：當操作失敗,應該調用該方法
+`reject`：當操作失敗，應該調用該方法
 
 !!! info
-    在部分程式設計書籍的說法,傳入一個Function,被傳入的Function習慣稱做 callback 或是 handler
+    在部分程式設計書籍的說法，傳入一個Function，被傳入的Function習慣稱做 callback 或是 handler
 
     並且稱接受/回傳一個Function的Function 為 High-order Function(高階函式)
 
 以該例中：
 
 ```js
-function calc( callback ) {
+function calc(callback) {
   let a = Math.random() * 100;
   let b = Math.random() * 100;
   return callback(a, b);
@@ -271,31 +273,32 @@ function mul(a, b) {
   return a * b;
 }
 
-calc(add) // return `Math.random() * 100` + `Math.random() * 100` 的值
-calc(mul) // return `Math.random() * 100` * `Math.random() * 100` 的值
+calc(add); // return `Math.random() * 100` + `Math.random() * 100` 的值
+calc(mul); // return `Math.random() * 100` * `Math.random() * 100` 的值
 
 ```
 
-呼叫 calc 時,calc內部會生成兩個隨機數字 a, b,並調用 callback 參數,該參數接受一個 Function
+呼叫 calc 時，calc內部會生成兩個隨機數字 `a`， `b`，並調用 `callback` 參數，該參數接受一個 Function
 
-add 和 mul 這兩個被傳入的 function,通常叫做 callback
+add 和 mul 這兩個被傳入的 function，通常叫做 `callback`
 
-另一個例子,滑鼠點擊事件的函數簽章：
+另一個例子，滑鼠點擊事件的函數簽章：
 
 ```js
-htmlElement.addEventListener('click', e => {
+htmlElement.addEventListener("click", (e) => {
   console.log(e);
-})
+});
+
 
 ```
 
-addEventListener 接收兩個參數：第一個是事件種類,常用的有 click, change, load ... 等
+`addEventListener` 接收兩個參數：第一個是事件種類，常用的有 `click`， `change`， `load` ... 等
 
-第二個參數則是一個 handler, 把事件物件傳給 handler, 供 handler使用
+第二個參數則是一個 `handler`，把事件物件傳給 `handler`，供 `handler` 使用
 
-那麼回到 Promise, 可以理解成 Promise 內部會生成兩個 callback 供使用
+那麼回到 `Promise`，可以理解成 `Promise` 內部會生成兩個 `callback` 供使用
 
-根據調用的 callback, 決定 Promise 的狀態是成功的還是失敗的：
+根據調用的 callback，決定 `Promise` 的狀態是成功的還是失敗的：
 
 ```js
 let promise = new Promise((resolve, reject) => {
@@ -308,7 +311,7 @@ let promise = new Promise((resolve, reject) => {
 
 ```
 
-new Promise 回傳的實例, 會提供 then 或是 catch 方法,分別對應 resolve 和 reject ：
+`new Promise` 回傳的實例，會提供 `then` 或是 `catch` 方法，分別對應 `resolve` 和 `reject` ：
 
 ```js
 promise
@@ -317,7 +320,7 @@ promise
 
 ```
 
-這樣理解Promise：一個未來會存在的數值, 且狀態確定後, 就不會改變了
+這樣理解Promise：一個未來會存在的數值，且狀態確定後，就不會改變了
 
 狀態不會改變的意思是：
 
@@ -330,26 +333,27 @@ let promise = new Promise((resolve, reject) => {
 });
 
 promise
-  .then(value => console.log(value))  // print 'true';
-  .catch(value => console.log(value)) // 不會執行
+  .then((value) => console.log(value)) // print 'true';
+  .catch((value) => console.log(value)); // 不會執行
 
 ```
 
 這個就是 Promise 不變性的意思：
 
-- 一開始處於 pending 狀態：還未調用 resolve 或是 reject 之前, 都處於該狀態
+- 一開始處於 pending 狀態：還未調用 `resolve` 或是 `reject` 之前, 都處於該狀態
 - 當 resolve 調用後：成為 fulfilled(實現) 狀態
 - 當 reject 調用後：成為 rejected(拒絕) 狀態
 Promise 一旦被決定是 fulfilled 還是 rejected 後, 就不會變成其他狀態了
 
-而 Promise 只會被決定一次狀態,意思是：
+而 Promise 只會被決定**一次**狀態,意思是：
 
 ```js
 let promise = new Promise((resolve, reject) => {
   const flag = true;
-  resolve(true);  // 在該階段,Promise 成為 fulfilled 狀態
+  resolve(true); // 在該階段,Promise 成為 fulfilled 狀態
   resolve(false); // 無效,Promise的狀態已經被決定了
 });
+
 
 ```
 
@@ -373,11 +377,11 @@ promise
 
 ```
 
-Promise的出現,為帶來了一個重要的進展 - 可以針對非同步事件進行排序
+Promise的出現，為帶來了一個重要的進展 - 可以針對非同步事件進行排序
 
-以上個個章節的例子,要下載 fileA, fileB, fileC,且一定要依照A B C的順序
+以上個個章節的例子，要下載 fileA， fileB， fileC，且一定要依照A B C的順序
 
-在上個章節,用`arr[0]、arr[1]、arr[2]`分別存入A、B、C的值,但是使用 Promise 後,可以改為：
+在上個章節，用`arr[0]、arr[1]、arr[2]`分別存入A、B、C的值，但是使用 Promise 後，可以改為：
 
 ```js
 function download(url) {
@@ -420,37 +424,38 @@ downloadAll() //依序呼叫 siteA、siteB、siteC 的下載內容
 
 #### 串接
 
-Promise 有個特性：他可以類似串列一般,把本次的回傳值做為下一個promise的傳入
+Promise 有個特性：他可以類似串列一般，把本次的回傳值做為下一個promise的傳入
 
 ```js
 let promise = new Promise((resolve, reject) => {
   const flag = Math.random() > 0.5; // Math.random() 會隨機回傳 0~1 之間的數字
-  if(flag) {
-    resolve(1,2,3,4,5) // 僅接受第一個參數
+  if (flag) {
+    resolve(1, 2, 3, 4, 5); // 僅接受第一個參數
   } else {
-    reject(10,20,30) // 僅接受第一個參數
+    reject(10, 20, 30); // 僅接受第一個參數
   }
 });
 
 promise
-  .then((a,b,c,d,e) => {
-    console.log(a,b,c,d,e); // print 1, undefined * 4
+  .then((a, b, c, d, e) => {
+    console.log(a, b, c, d, e); // print 1, undefined * 4
     return 100;
   })
-  .catch((a,b,c) => {
-    console.log(a,b,c); // print 10, undefined * 2
+  .catch((a, b, c) => {
+    console.log(a, b, c); // print 10, undefined * 2
     return -100;
   })
-  .then( value => {
+  .then((value) => {
     // 如果 flag 為 true,代表進入上一個 then,此時 value = 100
     // 反之 flag 為 false,代表進入上一個 catch,此時 value = -100
     console.log(value);
-    return 10000
+    return 10000;
   })
-  .finally(e => {
+  .finally((e) => {
     // 可以調用 finally(),代表不論在 then 還是 catch 都要執行的事件
-    console.log(e) // undefined,finally不接受任何參數
-  })
+    console.log(e); // undefined,finally不接受任何參數
+  });
+
 
 ```
 
@@ -461,7 +466,10 @@ promise
 
 ![js-promises](/webgame-engine/assets/promise/js-promises.png)
 
-這裡引用 MDN 的 Promise 流程圖：起初在 pending 狀態,接下來根據 fulfill 或是 reject,調用 onFulfillment 或是 onRejection,此時就被稱為 settled 狀態
+這裡引用 MDN 的 Promise 流程圖：起初在 `pending` 狀態,接下來根據 `fulfill` 或是 `reject`,調用 `onFulfillment` 或是 `onRejection`,此時就被稱為 `settled` 狀態
+
+值得注意的地方是，可以看到其實 `then()` 是可以接受兩個 callback：
+
 
 ```js
 const invokeFn = () => Promise.reject("oops!")
@@ -487,26 +495,37 @@ invokeFn()
 
 ```
 
-在舊一點的實作中, 會特意把 fulfill, reject, error 三種情況分開
+在舊一點的實作中，會特意把 `fulfill`、`reject`、`error` 三種情況分開
 
-Ex. 當呼叫伺服器的API時, 可能會發生：
+Ex. 當呼叫伺服器的API時，可能會發生：
 
-- 200 OK - 伺服器收到請求並允許
-- 403 Forbidden - 伺服器收到請求並拒絕
-- 無回應 - 完全無回應, 可能是伺服器壞掉, 或是該站點根本不存在
+- `200 OK` - 伺服器收到請求並允許
+- `403 Forbidden` - 伺服器收到請求並拒絕
+- 無回應 - 完全無回應， 可能是伺服器壞掉， 或是該站點根本不存在
 
-對於客戶端來說, onFulfillment 對應到 status 200, onReject 對應到 status 403, 最後onCatchError 對應到伺服器無回應
+對於客戶端來說， `onFulfillment` 對應到 `status 200`、`onReject` 對應到 `status 403`，最後 `onCatchError` 對應到伺服器無回應
 
-- Promise.resolve(val) 回傳一個進入 fulfill 狀態的 Promise 物件
-- Promise.reject(val) 回傳一個進入 reject 狀態的 Promise 物件
+- Promise.resolve(val) 回傳一個進入 `fulfill` 狀態的 Promise 物件
+- Promise.reject(val) 回傳一個進入 `reject` 狀態的 Promise 物件
 
-流程圖的第三階段,無論是 then 還是 catch 方法,都會會傳一個新的 Promise 物件
+流程圖的第三階段，無論是 `then` 還是 `catch` 方法，都會會傳一個新的 `Promise` 物件
+
+
+**延伸補充：巢狀地域(Callback Hell)**
+
+在早期，callback常被拿來作為解決非同步型的的一種方法，通常都會在callback中嵌套另一個callback來達到非同步**依序**完成的目的
+
+但經過一層一層的嵌套後往往會導致程式碼難以閱讀以及維護的情況，就被稱為巢狀地域
+
+而Promise Chain可以改善多層巢狀結構的問題，利用`then()`來串接，大幅地將地巢狀結構的層數。
+
+
 
 #### 進階練習
 
-這就如上方的 downloadAll 例子, 每一次的 then 都會回傳一個新的 Promise 物件, 且 Promise 只會被決定一次狀態, 因此可以提出兩種變體：
+這就如上方的 downloadAll 例子，每一次的 then 都會回傳一個新的 Promise 物件，且 Promise 只會被決定一次狀態，因此可以提出兩種變體：
 
-首先定義一個模擬下載 的Promise函式, 接受兩個值：val 以及 isSuccess
+首先定義一個**模擬下載** 的Promise函式，接受兩個值：val 以及 isSuccess
 
 ```js
 /* val 設定成當 Promise settled 時,應該回傳的值 */
@@ -548,20 +567,20 @@ download("data A")
 
 ```
 
-簡單的拆解一下, 理清這個範例的執行結果：
+簡單的拆解一下，理清這個範例的執行結果：
 
-在第一次呼叫 download 時,第二個參數 isSuccess 為 true,因此該次執行結果是 fulfill
+在第一次呼叫 download 時，第二個參數 `isSuccess` 為 true，因此該次執行結果是 `fulfill`
 
 ```js
 download("data A") // fulfill
 
 ```
 
-此時會經過 Savepoint 1,並印出 "Savepoint 1: Fulfill: data A"
+此時會經過 `Savepoint 1`，並印出 "Savepoint 1: Fulfill: data A"
 
-下一行的 download("data B") 也是 fulfill,因此會略過 catch,進入到 stage 2 的 Savepoint 3,並印出 "Savepoint 3: Fulfill: data B"
+下一行的 `download("data B")` 也是 `fulfill`，因此會略過 catch，進入到 `stage 2` 的 `Savepoint 3`，並印出 "Savepoint 3: Fulfill: data B"
 
-同樣的,最後則會走到 stage 3 的 "Savepoint 5",並印出 "Savepoint 5: Fulfill: data C"
+同樣的，最後則會走到 `stage 3` 的 "Savepoint 5"，並印出 "Savepoint 5: Fulfill: data C"
 
 最終輸出：
 
@@ -571,10 +590,12 @@ Savepoint 3: Fulfill: data B
 Savepoint 5: Fulfill: data C
 
 ```
-!!! tip
-    尋找離當下 Promise 最近的 then 和 catch,再根據 settled 的狀態決定路徑
 
-下面的例子, 把"看不到"的路徑, 先註解起來
+!!! tip
+
+    尋找離當下 `Promise` 最近的 `then` 和 `catch`，再根據 settled 的狀態決定路徑
+
+下面的例子，把"看不到"的路徑，先註解起來
 
 ```js
 download("data A") // <--- 目前執行的位置
@@ -605,7 +626,7 @@ download("data A") // <--- 目前執行的位置
   // })
 
 ```
-該次結果是成功,因此會進到 then,此時在 Savepoint 1：
+該次結果是成功，因此會進到 then，此時在 `Savepoint 1`：
 ```js
 // download("data A") 
   /* stage 1 */
@@ -636,7 +657,7 @@ download("data A") // <--- 目前執行的位置
 
 ```
 
-這次結果也是成功,因此會進到 then,此時在 Savepoint 3：
+這次結果也是成功，因此會進到 then，此時在 `Savepoint 3`：
 
 ```js
 // download("data A") 
@@ -667,9 +688,9 @@ download("data A") // <--- 目前執行的位置
   // })
 
 ```
-最後的結果還是成功, 因此會進到 then,此時在 Savepoint 5：
+最後的結果還是成功， 因此會進到 then，此時在 `Savepoint 5`：
 
-修改範例, 比方說在 stage 1 的 then 扔出一個 Error：
+修改範例， 比方說在 `stage 1` 的 `then` 扔出一個 Error：
 
 ```js
 download("data A")
@@ -716,7 +737,7 @@ Savepoint 5: Fulfill: data C
 
 #### fetch API
 
-ES 6 提供了 fetch API, 就像是上面的 download 的實作, 只是是由瀏覽器提供的WebAPI：
+ES 6 提供了 `fetch` API，就像是上面的 `download` 的實作，只是是由瀏覽器提供的WebAPI：
 
 ```js
 const result = fetch(url, {
@@ -735,7 +756,7 @@ result
   });
 
 ```
-這就是最常用來抓取伺服器資料的方法,比方說上面那個抓取政府運輸資料的程式可改為：
+這就是最常用來抓取伺服器資料的方法，比方說上面那個抓取政府運輸資料的程式可改為：
 
 ```js
 const domain = 'fhy.wra.gov.tw';
@@ -755,9 +776,10 @@ fetch(targetUrl)
 ![response](/webgame-engine/assets/promise/response.png)
 
 !!! note
-    如果請求的站點出現404 NOT FOUND, 那麼當次 fetch 的狀態是 fulfilled
 
-    因為 fetch 象徵的意義是對伺服器發出請求, 而不是取得資料, 而404 status一樣是伺服器的回傳結果
+    如果請求的站點出現`404 NOT FOUND`，那麼當次 fetch 的狀態是 **fulfilled**
+
+    因為 fetch 象徵的意義是對伺服器**發出請求**，而不是取得資料，而404 status一樣是伺服器的回傳結果
 
 ```js
 fetch("httpp://www.google.com")
@@ -770,7 +792,7 @@ fetch("httpp://www.google.com")
 
 ```
 
-這個例子中,誤把 http 打成 httpp,一個未知的協定,因此無法發出請求 導致直接進入 catch 階段
+這個例子中，誤把 `http` 打成 `httpp`，一個未知的協定，因此無法發出請求導致直接進入 catch 階段
 
 ```js
 const domain = 'fhy.wra.gov.tw';
@@ -794,7 +816,7 @@ fetch(targetUrl)
 
 ```
 
-而上述的例子中,可以觀察到在 then 或是 catch 中 throw Error,會進入下個階段的 catch
+而上述的例子中，可以觀察到在 then 或是 catch 中 `throw Error`，會進入下個階段的 catch
 
 更多資料請參考 [MDN - fetchAPI](https://developer.mozilla.org/en-US/docs/Web/API/fetch)
 
@@ -806,7 +828,9 @@ fetch(targetUrl)
 
 ### 介紹
 
-`async function`：在 `function` 的前方 加上一個 `async` 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
+Promise雖然改善了callback hell的發生，但其實還是有一層的巢狀結構，而此時`async/await`的出現可以為我們解決這個問題。
+
+`async function`：在 `function` 的前方加上一個 `async` 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
 
 `await`：可以暫停非同步函式的運行（中止 Promise 的運行），直到非同步進入 resolve 或 reject，當接收完回傳值後繼續非同步函式的運行。
 
@@ -928,50 +952,6 @@ async function processData() {
     本章節可以說是 最重要的 概念,請務必深入理解Promise的概念
 
     非同步事件普遍存在於 WEB與伺服器應用中
-
-
-## 補充：setTimeout 與 setInterval
-
-### 遇到的問題
-
-在 Web 開發中我們時常使用 setTimeout 及 setInterval來實現定時任務。
-但因為瀏覽器為了提高性能以及節省資源，所以會針對在背景執行的標籤頁來做優化策略。
-
-而瀏覽器 setTimeout 及 setInterval 會因為瀏覽器的優化策略而受到影響，導致計時器的執行時間間隔被延長。
-也就是說在背景執行的標籤頁中所使用的計時器任務有可能不會按照原先所設定的間隔時間來做執行。
-
-如下範例顯示：
-
-
-```js
-let lastTime = new Date().now()
-function measureTime(){
-    let currentTime = new Date().now()
-    console.log(currentTime-lastTime)
-    lastTime=currentTime
-}
-
-setInterval(measureTime,1000)
-```
-
-![timeout-problem](/webgame-engine/assets/promise/timeout-problem.png)
-
-標籤頁在背景執行越久間隔時間會變得越來越久。
-
-### 解決方法
-
-如果需要在標籤頁背景執行時定時任務，並且定時器按照先前設定的時間間隔了時間間隔來做執行，可以考慮使用下面兩個方式
-
-1. 使用 Web worker
-2. 使用 visibility Change事件
-3. 使用 requestAnimationFrame API
-   
-Web worker是在背景運行的的獨立線程，因此是不會受到瀏覽器優化策略的影響，所以可以將定時任務放在 Web worker中來做執行。
-
-visibility Change事件是一個可以使用來作為監聽頁面可見性變化的事件。
-所以可以使用事件來判斷標籤頁從背景切換到前景時再去觸發定時任務，以保證任務按照原先設定的時間間隔來執行。
-
-在動畫的部分可以選擇使用 requestAnimationFrame API 來解決。requsetAnimationFrame API 可依裝置畫面刷新頻率決定執行時機，確保每個 Frame 只跑一次，並會在畫面隱藏時暫停執行。
 
 
 

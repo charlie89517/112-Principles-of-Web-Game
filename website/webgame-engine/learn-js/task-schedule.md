@@ -115,9 +115,9 @@ Task Queue 紀錄等待執行的工作, 由後方的Worker取出後執行, 完�
 ```js
 console.log('Hello')
 
-setTimeout(() => function cb(){
+setTimeout(function cb(){
  console.log('There')
-}, 5000) // 1秒後印出 'test'
+}, 5000) // 5秒後印出 'test'
 
 console.log('Bye')
 ```
@@ -133,11 +133,21 @@ console.log('Bye')
 
 ```js
 let arr = [];
-setTimeout(() => arr.push(1), 0); // Enqueue - task queue
-setTimeout(() => arr.push(2), 0); // Enqueue - task queue
-setTimeout(() => arr.push(3), 0); // Enqueue - task queue
-arr.push(4) // call stack
-console.log(arr) // [4, 1, 2, 3]
+setTimeout(function () {
+  arr.push(1);
+}, 0); // Enqueue - task queue
+
+setTimeout(function () {
+  arr.push(2);
+}, 0); // Enqueue - task queue
+
+setTimeout(function () {
+  arr.push(3);
+}, 0); // Enqueue - task queue
+
+arr.push(4); // call stack
+console.log(arr); // [4, 1, 2, 3]
+
 ```
 
 該程式碼揭露的：因為前面三次push是放在task queue的, 因此狀況就好像：
@@ -164,7 +174,7 @@ Call Stack = [fn];
 ```js
 console.log('Hello')
 
-setTimeout(() => function cb(){
+setTimeout(function cb(){
  console.log('There')
 }, 0) // 1秒後印出 'test'
 
@@ -204,4 +214,49 @@ console.log('Done')
 
 !!! info
     這邊分享一個提供視覺化更方便瞭解整個流程的工具 [Loupe](http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+
+
+## 補充：setTimeout 與 setInterval
+
+### 遇到的問題
+
+在 Web 開發中我們時常使用 setTimeout 及 setInterval來實現定時任務。
+但因為瀏覽器為了提高性能以及節省資源，所以會針對在背景執行的標籤頁來做優化策略。
+
+而瀏覽器 setTimeout 及 setInterval 會因為瀏覽器的優化策略而受到影響，導致計時器的執行時間間隔被延長。
+也就是說在背景執行的標籤頁中所使用的計時器任務有可能不會按照原先所設定的間隔時間來做執行。
+
+如下範例顯示：
+
+
+```js
+let lastTime = Date.now()
+function measureTime(){
+    let currentTime = Date.now()
+    console.log(currentTime-lastTime)
+    lastTime=currentTime
+}
+
+setInterval(measureTime,1000)
+```
+
+![timeout-problem](/webgame-engine/assets/promise/timeout-problem.png)
+
+標籤頁在背景執行越久間隔時間會變得越來越久。
+
+### 解決方法
+
+如果需要在標籤頁背景執行時定時任務，並且定時器按照先前設定的時間間隔了時間間隔來做執行，可以考慮使用下面兩個方式
+
+1. 使用 Web worker
+2. 使用 visibility Change事件
+3. 使用 requestAnimationFrame API
+   
+Web worker是在背景運行的的獨立線程，因此是不會受到瀏覽器優化策略的影響，所以可以將定時任務放在 Web worker中來做執行。
+
+visibility Change事件是一個可以使用來作為監聽頁面可見性變化的事件。
+所以可以使用事件來判斷標籤頁從背景切換到前景時再去觸發定時任務，以保證任務按照原先設定的時間間隔來執行。
+
+在動畫的部分可以選擇使用 requestAnimationFrame API 來解決。requsetAnimationFrame API 可依裝置畫面刷新頻率決定執行時機，確保每個 Frame 只跑一次，並會在畫面隱藏時暫停執行。
+
 

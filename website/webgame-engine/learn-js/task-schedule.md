@@ -22,9 +22,6 @@ JavaScript 是由 堆疊（Stack）、堆積（Heap）、任務佇列（Task Que
 
     現代 JavaScript 引擎實作及很大程度地最佳化了該圖所描述的語意。
 
-
-
-
 ### 堆疊
 
 ```js
@@ -39,11 +36,9 @@ function bar(x) {
 }
 
 console.log(bar(7));
-
 ```
 
 當呼叫 bar 時，會產生一個含有 bar 的參數及區域變數的 frame，而在 bar 呼叫了 foo 時，含有 foo 參數及變數的第二個 frame 就會被置於堆疊的最上面。當 foo 回傳後，最上面的 frame 會被抽離堆疊（僅留下 bar 的呼叫 frame）。然後當 bar 返回之後，堆疊就會清空。
-
 
 ### 阻塞
 
@@ -74,11 +69,9 @@ cout << "Hello, world" << endl;
 4. 接著去煎肉排，等待煎肉排的時間
 5. 接著去倒飲料，等待倒飲料的時間
 6. 最後製作漢堡並送給客人
-   
+
 店員一次只能做一件事情，開始炸薯條就必須等待薯條炸完，沒辦法利用空閑時間做其他事情。
 
-
-   
 非同步
 
 1. 客人跟店員點餐
@@ -91,35 +84,35 @@ cout << "Hello, world" << endl;
 
 店員同樣一次也只能做一件事情，但在開始炸薯條之後他可以利用等待炸薯條的時間去煎肉排或倒飲料。
 
-
 ## JavaScript 引擎架構
 
 ![js-v8](/webgame-engine/assets/task-schedule/js-v8.png)
 
-!!! quote 
+!!! quote
 
     JavaScript 的並行模型（concurrency model）是基於「事件循環（event loop）」，其在運作上跟 C 或是 Java 有很大的不同。
 
 我們之所以可以在瀏覽器中同時（concurrently）處理多個事情，是因為瀏覽器並非只是一個 JavaScript Runtime。
 
-!!! note 
+!!! note
+
     JavaScript 的執行時期（Runtime）一次只能做一件事，但瀏覽器提供了更多不同的 API 讓我們使用，進而讓我們可以透過 event loop 搭配非同步的方式同時處理多個事項。
 
 
-Event loop 的作用是去監控堆疊（call stack）和工作佇列（task queue，當堆疊當中沒有執行項目的時候，便把佇列中的內容拉到堆疊中去執行。
+Event loop 的作用是去監控堆疊（call stack）和工作佇列（task queue），當堆疊當中沒有執行項目的時候，便把佇列中的內容拉到堆疊中去執行。
 
 Task Queue 紀錄等待執行的工作，由後方的Worker取出後執行，完成後調用註冊的 Handler
 
 比方說 setTimeout(fn, ms)，接受一個 function 和毫秒的數值，就會在 N 毫秒後調用該方法
 
 ```js
-console.log('Hello')
+console.log("Hello");
 
 setTimeout(function cb(){
  console.log('There')
 }, 5000) // 5秒後印出 'test'
 
-console.log('Bye')
+console.log("Bye");
 ```
 
 執行的過程可能如下：
@@ -127,7 +120,6 @@ console.log('Bye')
 1. setTimeout 中的 callback function 會被放到 WebAPIs 中，這時候，setTimeout 這個 function 就已經執行結束，並從堆疊中脫離
 2. 當計時器的時間到時，會把要執行的 callback function 放到工作佇列（task queue）
 3. 每次 Eventloop 的週期, 如果堆疊（stack）是空的，它便把佇列（queue）中的第一個項目放到堆疊當中；堆疊（stack）便會去執行這個項目。
-   
 
 證明 call stack 結束後, 才會執行 task queue 的工作如下：
 
@@ -150,7 +142,7 @@ console.log(arr); // [4, 1, 2, 3]
 
 ```
 
-該程式碼揭露的：因為前面三次 push 是放在 task queue 的, 因此狀況就好像：
+該程式碼揭露的：因為前面三次 push 是放在 task queue 的，因此狀況就好像：
 
 ```js
 Task Queue = [fn, fn, fn];
@@ -161,13 +153,10 @@ Call Stack = [fn];
 必須等到 Call Stack 清空後, 才會依序執行 Task Queue 內的工作
 
 !!! info
-    setTimeout 與 setInterval：
+setTimeout 與 setInterval：
 
-    1. setTimeout - 經過至少多少毫秒後, 應該調用 function
-    2. setInterval - 每隔至少多少毫秒後, 應該調用 function
-
-
-
+    1. setTimeout - 經過至少多少毫秒後，應該調用 function
+    2. setInterval - 每隔至少多少毫秒後，應該調用 function
 
 **setTimeout 0**
 
@@ -178,7 +167,7 @@ setTimeout(function cb(){
  console.log('There')
 }, 0) // 1秒後印出 'test'
 
-console.log('Bye')
+console.log("Bye");
 ```
 
 1. Hello 會被放到堆疊中執行
@@ -186,21 +175,20 @@ console.log('Bye')
 3. 當時間到時，把該 callback function 放到工作佇列（task queue）
 4. 等到所有堆疊的內容都被清空後執行這個 callback function。
 
-
 **Click Event**
 
 ```js
-console.log('Started')
+console.log("Started");
 
-$.on('button', 'click', function onClick () {
-  console.log('Clicked')
-})
+$.on("button", "click", function onClick() {
+  console.log("Clicked");
+});
 
-setTimeout(function onTimeout () {
-  console.log('Timeout Finished')
-}, 5000)
+setTimeout(function onTimeout() {
+  console.log("Timeout Finished");
+}, 5000);
 
-console.log('Done')
+console.log("Done");
 ```
 
 1. Started 被放到堆疊中執行
@@ -209,10 +197,12 @@ console.log('Done')
 4. 當 setTimeout 的 Timer 時間到時，或者是 click 事件被觸發時，WebAPIs 會將 callback function 放到工作佇列中（task queue）
 5. 當堆疊空掉的時候，event loop 就會把工作佇列中的內容搬到堆疊（stack）中加以執行。
 
-!!! note 
+!!! note
+
     當我們點擊瀏覽器時，這個點擊事件的 callback function 並不是立即被執行的，而是先被放到工作佇列（queue）中，直到堆疊（stack）空了之後，才會被執行
 
 !!! info
+
     這邊分享一個提供視覺化更方便瞭解整個流程的工具 [Loupe](http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMjAwMCk7Cn0pOwoKY29uc29sZS5sb2coIkhpISIpOwoKc2V0VGltZW91dChmdW5jdGlvbiB0aW1lb3V0KCkgewogICAgY29uc29sZS5sb2coIkNsaWNrIHRoZSBidXR0b24hIik7Cn0sIDUwMDApOwoKY29uc29sZS5sb2coIldlbGNvbWUgdG8gbG91cGUuIik7!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
 
 

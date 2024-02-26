@@ -5,12 +5,12 @@
 ## Install
 
 ```bash
-pip install mkdocs mkdocs-material mkdocs-glightbox
+pip install mkdocs mkdocs-material mkdocs-glightbox mkdocs-redirects
 ```
 
 這將自動安裝所有相依性的相容版本：MkDocs、Markdown、Pygments 和 Python Markdown 擴充功能。 Material for MkDocs 始終致力於支援最新版本，因此無需單獨安裝這些軟體包。
 
-並使用
+接下來，請在專案根目錄並使用
 ```bash
 mkdocs serve
 ```

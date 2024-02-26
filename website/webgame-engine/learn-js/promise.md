@@ -4,10 +4,10 @@
 
 在假日起床後，你打算做以下幾件事情：
 
-- 刷牙洗臉 (5分鐘)
-- 洗衣服 (1小時15分鐘)
-- 上廁所 (15分鐘)
-- 享用早餐 (25分鐘)
+- 刷牙洗臉 (5 分鐘)
+- 洗衣服 (1 小時 15 分鐘)
+- 上廁所 (15 分鐘)
+- 享用早餐 (25 分鐘)
 
 一早起來先盥洗後，放下衣服去洗，上個廁所，然後享用早餐
 
@@ -53,19 +53,21 @@
 
 ---
 
-
 ## AJAX
 
 政府有提供一系列的開放資料,可供查詢：[水利署](https://fhy.wra.gov.tw/WraApi#/)
 
-我們這邊就使用台灣雨量站的API來做舉例
+我們這邊就使用台灣雨量站的 API 來做舉例
 
 剛好符合即將要做的事情：透過網路從遠端取得一些資料
 
-經由 台灣雨量站API：[https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30](https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30) 可以得到以下的資料：
+經由 台灣雨量站 API：[https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30](https://fhy.wra.gov.tw/WraApi/v1/Rain/Station?$top=30) 可以得到以下的資料：
 
-
-
+| 雨量站所在地址 | 縣市代碼 | 緯度       | 經度       | 測站代碼 | 測站中文名稱 | 流域代碼 | 流域名稱 |
+| -------------- | -------- | ---------- | ---------- | -------- | ------------ | -------- | -------- |
+| 南投縣集集鎮   | 10008    | 23.8263889 | 120.775    | 00H710   | 集集(2)      | 1510     | 濁水溪   |
+| 南投縣仁愛鄉   | 10008    | 24.0908333 | 121.032222 | 00H810   | 惠蓀(2)      | 1430     | 烏溪     |
+| 屏東縣屏東市   | 10013    | 22.655     | 120.466    | 00Q070   | 屏東(5)      | 1730     | 高屏溪   |
 | 雨量站所在地址 | 縣市代碼 | 緯度       | 經度       | 測站代碼 | 測站中文名稱 | 流域代碼 | 流域名稱 |
 | -------------- | -------- | ---------- | ---------- | -------- | ------------ | -------- | -------- |
 | 南投縣集集鎮   | 10008    | 23.8263889 | 120.775    | 00H710   | 集集(2)      | 1510     | 濁水溪   |
@@ -172,21 +174,21 @@
 概念如下：透過背景發起 Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下
 
 ```js
-const domain = 'fhy.wra.gov.tw';
-const apiPath = 'WraApi/v1/Rain/Station';
-const query = '$top=30';
+const domain = "fhy.wra.gov.tw";
+const apiPath = "WraApi/v1/Rain/Station";
+const query = "$top=30";
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
 let xhr = new XMLHttpRequest();
 
 /* xhr.open(method, url) 以特定的HTTP方法開啟某個網址 */
-xhr.open('get', targetUrl);
+xhr.open("get", targetUrl);
 
 /* 當資料完成後,要做什麼事情 */
-xhr.onload = function(e) {
+xhr.onload = function (e) {
   console.log(xhr.responseText);
-}
+};
 /* 接近等效的程式碼：
 xhr.addEventListener('load', e => {
   console.log(xhr.responseText);
@@ -194,33 +196,30 @@ xhr.addEventListener('load', e => {
 
 /* 送出請求 */
 xhr.send();
-
 ```
 
 看到 `onload` 成員，當完成後，會發送一個事件，通知程式去把資料取出來
 
 ## 現在主流的做法
 
-在ES 6(ECMA 2016)之後，推出了一系列的API，其中包含影響甚鉅的 `Promise`
+在ES 6(ECMA 2016)之後，推出了一系列的 API，其中包含影響甚鉅的 `Promise`
 
 而ES 7之後，則推出了 `async/await` ，更方便進行處理非同步的資料 
 
 ## Promise
 
-### 關於Promise
+### 關於 Promise
 
+從語法上講：Promise 是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
 從語法上講：Promise 是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
 
 從本意上講：它是保證，保證它過一段時間會給你一種結果
 
-
-
-Promise有三種狀態：
+Promise 有三種狀態：
 
 - pending（等待）
 - fulfilled（成功）
 - rejected（失敗）
-
 
 !!! note
 
@@ -231,18 +230,16 @@ Promise有三種狀態：
 1. promise的狀態不受外界的影響，就像我開頭說的是一個容器，除了非同步操作的結果其他手段無法改變 promise 的狀態。
 2. 狀態一旦改變就不會改變，任何時候都會得到這個結果，狀態改變有兩種： 從 pending 變為 fulfilled 和從 pending 變為 rejected.
 
+### Prmoise 的使用
 
-### Prmoise的使用
-
-用實際的例子來說明,首先是 Promise 的函式簽章：
+用實際的例子來說明，首先是 Promise 的函式簽章：
 
 ```js
-function executor( resolve, reject ) {
+function executor(resolve, reject) {
   /* do something */
 }
 
-let promise = new Promise( executor );
-
+let promise = new Promise(executor);
 ```
 
 `executor` 的型別是 Function，並接受兩個參數 `resolve` 和 `reject`，兩個參數都是 `function`
@@ -252,6 +249,7 @@ let promise = new Promise( executor );
 `reject`：當操作失敗，應該調用該方法
 
 !!! info
+
     在部分程式設計書籍的說法，傳入一個 Function，被傳入的 Function 習慣稱做 callback 或是 handler
 
     並且稱接受/回傳一個 Function 的 Function 為 High-order Function(高階函式)
@@ -289,7 +287,6 @@ htmlElement.addEventListener("click", (e) => {
   console.log(e);
 });
 
-
 ```
 
 `addEventListener` 接收兩個參數：第一個是事件種類，常用的有 `click`， `change`， `load` ... 等
@@ -303,27 +300,22 @@ htmlElement.addEventListener("click", (e) => {
 ```js
 let promise = new Promise((resolve, reject) => {
   const value = Math.random() * 1000;
-  if(value > 500)
-    resolve(value);
-  else
-    reject(value);
+  if (value > 500) resolve(value);
+  else reject(value);
 });
-
 ```
 
 `new Promise` 回傳的實例，會提供 `then` 或是 `catch` 方法，分別對應 `resolve` 和 `reject` ：
 
 ```js
 promise
-  .then(value => console.log(value))   // 當 resolve 被調用時,進入該函式
-  .catch(value => console.log(value)); // 當 reject 被調用時,進入該函式
-
+  .then((value) => console.log(value)) // 當 resolve 被調用時,進入該函式
+  .catch((value) => console.log(value)); // 當 reject 被調用時,進入該函式
 ```
 
 這樣理解 Promise：一個未來會存在的數值，且狀態確定後，就不會改變了
 
 狀態不會改變的意思是：
-
 
 ```js
 let promise = new Promise((resolve, reject) => {
@@ -343,13 +335,14 @@ promise
 - 一開始處於 pending 狀態：還未調用 `resolve` 或是 `reject` 之前, 都處於該狀態
 - 當 resolve 調用後：成為 fulfilled(實現) 狀態
 - 當 reject 調用後：成為 rejected(拒絕) 狀態
-Promise 一旦被決定是 fulfilled 還是 rejected 後, 就不會變成其他狀態了
+  Promise 一旦被決定是 fulfilled 還是 rejected 後, 就不會變成其他狀態了
 
-而 Promise 只會被決定**一次**狀態,意思是：
+而 Promise 只會被決定**一次**狀態，意思是：
 
 ```js
 let promise = new Promise((resolve, reject) => {
   const flag = true;
+  resolve(true); // 在該階段,Promise 成為 fulfilled 狀態
   resolve(true); // 在該階段,Promise 成為 fulfilled 狀態
   resolve(false); // 無效,Promise的狀態已經被決定了
 });
@@ -357,24 +350,21 @@ let promise = new Promise((resolve, reject) => {
 
 ```
 
-而 then 和 catch 的回傳值,會成為下一個 Promise 的值：
-
+而 then 和 catch 的回傳值，會成為下一個 Promise 的值：
 
 ```js
-
 let promise = new Promise((resolve, reject) => {
   resolve(10); // 必定會成功的 Promise
 });
 
 promise
-  .then(value => {
+  .then((value) => {
     console.log(value); // print 10
-    return value * 100
+    return value * 100;
   })
-  .then(value => {
+  .then((value) => {
     console.log(value); // print 1000
   });
-
 ```
 
 Promise的出現，為帶來了一個重要的進展 - 可以針對非同步事件進行排序
@@ -385,42 +375,38 @@ Promise的出現，為帶來了一個重要的進展 - 可以針對非同步事�
 
 ```js
 function download(url) {
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open('get', url);
-    xhr.addEventListener('load', () => {
-      resolve(xhr.responseText) // 下載完成後,調用 resolve
-    })
-    xhr.addEventListener('error', e => {
-      reject(e.message) // 若失敗,調用 reject
+    xhr.open("get", url);
+    xhr.addEventListener("load", () => {
+      resolve(xhr.responseText); // 下載完成後,調用 resolve
     });
-    xhr.send() //送出請求
-  })
+    xhr.addEventListener("error", (e) => {
+      reject(e.message); // 若失敗,調用 reject
+    });
+    xhr.send(); //送出請求
+  });
 }
-
 
 function downloadAll() {
   download(siteA)
-    .then(data => {
+    .then((data) => {
       console.log(data);
       return download(siteB);
     })
-    .then(data => {
+    .then((data) => {
       console.log(data);
       return download(siteC);
     })
-    .then(data => {
+    .then((data) => {
       console.log(data);
     });
 }
 
-downloadAll() //依序呼叫 siteA、siteB、siteC 的下載內容
-
+downloadAll(); //依序呼叫 siteA、siteB、siteC 的下載內容
 ```
 
-
-
-### 更深入的Promise 
+### 更深入的 Promise
 
 #### 串接
 
@@ -459,7 +445,7 @@ promise
 
 ```
 
-在then當中可以傳入兩個 callback 分別為：
+在 then 當中可以傳入兩個 callback 分別為：
 
 - `onFulfilled`：成功的值
 - `onRejected`：失敗的原因
@@ -472,27 +458,20 @@ promise
 
 
 ```js
-const invokeFn = () => Promise.reject("oops!")
+const invokeFn = () => Promise.reject("oops!");
 
 /* Example 1 */
 invokeFn()
   .then(
     () => console.log("onFulfillment"),
-    reason => console.log(`onReject ${reason}`)
+    (reason) => console.log(`onReject ${reason}`)
   )
-  .catch(
-    reason => console.log(`ErrorCatch, ${reason}`)
-  );
+  .catch((reason) => console.log(`ErrorCatch, ${reason}`));
 
 /* Example 2 */
 invokeFn()
-  .then(
-    () => console.log("onFulfillment"),
-  )
-  .catch(
-    reason => console.log(`ErrorCatch, ${reason}`)
-  );
-
+  .then(() => console.log("onFulfillment"))
+  .catch((reason) => console.log(`ErrorCatch, ${reason}`));
 ```
 
 在舊一點的實作中，會特意把 `fulfill`、`reject`、`error` 三種情況分開
@@ -522,40 +501,39 @@ Ex. 當呼叫伺服器的API時，可能會發生：
 /* val 設定成當 Promise settled 時,應該回傳的值 */
 /* isSuccess 則決定,該 Promise 的狀態是 `fulfill` 還是 `reject` */
 const download = (val, isSuccess = true) => {
-  if(isSuccess) {
+  if (isSuccess) {
     return Promise.resolve(`Fulfill: ${val}`);
   } else {
     return Promise.reject(`Reject: ${val}`);
   }
-}
+};
 
 download("data A")
   /* stage 1 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 1: ${data}`);
     return download("data B");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 2: ${err}`);
     return download("error-data B");
   })
   /* stage 2 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 3: ${data}`);
     return download("data C");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 4: ${err}`);
     return download("error-data C");
   })
   /* stage 3 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 5: ${data}`);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 6: ${err}`);
-  })
-
+  });
 ```
 
 簡單的拆解一下，理清這個範例的執行結果：
@@ -563,8 +541,7 @@ download("data A")
 在第一次呼叫 download 時，第二個參數 `isSuccess` 為 true，因此該次執行結果是 `fulfill`
 
 ```js
-download("data A") // fulfill
-
+download("data A"); // fulfill
 ```
 
 此時會經過 `Savepoint 1`，並印出 "Savepoint 1: Fulfill: data A"
@@ -582,6 +559,7 @@ Savepoint 5: Fulfill: data C
 
 ```
 
+
 !!! tip
 
     尋找離當下 `Promise` 最近的 `then` 和 `catch`，再根據 settled 的狀態決定路徑
@@ -591,37 +569,38 @@ Savepoint 5: Fulfill: data C
 ```js
 download("data A") // <--- 目前執行的位置
   /* stage 1 */
-  .then(data => { // <--- 最近的 then
+  .then((data) => {
+    // <--- 最近的 then
     console.log(`Savepoint 1: ${data}`);
     return download("data B");
   })
-  .catch(err => { // <--- 最近的 catch
+  .catch((err) => {
+    // <--- 最近的 catch
     console.log(`Savepoint 2: ${err}`);
     return download("error-data B");
-  })
-  /* stage 2 */
-  // .then(data => {
-  //   console.log(`Savepoint 3: ${data}`);
-  //   return download("data C");
-  // })
-  // .catch(err => {
-  //   console.log(`Savepoint 4: ${err}`);
-  //   return download("error-data C");
-  // })
-  /* stage 3 */
-  // .then(data => {
-  //   console.log(`Savepoint 5: ${data}`);
-  // })
-  // .catch(err => {
-  //   console.log(`Savepoint 6: ${err}`);
-  // })
-
+  });
+/* stage 2 */
+// .then(data => {
+//   console.log(`Savepoint 3: ${data}`);
+//   return download("data C");
+// })
+// .catch(err => {
+//   console.log(`Savepoint 4: ${err}`);
+//   return download("error-data C");
+// })
+/* stage 3 */
+// .then(data => {
+//   console.log(`Savepoint 5: ${data}`);
+// })
+// .catch(err => {
+//   console.log(`Savepoint 6: ${err}`);
+// })
 ```
 該次結果是成功，因此會進到 then，此時在 `Savepoint 1`：
 ```js
-// download("data A") 
+// download("data A")
   /* stage 1 */
-  .then(data => { 
+  .then(data => {
     console.log(`Savepoint 1: ${data}`);
     return download("data B"); // <--- 目前執行的位置
   })
@@ -651,9 +630,9 @@ download("data A") // <--- 目前執行的位置
 這次結果也是成功，因此會進到 then，此時在 `Savepoint 3`：
 
 ```js
-// download("data A") 
+// download("data A")
   /* stage 1 */
-  // .then(data => { 
+  // .then(data => {
   //   console.log(`Savepoint 1: ${data}`);
   //   return download("data B");
   // })
@@ -662,7 +641,7 @@ download("data A") // <--- 目前執行的位置
   //   return download("error-data B");
   // })
   /* stage 2 */
-  .then(data => { 
+  .then(data => {
     console.log(`Savepoint 3: ${data}`);
     return download("data C"); // <--- 目前執行的位置
   })
@@ -686,32 +665,31 @@ download("data A") // <--- 目前執行的位置
 ```js
 download("data A")
   /* stage 1 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 1: ${data}`);
-    throw "Something wrong" // <------- 加入該行
+    throw "Something wrong"; // <------- 加入該行
     return download("data B");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 2: ${err}`);
     return download("error-data B");
   })
   /* stage 2 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 3: ${data}`);
     return download("data C");
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 4: ${err}`);
     return download("error-data C");
   })
   /* stage 3 */
-  .then(data => {
+  .then((data) => {
     console.log(`Savepoint 5: ${data}`);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(`Savepoint 6: ${err}`);
-  })
-
+  });
 ```
 
 此時的輸出順序就會是
@@ -732,34 +710,30 @@ ES 6 提供了 `fetch` API，就像是上面的 `download` 的實作，只是是
 
 ```js
 const result = fetch(url, {
-  method,  // HTTP Method, default 為 get
+  method, // HTTP Method, default 為 get
   headers, // HTTP 表頭, default為null
-  body,     // 內容, default為null
-  ...moreOptions
+  body, // 內容, default為null
+  ...moreOptions,
 });
 
 result
-  .then(e => {
-    return e.json() //把資料以JSON格式解讀
+  .then((e) => {
+    return e.json(); //把資料以JSON格式解讀
   })
-  .then(json => {
-    console.log(json)
+  .then((json) => {
+    console.log(json);
   });
-
 ```
 這就是最常用來抓取伺服器資料的方法，比方說上面那個抓取政府運輸資料的程式可改為：
 
 ```js
-const domain = 'fhy.wra.gov.tw';
-const apiPath = 'WraApi/v1/Rain/Station';
-const query = '$top=30';
+const domain = "fhy.wra.gov.tw";
+const apiPath = "WraApi/v1/Rain/Station";
+const query = "$top=30";
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
-fetch(targetUrl)
-  .then(res => res.json())
-
-
+fetch(targetUrl).then((res) => res.json());
 ```
 
 執行結果
@@ -774,46 +748,40 @@ fetch(targetUrl)
 
 ```js
 fetch("httpp://www.google.com")
-  .then(d => {
+  .then((d) => {
     console.log(true);
   })
-  .catch(err => {
-    console.log("Error")
-  }) //進入 catch
-
+  .catch((err) => {
+    console.log("Error");
+  }); //進入 catch
 ```
 
 這個例子中，誤把 `http` 打成 `httpp`，一個未知的協定，因此無法發出請求導致直接進入 catch 階段
 
 ```js
-const domain = 'fhy.wra.gov.tw';
-const apiPath = 'WraApi/v1/Rain/Station';
-const query = '$top=30';
+const domain = "fhy.wra.gov.tw";
+const apiPath = "WraApi/v1/Rain/Station";
+const query = "$top=30";
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
 fetch(targetUrl)
-  .then(res => {
+  .then((res) => {
     return res.text(); // 這次不使用 json(),而是使用 text() 取得未 paese 的內容
   })
-  .then(content => {
+  .then((content) => {
     console.log(content);
-    return JSON.parse(content+'}');
+    return JSON.parse(content + "}");
   })
-  .catch(err => {
+  .catch((err) => {
     // 會進入這裡,因為在 content 後加上 '}',導致無法順利解析成JSON格式
-    console.log("Parse error")
-  })
-
+    console.log("Parse error");
+  });
 ```
 
 而上述的例子中，可以觀察到在 then 或是 catch 中 `throw Error`，會進入下個階段的 catch
 
 更多資料請參考 [MDN - fetchAPI](https://developer.mozilla.org/en-US/docs/Web/API/fetch)
-
-
-
-
 
 ## async 與 await
 
@@ -824,7 +792,6 @@ Promise 雖然改善了 callback hell 的發生，但其實還是有一層的巢
 `async function`：在 `function` 的前方加上一個 `async` 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
 
 `await`：可以暫停非同步函式的運行（中止 Promise 的運行），直到非同步進入 resolve 或 reject，當接收完回傳值後繼續非同步函式的運行。
-
 
 promise、then 寫法的程式碼，以 async 函式改寫方式如下：
 
@@ -837,10 +804,9 @@ function getData() {
       return rawData.json();
     })
     .then((data) => {
-      console.log(data)
-    })
+      console.log(data);
+    });
 }
-
 ```
 
 async/await:
@@ -853,7 +819,7 @@ async function getData() {
 }
 ```
 
-###  特色
+### 特色
 
 非同步函式有兩個特色：
 
@@ -869,12 +835,12 @@ async function add(a, b) {
 
 let result = add(10, 20); // Promise Object, [[value]] = 30
 
-result.then(value => console.log(value)) // print: 30
+result.then((value) => console.log(value)); // print: 30
 ```
 
 特色1：指示某個 function 是非同步事件，所以使用Promise封裝，無法直接使用 `console.log` 取得其值。
 
-重點是特色2
+重點是特色 2
 
 await 可以取出 Promise 最後的回傳值,比方說：
 
@@ -884,26 +850,22 @@ function return100() {
 }
 
 // 正常使用：
-return100()
-  .then(data => console.log(data)) // print 100
-
+return100().then((data) => console.log(data)); // print 100
 
 // 在 async function 中使用 await
 async function get100() {
   const result = await return100();
-  console.log(result) // print 100
+  console.log(result); // print 100
 }
-
 ```
 
 async function 可以讓的非同步程式"看起來"像同步程式
 
-如果以上面那個download A、B、C 的例子,就可以改成
+如果以上面那個 download A、B、C 的例子,就可以改成
 
 ```js
 function download(url) {
-  return fetch(url)
-          .then(res => res.text());
+  return fetch(url).then((res) => res.text());
 }
 
 async function processData() {
@@ -911,7 +873,6 @@ async function processData() {
   const dataB = await download(siteB);
   const dataC = await download(siteC);
 }
-
 ```
 
 ### 錯誤的處理
@@ -930,7 +891,6 @@ async function processData() {
     console.log("Download Failed");
   }
 }
-
 ```
 
 這就是 async/await 的使用方法
@@ -938,6 +898,7 @@ async function processData() {
 更多資料請參考 [MDN - async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
 !!! note
+
     這裡花了極大的篇幅在解釋非同步程式設計,以及 Promise 物件的使用方法
 
     本章節可以說是 最重要的 概念,請務必深入理解 Promise 的概念

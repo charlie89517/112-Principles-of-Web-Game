@@ -240,7 +240,7 @@ function measureTime(){
 setInterval(measureTime,1000)
 ```
 
-![timeout-problem](/webgame-engine/assets/promise/timeout-problem.png)
+![timeout-problem](/webgame-engine/assets/task-schedule/timeout-problem.png)
 
 標籤頁在背景執行越久間隔時間會變得越來越久。
 

@@ -6,41 +6,41 @@
     
     this 值由被呼叫的函式來決定。它不能在執行期間被指派，每次函式呼叫調用的值也可能不同
 
-    this是一個特殊的值, 無法於執行期間被覆蓋
+    this 是一個特殊的值，無法於執行期間被覆蓋
 
     在 **嚴格模式** 與 **非嚴格模式**下有所不同
 
 ### This的查找
 
-對於一般的function, 查找this的範圍會從調用者(caller)往上查找：
+對於一般的 function，查找 this 的範圍會從調用者(caller)往上查找：
 
 ```javascript
 "use strict";
 let obj = {
   prop: 300,
-  fn: function() {
+  fn: function () {
     return this.prop;
-  }
-}
+  },
+};
 
 function outerFn() {
   return this.prop;
 }
 
-obj.fn() // 300;
+obj.fn(); // 300;
 
 obj.fn2 = outerFn;
 
-obj.fn2() // 300, 因為此時 outerFn 繫結於 obj 的成員位址
+obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
 
-outerFn() // Error, this 並沒有 prop 這個成員
+outerFn(); // Error, this 並沒有 prop 這個成員
 
 ```
-`this`的判斷, 是先依照是不是作為某個物件的屬性或方法被調用
+`this`的判斷，是先依照是不是作為某個物件的屬性或方法被調用
 
-在上述的例子中, 因為 `outerFn` 是直接以一個 function 被調用, 而不是某個物件底下的方法, 所以 `this` 的值為 `undefined`
+在上述的例子中，因為 `outerFn` 是直接以一個 function 被調用，而不是某個物件底下的方法，所以 `this` 的值為 `undefined`
 
-但經過 `obj.fn2` 指向 `outerFn`, 此時 `obj.fn2` 同樣是調用 `outerFn`, 但是是以 `obj`的成員被調用
+但經過 `obj.fn2` 指向 `outerFn`，此時 `obj.fn2` 同樣是調用 `outerFn`，但是是以 `obj`的成員被調用
 
 因此 `this` 的值相當於 `obj`
 
@@ -81,9 +81,9 @@ obj.sub.foo() // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員, 
 
 !!! danger
 
-    在上述的例中, 通過 **proto** 屬性直接修改一個物件的原型(Prototype)
+    在上述的例中，通過 **proto** 屬性直接修改一個物件的原型(Prototype)
 
-    但真正開發中, 直接改變物件的原型是一件很不建議的事情, 同時也會影響到所有參照原型的實例
+    但真正開發中，直接改變物件的原型是一件很不建議的事情，同時也會影響到所有參照原型的實例
 
 
 ### This的綁定
@@ -203,7 +203,7 @@ console.log(this === undefined); // 輸出 true
 
 箭頭函式表示法：
 
-```javascript 
+```js
 // ex.1
 const sum = (a, b) => {
   return a + b;
@@ -230,13 +230,13 @@ const returnObj = ( user ) => ({
 
 ### 箭頭函式對this的影響
 
-this 對於一般函式來說, this 有幾種可能值：
+this 對於一般函式來說，this 有幾種可能值：
 
-- 作為 new 建構子來說, this指向物件本身
-- 對於 strict mode 下直接調用函式, 函式中的 this 是 `undefined`
-- 作為物件的方法呼叫時, 參考至物件上
+- 作為 new 建構子來說，this指向物件本身
+- 對於 strict mode 下直接調用函式，函式中的 this 是 `undefined`
+- 作為物件的方法呼叫時，參考至物件上
   
-而 arrow function () => {} 的行為, 是基於詞法域(lexical), 而非語法語境(context)
+而 arrow function () => {} 的行為，是基於詞法域(lexical)，而非語法語境(context)
 
 !!! info
 
@@ -250,50 +250,55 @@ this 對於一般函式來說, this 有幾種可能值：
 
     使用 `function() {}` 宣告的時機：
 
-    1. 在物件中, 方法要參照物件本身
-    2. 在類別中, 宣告成員函式的情景
+    1. 在物件中，方法要參照物件本身
+    2. 在類別中，宣告成員函式的情景
     3. 使用到 Generator `function*` 的情況
     4. 使用 arguments 的情況
    
-    除此之外, 都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
+    除此之外，都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
 
-    但原則上來說, 盡可能使用展開運算替代 arguments , 因此動態參數的情況, 也可以使用 arrow function
+    但原則上來說， 盡可能使用展開運算替代 arguments，因此動態參數的情況，也可以使用 arrow function
 
 ## 閉包
 
 ### 語法域與詞法域
 
-通俗的解釋, 語法域代表的是執行期間動態決定的行為, 比方說普通函式的`this`、建構式的`super`
+通俗的解釋，語法域代表的是執行期間動態決定的行為，比方說普通函式的`this`、建構式的 `super`
 
-而詞法域代表的是封閉範圍的前後文, 如同變數的查找一樣, 舉例來說：
+而詞法域代表的是封閉範圍的前後文，如同變數的查找一樣，舉例來說：
 
 ```js
-{                     // -- block 1
+{
+  // -- block 1
   let a = 100;
   let b = 200;
-  {                   // -- block 2
+  {
+    // -- block 2
     let c = 300;
-    function fn() {   // -- block 2.1
+    function fn() {
+      // -- block 2.1
       console.log(a, b, c);
     }
-    fn() // 100, 200, 300
+    fn(); // 100, 200, 300
   }
-  {                   // -- block 3
-    function fn() {   // -- block 3.1
+  {
+    // -- block 3
+    function fn() {
+      // -- block 3.1
       console.log(a, b, c);
     }
-    fn() // 錯誤, c 不存於該 block 3.1 以及 block 3
+    fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
   }
 }
 
 ```
 
-a, b 在同一個 block, 而 c 在的 block 可以看到外部(block 1)
-所以第一個 block 2 可以看到 a,b,c, 但是第二個僅能看到 a,b
+a, b 在同一個 block，而 c 在的 block 可以看到外部(block 1)
+所以第一個 block 2 可以看到 a, b, c, 但是第二個僅能看到 a, b
 
 這就是詞法域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
 
-而閉包則複雜一點, 以上面的例子來說, 可以觀察出：
+而閉包則複雜一點，以上面的例子來說，可以觀察出：
 - block 允許巢狀
 - 內部的 block 可以存取外部的 block
 - 外部的 block 不可以存取內部的 block
@@ -369,7 +374,7 @@ counter(); // 輸出 2
 利用閉包封裝了私有變數和方法，以便可以在需要時安全地公開公共介面。
 
 ```js
-let myModule = (function() {
+let myModule = (function () {
   let privateVariable = "I am private";
 
   function privateFunction() {
@@ -378,19 +383,20 @@ let myModule = (function() {
 
   return {
     publicVariable: "I am public",
-    publicFunction: function() {
+    publicFunction: function () {
       console.log("This is a public function.");
     },
-    accessPrivate: function() {
+    accessPrivate: function () {
       console.log(privateVariable);
       privateFunction();
-    }
+    },
   };
 })();
 
 console.log(myModule.publicVariable); // 輸出 "I am public"
 myModule.publicFunction(); // 輸出 "This is a public function."
 myModule.accessPrivate(); // 輸出 "I am private" 和 "This is a private function."
+
 ```
 自調用函式表達式（Immediately Invoked Function Expression, IIFE）創建一個立即執行的函式，並使用閉包創建一個模組。在模組中，定義了一個私有變數 privateVariable 和一個私有方法 privateFunction。然後，我們返回一個具有公共變數和方法的對象字面量，以便可以在需要時從外部訪問它們。最後，我們將對象字面量賦給 myModule 變數，以便可以在其他代碼中使用它。
 

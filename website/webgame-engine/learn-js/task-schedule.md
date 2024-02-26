@@ -49,16 +49,16 @@ console.log(bar(7));
 
 模擬一個情境：
 
-在 C++ 中, 可能使用 `cin` 或是 `scanf` 來得到使用者的輸入, 程式碼如下：
+在 C++ 中，可能使用 `cin` 或是 `scanf` 來得到使用者的輸入，程式碼如下：
 
 ```cpp
 cin >> num;
 cout << "Hello, world" << endl;
 ```
 
-`cin` 會嘗試取得使用者輸入, 然後輸出 `"Hello, world"`。但是使用者輸入之前, 畫面是不會繼續渲染的, 這在交互式的 command interface 不是問題
+`cin` 會嘗試取得使用者輸入，然後輸出 `"Hello, world"`。但是使用者輸入之前，畫面是不會繼續渲染的，這在交互式的 command interface 不是問題
 
-但是到了 GUI 卻相當嚴重, 比方說登入頁面, 在你輸入帳號、密碼之前, 畫面上其他部分都停止繪製, 這不是一個好的體驗
+但是到了 GUI 卻相當嚴重，比方說登入頁面，在你輸入帳號、密碼之前，畫面上其他部分都停止繪製，這不是一個好的體驗
 
 ## 概述非同步與同步
 
@@ -106,11 +106,11 @@ cout << "Hello, world" << endl;
     JavaScript 的執行時期（Runtime）一次只能做一件事，但瀏覽器提供了更多不同的 API 讓我們使用，進而讓我們可以透過 event loop 搭配非同步的方式同時處理多個事項。
 
 
-Event loop 的作用是去監控堆疊（call stack）和工作佇列（task queue），當堆疊當中沒有執行項目的時候，便把佇列中的內容拉到堆疊中去執行。
+Event loop 的作用是去監控堆疊（call stack）和工作佇列（task queue，當堆疊當中沒有執行項目的時候，便把佇列中的內容拉到堆疊中去執行。
 
-Task Queue 紀錄等待執行的工作, 由後方的Worker取出後執行, 完成後調用註冊的 Handler
+Task Queue 紀錄等待執行的工作，由後方的Worker取出後執行，完成後調用註冊的 Handler
 
-比方說 setTimeout(fn, ms), 接受一個 function 和毫秒的數值, 就會在 N 毫秒後調用該方法
+比方說 setTimeout(fn, ms)，接受一個 function 和毫秒的數值，就會在 N 毫秒後調用該方法
 
 ```js
 console.log('Hello')

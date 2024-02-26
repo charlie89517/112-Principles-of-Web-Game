@@ -1,5 +1,5 @@
 # Site Informate
-site_name: mkdocs
+site_name: Gamelab 教材
 site_dir: release
 docs_dir: website
 
@@ -59,6 +59,9 @@ markdown_extensions:
 
 plugins:
   - glightbox
+  - redirects:
+      redirect_maps:
+        "index.md": "webgame-engine/index.md"
 
 validation:
   nav:
@@ -68,40 +71,39 @@ validation:
   links:
     not_found: warn
     unrecognized_links: info
-    absolute_links: info
+    absolute_links: ignore
 
 # Sitemap
 nav:
-  - 首頁:
-    - index.md
-  - "網頁遊戲引擎原理與實做":
-      - webgame-engine/index.md
-      - 課程總覽:
-          - webgame-engine/overview/cocos-creator.md # Cocos Creator
-          - webgame-engine/overview/javascript.md # JavaScript
-          - webgame-engine/overview/git.md # Git
-          - webgame-engine/overview/coding-style.md # Coding style
+  - "網頁遊戲引擎原理與實作":
+      - 介紹: webgame-engine/index.md
+      - 環境安裝:
+          - Cocos Creator: webgame-engine/overview/cocos-creator.md # Cocos Creator
+          - JavaScript: webgame-engine/overview/javascript.md # JavaScript
+          - Git: webgame-engine/overview/git.md # Git
+          - Git安裝: webgame-engine/overview/git-install.md # Git安裝
+          - "Code Format": webgame-engine/overview/coding-style.md # Coding style
       - JavaScript & TypeScript:
-          - webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法
-          - webgame-engine/learn-js/class-and-object.md # 類別與物件
-          - webgame-engine/learn-js/ts-js-compare.md # JS vs TS
-          - webgame-engine/learn-js/dig-deep.md # 進階：深入型別
-          - webgame-engine/learn-js/strict-mode.md # 嚴格模式
-          - webgame-engine/learn-js/this-and-closure.md # This 與 閉包
-          - webgame-engine/learn-js/task-schedule.md # 事件循環
-          - webgame-engine/learn-js/promise.md # 非同步處理
-          - webgame-engine/learn-js/generator.md # 生成器與協程
-          - webgame-engine/learn-js/http-request.md # HTTP & RESTful API
-          - webgame-engine/learn-js/websocket.md # Websocket
+          - 基礎型別與語法: webgame-engine/learn-js/basic-and-syntax.md # 基礎型別與語法
+          - 類別與物件: webgame-engine/learn-js/class-and-object.md # 類別與物件
+          - JS vs TS: webgame-engine/learn-js/ts-js-compare.md # JS vs TS
+          - 進階：型別系統: webgame-engine/learn-js/dig-deep.md # 進階：深入型別
+          - 嚴格模式: webgame-engine/learn-js/strict-mode.md # 嚴格模式
+          - This 與 閉包: webgame-engine/learn-js/this-and-closure.md # This 與 閉包
+          - 事件循環: webgame-engine/learn-js/task-schedule.md # 事件循環
+          - 非同步處理: webgame-engine/learn-js/promise.md # 非同步處理
+          - 生成器與協程: webgame-engine/learn-js/generator.md # 生成器與協程
+          - HTTP & RESTful API: webgame-engine/learn-js/http-request.md # HTTP & RESTful API
+          - Websocket: webgame-engine/learn-js/websocket.md # Websocket
       - 設計模式:
-          - webgame-engine/pattern/singleton.md # 單例模式
-          - webgame-engine/pattern/composition.md # 組合模式
-          - webgame-engine/pattern/observer.md # 觀察者模式
-          - webgame-engine/pattern/object-pool.md # 物件池模式
+          - 單例模式: webgame-engine/pattern/singleton.md # 單例模式
+          - 組合模式: webgame-engine/pattern/composition.md # 組合模式
+          - 觀察者模式: webgame-engine/pattern/observer.md # 觀察者模式
+          - 物件池模式: webgame-engine/pattern/object-pool.md # 物件池模式
       - Cocos Creator:
-          - webgame-engine/cocos/basic.md # Component介紹 & 生命週期(包含 schedule & scheduleOnce)
-          - webgame-engine/cocos/node-and-coord.md # Node & 坐標系統
-          - webgame-engine/cocos/events.md # 事件系統
+          - Node與坐標系統: webgame-engine/cocos/node-and-coord.md # Node & 坐標系統
+          - 事件系統: webgame-engine/cocos/events.md # 事件系統
+          - 元件介紹: webgame-engine/cocos/basic.md # Component介紹 & 生命週期(包含 schedule & scheduleOnce)
           - 常用元件:
               - webgame-engine/cocos/common/ui-transform-and-anchor.md # UITransform & Anchor
               - webgame-engine/cocos/common/layout.md # Layout
@@ -116,14 +118,15 @@ nav:
               - webgame-engine/cocos/common/scroll-view.md # ScrollView
               - webgame-engine/cocos/common/page-view.md # PageView
           - 動畫系統:
-              - webgame-engine/cocos/animate/tween.md # Tween( 請順便介紹 Easing 與 Cocos CurveRange Property )
-              - webgame-engine/cocos/animate/animation.md # Animation
-              - webgame-engine/cocos/animate/spine.md # Spine
-              - webgame-engine/cocos/animate/particle-system.md # Particle System
+              - 緩動系統: webgame-engine/cocos/animate/tween.md # Tween( 請順便介紹 Easing 與 Cocos CurveRange Property )
+              - Cocos 動畫系統: webgame-engine/cocos/animate/animation.md # Animation
+              - Spine 骨骼動畫: webgame-engine/cocos/animate/spine.md # Spine
+              - 粒子系統: webgame-engine/cocos/animate/particle-system.md # Particle System
           - 音效系統:
               - webgame-engine/cocos/sound/autoplay-policy.md #Web Audio Autoplay Policy
               - webgame-engine/cocos/sound/audio-source.md #AudioSource
           - 資源管理:
-              - webgame-engine/cocos/resource/prefab.md # NodePool & Prefab
-              - webgame-engine/cocos/resource/dynamic-load.md # 動態載入
-              - webgame-engine/cocos/resource/bundle.md # Bundle
+              - 節點池與預製體: webgame-engine/cocos/resource/prefab.md # NodePool & Prefab
+              - 場景加載與切換: webgame-engine/cocos/resource/load-scene.md # 場景載入
+              - 動態載入: webgame-engine/cocos/resource/dynamic-load.md # 動態載入
+              - 資源包: webgame-engine/cocos/resource/bundle.md # Bundle

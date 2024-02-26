@@ -42,6 +42,19 @@ Cocos 依據 Node 的 Active 狀態及 Component 本身的 enable 屬性對 Comp
   　當所在節點或組件本身調用了`destroy()`時觸發
   　在觸發的這一幀結束時會回收組件
 
+```mermaid
+graph LR;
+    A((onLoad)) --> B((onEnable));
+    B --> C((start));
+    C --> D(("update(dt)"));
+    D --> E(("lateUpdate(dt)"));
+    E --> |下\n一\n幀| D;
+    E --> |被\n禁\n用| F((onDisable));
+    F --> G((onDestroy));
+```
+
+<center>▲ 生命週期執行順序</center>
+
 ## Component 裝飾器
 
 Cocos 使用裝飾器的方式讓編輯器能夠識別特定的對象，如 Component 或是其屬性等。因此可以發現，所有的 Component Class 上一行都會有 `@ccclass` 之類的語法，即為讓編輯器能夠辨識出該 Component 的方式。`@ccclass` 提供一個可選參數，可以指定 Component 的名稱，若無指定時預設會依 Component 的 Class Name 作為 Component Name。
@@ -77,16 +90,70 @@ export class TestProperty extends Component {
   　需特別注意，如果屬性是 number，應填入 `CCInteger` 或 `CCFloat`
   　如果屬性是 boolean，應填入 `CCBoolean`
   　如果屬性是 string，應填入 `CCString`
-  　一般的 ccclass (如:Component) 直接填入 Class 即可，如 `@property({type: Node})`
+  　一般的 ccclass (如: 一般 Class 或 Component) 直接填入 Class 即可，如 `@property({type: Node})`
   　![property type](https://i.imgur.com/oOIpJhY.png)
   　若是指定一個陣列，則屬性外需要包中括號，如 `@property({type: [Node]})`
   　![property array type](https://i.imgur.com/pNa9lkZ.png)
   　![property array type sample](https://i.imgur.com/YdomsFB.png)
 
-- tooltip : 在編輯器上顯示一些敘述
-- min : 限定數值在編輯器上輸入的最小值
-- max : 限定數值在編輯器上輸入的最大值
+除了 `type` 以外，主要還有以下幾種：
+
+| 參數         | 類型    | 描述                                                                                                                                  |
+| ------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| displayName  | string  | 於編輯器上顯示的名稱，未指定時是以屬性命名作為預設。                                                                                  |
+| visible      | boolean | 是否會顯示於編輯器上，可以是一個回傳 boolean 的函式，詳見下方範例。                                                                   |
+| tooltip      | string  | 在編輯器上顯示一些敘述，Hover 於名稱時顯示。                                                                                          |
+| min          | number  | 限定數值在編輯器上輸入的最小值。                                                                                                      |
+| max          | number  | 限定數值在編輯器上輸入的最大值。                                                                                                      |
+| displayOrder | number  | Property 顯示的排序方式，此數值越小的 Property 會顯示在越上層，預設是 `Infinity`，修改後原有的 `Component` 不會立即生效，需要 Reset。 |
+| override     | boolean | 若 `Child Class` 要 Override `Parent Class` 的 Property 設定，需要設置此項為 `true`，否則會出現警告                                   |
+
 - 更多詳細的參數可以參考 [Cocos 官方文件](https://docs.cocos.com/creator/3.6/manual/zh/scripting/reference/attributes.html)
+
+#### `visible` 參數補充
+
+若將 `visible` 指定為一個 Function，可以達到將其他 Property 作為開關判斷是否顯示該 Property。
+
+```ts
+@property
+private readonly showMessage: boolean = false;
+@property({
+    visible() {
+        return this.showMessage;
+    },
+})
+private readonly message: string = '網路遊戲引擎原理與實作';
+```
+
+![property visible](https://i.imgur.com/0bvyvsV.gif)
+
+#### Property Class
+
+當有一組多個 Property 常被使用到時，我們通常會將它作為一個 Class，在將它作為 Property `type` 設定上去，如此一來不需要重複宣告相同的 `attribute`，也可以將其設定為 Property Array。
+
+下面的範例即是將 `a`、`b`、`c` 作為一組 Property Class 用於 `ComponentA` 上的 ABCArray。
+
+```ts
+// 就算不是 Component 也必須使用 ccclass，否則 Cocos 編輯器無法正確判讀
+@ccclass("ABC")
+class ABC {
+  @property()
+  public readonly a: number = 112;
+  @property()
+  public readonly b: string = "網路遊戲引擎原理與實作";
+  @property()
+  public readonly c: string = "Cocos Creator";
+}
+
+@ccclass
+export class ComponentA extends Component {
+  // type: [ABC] 代表此 property 是 class ABC 的陣列
+  @property({ type: [ABC] })
+  private readonly ABCArray: ABC[] = [];
+}
+```
+
+![object property](https://i.imgur.com/2RqWUEP.png)
 
 ### 其他常見的裝飾器
 

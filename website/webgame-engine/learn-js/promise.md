@@ -134,7 +134,7 @@
 
 !!! info 
 
-    WEB應用常常依賴伺服器的資料,且這些資料在網頁上**可能**會常常變化
+    WEB 應用常常依賴伺服器的資料,且這些資料在網頁上**可能**會常常變化
 
 ## 早期的實現
 
@@ -147,7 +147,7 @@
 - 送出表單
 - 喔，你有可能帳號名稱跟別人重複了、或是密碼不符合格式(比方說要包含大小寫英數字)
 - 重新填寫表單
-- 在隨後幾年(2010)，Google進入大家的生活，同樣的流程：
+- 在隨後幾年(2010)，Google 進入大家的生活，同樣的流程：
 
 輸入一個帳號名稱
 準備輸入你的姓名、基本資料
@@ -167,9 +167,9 @@
   
 諸多應用，因此提出一個概念：**能不能只交換需要的部分？**，或是先提交**部分資料**給伺服器進行處理
 
-因為早期使用XML做為資料傳輸的格式(近幾年大部分使用JSON)，所以稱為AJAX
+因為早期使用XML做為資料傳輸的格式(近幾年大部分使用JSON)，所以稱為 AJAX
 
-概念如下：透過背景發起Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下
+概念如下：透過背景發起 Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下
 
 ```js
 const domain = 'fhy.wra.gov.tw';
@@ -209,7 +209,7 @@ xhr.send();
 
 ### 關於Promise
 
-從語法上講：Promise是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
+從語法上講：Promise 是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
 
 從本意上講：它是保證，保證它過一段時間會給你一種結果
 
@@ -218,18 +218,18 @@ xhr.send();
 Promise有三種狀態：
 
 - pending（等待）
-- fulfiled（成功）
+- fulfilled（成功）
 - rejected（失敗）
 
 
 !!! note
 
-    Promise狀態一旦改變，就不會再變，創造promise實例後，他會立即執行
+    Promise 狀態一旦改變，就不會再變，創造 promise 實例後，他會立即執行
 
 ### Promise 的特點
 
-1. promise的狀態不受外界的影響，就像我開頭說的是一個容器，除了非同步操作的結果其他手段無法改變promise的狀態。
-2. 狀態一旦改變就不會改變，任何時候都會得到這個結果，狀態改變有兩種： 從pending變為fulfilled和從pending變為rejected.
+1. promise的狀態不受外界的影響，就像我開頭說的是一個容器，除了非同步操作的結果其他手段無法改變 promise 的狀態。
+2. 狀態一旦改變就不會改變，任何時候都會得到這個結果，狀態改變有兩種： 從 pending 變為 fulfilled 和從 pending 變為 rejected.
 
 
 ### Prmoise的使用
@@ -252,9 +252,9 @@ let promise = new Promise( executor );
 `reject`：當操作失敗，應該調用該方法
 
 !!! info
-    在部分程式設計書籍的說法，傳入一個Function，被傳入的Function習慣稱做 callback 或是 handler
+    在部分程式設計書籍的說法，傳入一個 Function，被傳入的 Function 習慣稱做 callback 或是 handler
 
-    並且稱接受/回傳一個Function的Function 為 High-order Function(高階函式)
+    並且稱接受/回傳一個 Function 的 Function 為 High-order Function(高階函式)
 
 以該例中：
 
@@ -278,7 +278,7 @@ calc(mul); // return `Math.random() * 100` * `Math.random() * 100` 的值
 
 ```
 
-呼叫 calc 時，calc內部會生成兩個隨機數字 `a`， `b`，並調用 `callback` 參數，該參數接受一個 Function
+呼叫 calc 時，calc 內部會生成兩個隨機數字 `a`， `b`，並調用 `callback` 參數，該參數接受一個 Function
 
 add 和 mul 這兩個被傳入的 function，通常叫做 `callback`
 
@@ -320,7 +320,7 @@ promise
 
 ```
 
-這樣理解Promise：一個未來會存在的數值，且狀態確定後，就不會改變了
+這樣理解 Promise：一個未來會存在的數值，且狀態確定後，就不會改變了
 
 狀態不會改變的意思是：
 
@@ -424,7 +424,7 @@ downloadAll() //依序呼叫 siteA、siteB、siteC 的下載內容
 
 #### 串接
 
-Promise 有個特性：他可以類似串列一般，把本次的回傳值做為下一個promise的傳入
+Promise 有個特性：他可以類似串列一般，把本次的回傳值做為下一個 promise 的傳入
 
 ```js
 let promise = new Promise((resolve, reject) => {
@@ -511,21 +511,12 @@ Ex. 當呼叫伺服器的API時，可能會發生：
 流程圖的第三階段，無論是 `then` 還是 `catch` 方法，都會會傳一個新的 `Promise` 物件
 
 
-**延伸補充：巢狀地域(Callback Hell)**
-
-在早期，callback常被拿來作為解決非同步型的的一種方法，通常都會在callback中嵌套另一個callback來達到非同步**依序**完成的目的
-
-但經過一層一層的嵌套後往往會導致程式碼難以閱讀以及維護的情況，就被稱為巢狀地域
-
-而Promise Chain可以改善多層巢狀結構的問題，利用`then()`來串接，大幅地將地巢狀結構的層數。
-
-
 
 #### 進階練習
 
 這就如上方的 downloadAll 例子，每一次的 then 都會回傳一個新的 Promise 物件，且 Promise 只會被決定一次狀態，因此可以提出兩種變體：
 
-首先定義一個**模擬下載** 的Promise函式，接受兩個值：val 以及 isSuccess
+首先定義一個**模擬下載** 的 Promise 函式，接受兩個值：val 以及 isSuccess
 
 ```js
 /* val 設定成當 Promise settled 時,應該回傳的值 */
@@ -828,7 +819,7 @@ fetch(targetUrl)
 
 ### 介紹
 
-Promise雖然改善了callback hell的發生，但其實還是有一層的巢狀結構，而此時`async/await`的出現可以為我們解決這個問題。
+Promise 雖然改善了 callback hell 的發生，但其實還是有一層的巢狀結構，而此時 `async/await` 的出現可以為我們解決這個問題。
 
 `async function`：在 `function` 的前方加上一個 `async` 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
 
@@ -881,7 +872,7 @@ let result = add(10, 20); // Promise Object, [[value]] = 30
 result.then(value => console.log(value)) // print: 30
 ```
 
-特色1：指示某個function是非同步事件，所以使用Promise封裝，無法直接使用 `console.log` 取得其值。
+特色1：指示某個 function 是非同步事件，所以使用Promise封裝，無法直接使用 `console.log` 取得其值。
 
 重點是特色2
 
@@ -949,9 +940,23 @@ async function processData() {
 !!! note
     這裡花了極大的篇幅在解釋非同步程式設計,以及 Promise 物件的使用方法
 
-    本章節可以說是 最重要的 概念,請務必深入理解Promise的概念
+    本章節可以說是 最重要的 概念,請務必深入理解 Promise 的概念
 
-    非同步事件普遍存在於 WEB與伺服器應用中
+    非同步事件普遍存在於 WEB 與伺服器應用中
+
+!!! info 
+
+    **延伸補充：巢狀地獄(Callback Hell)**
+
+    在早期，callback 常被拿來作為解決非同步型的的一種方法，通常都會在 callback 中嵌套另一個 callback 來達到非同步**依序**完成的目的
+
+    但經過一層一層的嵌套後往往會導致程式碼難以閱讀以及維護的情況，就被稱為巢狀地獄
+
+    而 Promise Chain 可以改善多層巢狀結構的問題，利用`then()`來串接，大幅地降低巢狀結構的層數，但還是會使用到 callback 。
+
+    所以使用 `async/await` 可以更好的解決使用 callback 的問題。
+
+    
 
 
 

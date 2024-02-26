@@ -133,7 +133,7 @@ sayName.bind(obj3)(); // 輸出 "Kevin"
 
 **`new` 綁定：**
 
-使用`new` 運算符生成構造函式時，this指向新創建的物件。
+使用 `new` 運算符生成構造函式時，this 指向新創建的物件。
 
 ```js
 function Person(name, age) {
@@ -147,7 +147,7 @@ console.log(person.name); // 輸出 "Alice"
 
 **箭頭函式綁定：**
 
-`箭頭函式中的this指向，始終指向箭頭函式的上下文`和調用方式無關。
+`箭頭函式中的 this 指向，始終指向箭頭函式的上下文`和調用方式無關。
 
 ```js
 const obj = {
@@ -167,11 +167,11 @@ obj.sayName(); // 輸出 "Alice"
 ## This指向
 
 !!! quote
-    在函式執行的過程中，`this`一旦被確定，那就不能更改了
+    在函式執行的過程中，`this` 一旦被確定，那就不能更改了
 
 **全域中的`this`**
 
--  嚴格模式下：全域中的`this`指向`undefined`，並非全域物件
+-  嚴格模式下：全域中的 `this` 指向 `undefined` ，並非全域物件
    
 ```js
 'use strict';
@@ -180,7 +180,7 @@ console.log(this === undefined); // 輸出 true
 
 ```
 
-- 非嚴格模式下：全域中的this指向全域物件，瀏覽器環境下是`window`，在 Node.js 環境中，全域物件是 `global` 物件。
+- 非嚴格模式下：全域中的this指向全域物件，瀏覽器環境下是 `window`，在 Node.js 環境中，全域物件是 `global` 物件。
 
 
 **函式中的`this`**
@@ -188,15 +188,15 @@ console.log(this === undefined); // 輸出 true
 
 !!! note
 
-    當函式作為方法調用時，this指向調用該方法的函式
+    當函式作為方法調用時，this 指向調用該方法的函式
 
-    當函式作為函式調用時，this指向全域物件
+    當函式作為函式調用時，this 指向全域物件
 
-    當函式被使用運算子調用時，this指向新創建的物件
+    當函式被使用運算子調用時，this 指向新創建的物件
 
-    當箭頭函式被調用時，this指向箭頭函式的執行上下文
+    當箭頭函式被調用時，this 指向箭頭函式的執行上下文
 
-箭頭函式下，this的指向固定為箭頭函式的上下文，也就是箭頭函式外層的執行上下文中的this，不會根據函式的調用方式決定
+箭頭函式下，this 的指向固定為箭頭函式的上下文，也就是箭頭函式外層的執行上下文中的 this，不會根據函式的調用方式決定
 
 
 ## 箭頭函式(Arrow Function)
@@ -230,10 +230,10 @@ const returnObj = ( user ) => ({
 
 ### 箭頭函式對this的影響
 
-this對於一般函式來說, this 有幾種可能值：
+this 對於一般函式來說, this 有幾種可能值：
 
 - 作為 new 建構子來說, this指向物件本身
-- 對於strict mode下直接調用函式, 函式中的 this 是 `undefined`
+- 對於 strict mode 下直接調用函式, 函式中的 this 是 `undefined`
 - 作為物件的方法呼叫時, 參考至物件上
   
 而 arrow function () => {} 的行為, 是基於詞法域(lexical), 而非語法語境(context)
@@ -257,7 +257,7 @@ this對於一般函式來說, this 有幾種可能值：
    
     除此之外, 都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
 
-    但原則上來說, 盡可能使用展開運算替代arguments, 因此動態參數的情況, 也可以使用 arrow function
+    但原則上來說, 盡可能使用展開運算替代 arguments , 因此動態參數的情況, 也可以使用 arrow function
 
 ## 閉包
 
@@ -288,7 +288,7 @@ this對於一般函式來說, this 有幾種可能值：
 
 ```
 
-a, b 在同一個 block, 而 c 在的block可以看到外部(block 1)
+a, b 在同一個 block, 而 c 在的 block 可以看到外部(block 1)
 所以第一個 block 2 可以看到 a,b,c, 但是第二個僅能看到 a,b
 
 這就是詞法域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
@@ -360,7 +360,7 @@ counter(); // 輸出 1
 counter(); // 輸出 2
 ```
 
-創建`createCounter` 函式，該函式定義變數 `count` 和一個內部函式 increment。當我們調用 `createCounter` 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 `count` 變數的引用。由於 `count` 變數是在 `createCounter` 函式內部定義的，因此它不會被其他代碼所訪問。
+創建 `createCounter` 函式，該函式定義變數 `count` 和一個內部函式 increment。當我們調用 `createCounter` 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 `count` 變數的引用。由於 `count` 變數是在 `createCounter` 函式內部定義的，因此它不會被其他代碼所訪問。
 
 每次調用 `counter` 函式時，它都會執行 increment 中的代碼，並在控制台輸出當前計數器的值。由於 increment 函式捕獲了 `count` 變數，因此它可以增加計數器的值並在每次調用時輸出正確的結果。
 

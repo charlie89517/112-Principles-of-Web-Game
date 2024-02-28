@@ -227,6 +227,8 @@ Promise 有三種狀態：
 
 ### Prmoise 的使用
 
+#### Promise
+
 用實際的例子來說明，首先是 Promise 的函式簽章：
 
 ```js
@@ -399,6 +401,89 @@ function downloadAll() {
 
 downloadAll(); //依序呼叫 siteA、siteB、siteC 的下載內容
 ```
+
+#### Promise.all 與 Promise.race
+
+**Promise.all**
+
+`Promise.all` 也是一個 promise ，且接受一組 promise 作為輸入。
+
+當 promise 都執行或其中任何一個執行失敗時，就會改變 promise 狀態
+
+語法
+
+```js
+
+Promise.all(iterable);
+
+```
+
+
+`iterable`: 一個 `iterable` 物件像是 Array 或 String。
+
+這邊引用MDN所提供的範例：
+
+```js
+var p1 = Promise.resolve(3);
+var p2 = 1337;
+var p3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, "foo");
+});
+
+Promise.all([p1, p2, p3]).then((values) => {
+  console.log(values); // [3, 1337, "foo"]
+});
+
+```
+
+當 `p1`、`p2`、`p3` 全部都實現後才會執行 `then`後面的內容，且獲取到的值是陣列值。
+
+
+!!! info
+
+    陣列中如果不是 Promise 物件，則會自動使用 `Promise.resolve` 來轉換 
+
+**Promise.race**
+
+如果說 `promise.all` 指的是陣列中**所有的** promise 參數都要解決才會繼續下一步，則 `promise.race` 就可以說是只要有**任何一個** promise 參數被解決，就進行下一步動作。
+
+語法
+
+```js
+
+Promise.race(iterable);
+
+```
+
+這邊也舉一個簡單的範例
+
+```js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout((value) => resolve(value), 800, "p1");
+});
+const p2 = new Promise((resolve, reject) => {
+  setTimeout((value) => resolve(value), 3000, "p2");
+});
+const p3 = new Promise((resolve, reject) => {
+  setTimeout((value) => resolve(value), 1000, "p3");
+});
+
+Promise.race([p1, p2, p3])
+  .then((value) => {
+    console.log(value); // 輸出p1
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+```
+
+這邊放入了三個 promise 並且產生的時間分別會在不同的時間執行，最終因為 `p1` 最快被解決所以會輸出 p1。
+
+
+
+
+
 
 ### 更深入的 Promise
 

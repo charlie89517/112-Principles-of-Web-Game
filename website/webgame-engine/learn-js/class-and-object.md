@@ -25,17 +25,17 @@ p2.calcBmi(); // 22.89307408198773
 p1.calcBmi == p2.calcBmi; // true
 ```
 
-這裡定義 `Person` 型別, 並宣告了 `calcBmi` 方法的實作。
+這裡定義 `Person` 型別，並宣告了 `calcBmi` 方法的實作。
 
-當宣告了一個物件時, 便可以同時定義他的 `prototype`
+當宣告了一個物件時，便可以同時定義他的 `prototype`
 
-當調用 function 的順序(e.g. `p1.calcBmi`)時, 會依序 [原型鏈](/webgame-engine/learn-js/dig-deep/#_3) 查找
+當調用 function 的順序(e.g. `p1.calcBmi`)時，會依序 [原型鏈](/webgame-engine/learn-js/dig-deep/#_3) 查找
 
 `p1.calcBmi` -> `Person.prototype.calcBmi` -> `Object.prototype.calcBmi`
 
 !!!question
 
-    若回傳一個包含函式的物件, 其行為會與定義 Class 一樣嗎？
+    若回傳一個包含函式的物件，其行為會與定義 Class 一樣嗎？
 
 ```js
 /* Class-like Example */
@@ -56,17 +56,17 @@ p2.calcBmi(); // 22.89307408198773
 p1.calcBmi == p2.calcBmi; // false
 ```
 
-這個行為"看起來"會跟使用 `new Person` 一樣, 但是有個非常嚴重的問題, 就是 `p1.calcBmi != p2.calcBmi`
+這個行為"看起來"會跟使用 `new Person` 一樣，但是有個非常嚴重的問題，就是 `p1.calcBmi != p2.calcBmi`
 
-這個問題的嚴重性在於, 假定定義了像是 `MyClass` 這種類別, 並且有個方法 `myFunction`, 當建立了 1000 個實例
+這個問題的嚴重性在於，假定定義了像是 `MyClass` 這種類別，並且有個方法 `myFunction`，當建立了 1000 個實例
 
-myFunction 也會被建立 1000 次, 這對於記憶體的處理是非常不健康的
+myFunction 也會被建立 1000 次，這對於記憶體的處理是非常不健康的
 
-邏輯上, 成員變數應該保持在自己的 scope, 而方法(例如 `MyClass.myFunction`) 是一個獨立的 function, 由所有的 `MyClass` 共用該 function 位址
+邏輯上，成員變數應該保持在自己的 scope，而方法(例如 `MyClass.myFunction`) 是一個獨立的 function，由所有的 `MyClass` 共用該 function 位址
 
-僅需要傳入自己的參考, MyClass 便會假設 `this` 是自己傳進來的參考
+僅需要傳入自己的參考，MyClass 便會假設 `this` 是自己傳進來的參考
 
-使用 C++ 來舉例, C++ 的 class 實作隱含了 `this` 參數, 比方說
+使用 C++ 來舉例，C++ 的 class 實作隱含了 `this` 參數，比方說
 
 ```c++
 class Person {
@@ -83,7 +83,7 @@ private:
 }
 ```
 
-實際上, `calcBmi` 的簽章會包含一個隱含的參數 `this`
+實際上，`calcBmi` 的簽章會包含一個隱含的參數 `this`
 
 ```c++
 double Person::calcBmi(Person* this) {
@@ -91,7 +91,7 @@ double Person::calcBmi(Person* this) {
 }
 ```
 
-如果要驗證這一點, 通過 `std::bind` 這個函式可以更好的觀察到
+如果要驗證這一點，通過 `std::bind` 這個函式可以更好的觀察到
 
 ```c++
 #include <iostream>
@@ -119,44 +119,44 @@ int main() {
 
 逐步拆解以上的過程：
 
-1. `class Person` 宣告了 `calcBmi` function, 允許 `Person` 計算 BMI
-2. 把 `fn` 通過 `std::bind` 繫結了 `Person::calcBmi` 這個函式, 並且把 `this` 的 Context 繫結在 `person` 上
-3. 調用 `fn()` 時, 相當於調用了 `person.calcBmi()`
+1. `class Person` 宣告了 `calcBmi` function，允許 `Person` 計算 BMI
+2. 把 `fn` 通過 `std::bind` 繫結了 `Person::calcBmi` 這個函式，並且把 `this` 的 Context 繫結在 `person` 上
+3. 調用 `fn()` 時，相當於調用了 `person.calcBmi()`
 
 !!!note
 
     以筆者的理解來說明：
 
-    在Class的實現上, 可以拆解為 `屬性` 以及 `方法`
+    在Class的實現上，可以拆解為 `屬性` 以及 `方法`
 
     `屬性` 是由實例自行維護的數據區塊
 
     `方法` 則是所有的實例共享同樣的函式宣告與實作
 
-    所有的方法雖然共用相同的function 區段, 但是因為隱含了 `*this`, 所以不同實例調用方法才會呈現不同的結果
+    所有的方法雖然共用相同的function 區段，但是因為隱含了 `*this`，所以不同實例調用方法才會呈現不同的結果
 
     可以參考 MSDN C++ 上的 [__thiscall](https://learn.microsoft.com/en-us/cpp/cpp/thiscall?view=msvc-170)
 
-    部分程式語言, 如 Rustlang, 則要求在成員的方法實作, 顯式宣告第一個參數為 `&self`
+    部分程式語言，如 Rustlang，則要求在成員的方法實作，顯式宣告第一個參數為 `&self`
 
-    在 JavaScript 上, 早期的 Class 實作要求使用 `function` 來宣告, 在 `Person` 該例中
+    在 JavaScript 上，早期的 Class 實作要求使用 `function` 來宣告，在 `Person` 該例中
 
-    早期開發人員通過 `if(!(this instanceof Person))` 判斷 `Person` 是通過建構式被調用, 還是通過一般函式被調用
+    早期開發人員通過 `if(!(this instanceof Person))` 判斷 `Person` 是通過建構式被調用，還是通過一般函式被調用
 
-    因為一般函式與建構式的調用, this 的數值是不相同的(在下個章節進行討論)
+    因為一般函式與建構式的調用，this 的數值是不相同的(在下個章節進行討論)
 
-    function 的定義統一被移到 `<Class Name>.prototype` 這個區段, 而屬性則由實例自行維護
+    function 的定義統一被移到 `<Class Name>.prototype` 這個區段，而屬性則由實例自行維護
 
     因此前兩個例子中：
 
-    1. `Class Example` 所有的 `Person` 實例, 會共享 `Person.prototype.calcBmi` 的實現
-    2. `Class-like Example` 所有的 `Person` 實例, 不會共享 `Person.prototype.calcBmi` 的實現, 相當於 `calcBmi` 的實現每次在 `Person()` 調用時, 都被重新宣告/實現一次。
+    1. `Class Example` 所有的 `Person` 實例，會共享 `Person.prototype.calcBmi` 的實現
+    2. `Class-like Example` 所有的 `Person` 實例，不會共享 `Person.prototype.calcBmi` 的實現，相當於 `calcBmi` 的實現每次在 `Person()` 調用時，都被重新宣告/實現一次。
 
-    在例子2中, 使用的實例越多, 記憶體的使用則越劇烈
+    在例子2中，使用的實例越多，記憶體的使用則越劇烈。
 
 ## ES6 以後的類別
 
-- ES6 (ECMA 2016) 以後的標準, 提供了 `class` 與 `extends` 關鍵字
+- ES6 (ECMA 2016) 以後的標準，提供了 `class` 與 `extends` 關鍵字
 - `class` 實際上是一種特別的 [函式(Functions)](/webgame-engine/learn-js/basic-and-syntax/#functions)
 - 函式宣告和類別宣告的一個重要差別在於函式宣告是 [可提升(Hoisted)](/webgame-engine/learn-js/basic-and-syntax/#hoisting) 的，但類別宣告不是
 - `class` 可用兩種方式定義，分別是 [類別宣告(Class declarations)](#class_declarations) 和 [類別表達(Class expressions)](#class_expressions)
@@ -341,13 +341,13 @@ console.log(adult.introStr()); // "Cindy is 25 year-old and has 2 children."
 console.log("Is adult an instance of Person?", adult instanceof Person); // true
 ```
 
-此外, 假設建構式不需要參數, 類別可以使用 new Person 或是 new Person() 的方式初始化, 他們的差異是運算子優先順序
+此外，假設建構式不需要參數，類別可以使用 new Person 或是 new Person() 的方式初始化，他們的差異是運算子優先順序
 
-因為成員存取算運子.的優先度比較高, 所以使用
+因為成員存取算運子.的優先度比較高，所以使用
 
-new Person.introStr 會導致錯誤, 因為 Person 不存在 introStr 這個靜態方法, 但是使用
+new Person.introStr 會導致錯誤，因為 Person 不存在 introStr 這個靜態方法，但是使用
 
-new Person().introStr 則不會出錯, 因為他實際上調用了 (new Person).introStr
+new Person().introStr 則不會出錯，因為他實際上調用了 (new Person).introStr
 
 !!!tip
 

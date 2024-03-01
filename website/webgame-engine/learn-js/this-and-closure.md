@@ -6,13 +6,13 @@
 
     this 值由被呼叫的函式來決定。它不能在執行期間被指派，每次函式呼叫調用的值也可能不同
 
-    this是一個特殊的值, 無法於執行期間被覆蓋
+    this 是一個特殊的值，無法於執行期間被覆蓋
 
     在 **嚴格模式** 與 **非嚴格模式**下有所不同
 
 ### This 的查找
 
-對於一般的 function, 查找 this 的範圍會從調用者(caller)往上查找：
+對於一般的 function，查找 this 的範圍會從調用者(caller)往上查找：
 
 ```javascript
 "use strict";
@@ -28,19 +28,21 @@ function outerFn() {
 }
 
 obj.fn(); // 300;
+obj.fn(); // 300;
 
 obj.fn2 = outerFn;
 
 obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
+obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
 
 outerFn(); // Error, this 並沒有 prop 這個成員
+
 ```
+`this`的判斷，是先依照是不是作為某個物件的屬性或方法被調用
 
-`this`的判斷, 是先依照是不是作為某個物件的屬性或方法被調用
+在上述的例子中，因為 `outerFn` 是直接以一個 function 被調用，而不是某個物件底下的方法，所以 `this` 的值為 `undefined`
 
-在上述的例子中, 因為 `outerFn` 是直接以一個 function 被調用, 而不是某個物件底下的方法, 所以 `this` 的值為 `undefined`
-
-但經過 `obj.fn2` 指向 `outerFn`, 此時 `obj.fn2` 同樣是調用 `outerFn`, 但是是以 `obj`的成員被調用
+但經過 `obj.fn2` 指向 `outerFn`，此時 `obj.fn2` 同樣是調用 `outerFn`，但是是以 `obj`的成員被調用
 
 因此 `this` 的值相當於 `obj`
 
@@ -80,9 +82,9 @@ obj.sub.foo(); // 300, 最直接的引用是 obj.sub, 該物件沒有prop成員,
 
 !!! danger
 
-    在上述的例中, 通過 **proto** 屬性直接修改一個物件的原型(Prototype)
+    在上述的例中，通過 **proto** 屬性直接修改一個物件的原型(Prototype)
 
-    但真正開發中, 直接改變物件的原型是一件很不建議的事情, 同時也會影響到所有參照原型的實例
+    但真正開發中，直接改變物件的原型是一件很不建議的事情，同時也會影響到所有參照原型的實例
 
 ### This 的綁定
 
@@ -129,7 +131,7 @@ sayName.bind(obj3)(); // 輸出 "Kevin"
 
 **`new` 綁定：**
 
-使用`new` 運算符生成構造函式時，this 指向新創建的物件。
+使用 `new` 運算符生成構造函式時，this 指向新創建的物件。
 
 ```js
 function Person(name, age) {
@@ -142,7 +144,7 @@ console.log(person.name); // 輸出 "Alice"
 
 **箭頭函式綁定：**
 
-`箭頭函式中的this指向，始終指向箭頭函式的上下文`和調用方式無關。
+`箭頭函式中的 this 指向，始終指向箭頭函式的上下文`和調用方式無關。
 
 ```js
 const obj = {
@@ -161,39 +163,42 @@ obj.sayName(); // 輸出 "Alice"
 ## This 指向
 
 !!! quote
-在函式執行的過程中，`this`一旦被確定，那就不能更改了
+
+    在函式執行的過程中，`this` 一旦被確定，那就不能更改了
 
 **全域中的`this`**
 
-- 嚴格模式下：全域中的`this`指向`undefined`，並非全域物件
-
+-  嚴格模式下：全域中的 `this` 指向 `undefined` ，並非全域物件
+   
 ```js
 "use strict";
 
 console.log(this === undefined); // 輸出 true
 ```
 
-- 非嚴格模式下：全域中的 this 指向全域物件，瀏覽器環境下是`window`，在 Node.js 環境中，全域物件是 `global` 物件。
+- 非嚴格模式下：全域中的this指向全域物件，瀏覽器環境下是 `window`，在 Node.js 環境中，全域物件是 `global` 物件。
+
 
 **函式中的`this`**
 
 !!! note
 
-    當函式作為方法調用時，this指向調用該方法的函式
+    當函式作為方法調用時，this 指向調用該方法的函式
 
-    當函式作為函式調用時，this指向全域物件
+    當函式作為函式調用時，this 指向全域物件
 
-    當函式被使用運算子調用時，this指向新創建的物件
+    當函式被使用運算子調用時，this 指向新創建的物件
 
-    當箭頭函式被調用時，this指向箭頭函式的執行上下文
+    當箭頭函式被調用時，this 指向箭頭函式的執行上下文
 
 箭頭函式下，this 的指向固定為箭頭函式的上下文，也就是箭頭函式外層的執行上下文中的 this，不會根據函式的調用方式決定
+
 
 ## 箭頭函式(Arrow Function)
 
 箭頭函式表示法：
 
-```javascript
+```js
 // ex.1
 const sum = (a, b) => {
   return a + b;
@@ -206,7 +211,7 @@ const sum = (a, b) => a + b; // 行為同 ex.1
 const sayHello = (name) => `Hello, ${name}`;
 
 // ex.4
-const sayHello = (name) => `Hello, ${name}`; // 只有一個參數時, 可以省略()
+const sayHello = name => `Hello, ${name}`; // 只有一個參數時, 可以省略()
 
 // ex.5
 const returnObj = (user) => ({
@@ -219,13 +224,13 @@ const returnObj = (user) => ({
 
 ### 箭頭函式對 this 的影響
 
-this 對於一般函式來說, this 有幾種可能值：
+this 對於一般函式來說，this 有幾種可能值：
 
-- 作為 new 建構子來說, this 指向物件本身
-- 對於 strict mode 下直接調用函式, 函式中的 this 是 `undefined`
-- 作為物件的方法呼叫時, 參考至物件上
-
-而 arrow function () => {} 的行為, 是基於詞法域(lexical), 而非語法語境(context)
+- 作為 new 建構子來說，this指向物件本身
+- 對於 strict mode 下直接調用函式，函式中的 this 是 `undefined`
+- 作為物件的方法呼叫時，參考至物件上
+  
+而 arrow function () => {} 的行為，是基於詞法域(lexical)，而非語法語境(context)
 
 !!! info
 
@@ -239,22 +244,22 @@ this 對於一般函式來說, this 有幾種可能值：
 
     使用 `function() {}` 宣告的時機：
 
-    1. 在物件中, 方法要參照物件本身
-    2. 在類別中, 宣告成員函式的情景
+    1. 在物件中，方法要參照物件本身
+    2. 在類別中，宣告成員函式的情景
     3. 使用到 Generator `function*` 的情況
     4. 使用 arguments 的情況
+   
+    除此之外，都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
 
-    除此之外, 都可以直接使用`() => {}` Arrow Function 的形式來宣告函式
-
-    但原則上來說, 盡可能使用展開運算替代arguments, 因此動態參數的情況, 也可以使用 arrow function
+    但原則上來說， 盡可能使用展開運算替代 arguments，因此動態參數的情況，也可以使用 arrow function
 
 ## 閉包
 
 ### 語法域與詞法域
 
-通俗的解釋, 語法域代表的是執行期間動態決定的行為, 比方說普通函式的`this`、建構式的`super`
+通俗的解釋，語法域代表的是執行期間動態決定的行為，比方說普通函式的`this`、建構式的 `super`
 
-而詞法域代表的是封閉範圍的前後文, 如同變數的查找一樣, 舉例來說：
+而詞法域代表的是封閉範圍的前後文，如同變數的查找一樣，舉例來說：
 
 ```js
 {
@@ -266,28 +271,32 @@ this 對於一般函式來說, this 有幾種可能值：
     let c = 300;
     function fn() {
       // -- block 2.1
-      console.log(a, b, c);
+      function fn() {
+        // -- block 2.1
+        console.log(a, b, c);
+      }
+      fn(); // 100, 200, 300
+      fn(); // 100, 200, 300
     }
-    fn(); // 100, 200, 300
-  }
-  {
-    // -- block 3
-    function fn() {
-      // -- block 3.1
-      console.log(a, b, c);
+    {
+      // -- block 3
+      function fn() {
+        // -- block 3.1
+        console.log(a, b, c);
+      }
+      fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
     }
-    fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
   }
 }
+
 ```
 
-a, b 在同一個 block, 而 c 在的 block 可以看到外部(block 1)
-所以第一個 block 2 可以看到 a,b,c, 但是第二個僅能看到 a,b
+a, b 在同一個 block，而 c 在的 block 可以看到外部(block 1)
+所以第一個 block 2 可以看到 a, b, c, 但是第二個僅能看到 a, b
 
 這就是詞法域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
 
-而閉包則複雜一點, 以上面的例子來說, 可以觀察出：
-
+而閉包則複雜一點，以上面的例子來說，可以觀察出：
 - block 允許巢狀
 - 內部的 block 可以存取外部的 block
 - 外部的 block 不可以存取內部的 block
@@ -351,7 +360,7 @@ counter(); // 輸出 1
 counter(); // 輸出 2
 ```
 
-創建`createCounter` 函式，該函式定義變數 `count` 和一個內部函式 increment。當我們調用 `createCounter` 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 `count` 變數的引用。由於 `count` 變數是在 `createCounter` 函式內部定義的，因此它不會被其他代碼所訪問。
+創建 `createCounter` 函式，該函式定義變數 `count` 和一個內部函式 increment。當我們調用 `createCounter` 並將其返回值賦給 counter 變數時，counter 變數實際上保存了 increment 的引用以及對 `count` 變數的引用。由於 `count` 變數是在 `createCounter` 函式內部定義的，因此它不會被其他代碼所訪問。
 
 每次調用 `counter` 函式時，它都會執行 increment 中的代碼，並在控制台輸出當前計數器的值。由於 increment 函式捕獲了 `count` 變數，因此它可以增加計數器的值並在每次調用時輸出正確的結果。
 
@@ -382,6 +391,7 @@ let myModule = (function () {
 console.log(myModule.publicVariable); // 輸出 "I am public"
 myModule.publicFunction(); // 輸出 "This is a public function."
 myModule.accessPrivate(); // 輸出 "I am private" 和 "This is a private function."
+
 ```
 
 自調用函式表達式（Immediately Invoked Function Expression, IIFE）創建一個立即執行的函式，並使用閉包創建一個模組。在模組中，定義了一個私有變數 privateVariable 和一個私有方法 privateFunction。然後，我們返回一個具有公共變數和方法的對象字面量，以便可以在需要時從外部訪問它們。最後，我們將對象字面量賦給 myModule 變數，以便可以在其他代碼中使用它。

@@ -92,23 +92,23 @@ scheme  user information     host     port                  query         fragme
 
 ## RESTful API
 
-Restful API（Representational State Transfer）是一種基於 HTTP 協議的**設計風格**。
+表現層狀態轉換 REST（REpresentational State Transfer）是一種基於 HTTP 協議的**設計風格**。
 
 使用標準的 HTTP 動詞（GET、POST、PUT、DELETE 等）來操作。
-例如，使用 GET 來獲取資料，使用 POST 來新增，使用 PUT 來更新，使用 DELETE 來刪除，這些對應於 CURD 操作。
+例如，使用 GET 來獲取資料，使用 POST 來新增，使用 PUT 來更新，使用 DELETE 來刪除，這些對應於 CRUD 操作。
 
 - GET (取得)
 - POST (新增)
 - PUT (修改)
 - DELETE (刪除)
 
-[其他HTTP動詞 https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods)
+[其他HTTP動詞](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods)
 
 !!! note
     不建議在 GET 中使用登入帳號密碼，
     因為在 GET 請求中，URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
     
-    例如: /login?account="admin"&password="123"
+    例如: `/login?account=admin&password=123`
 
     
 ## 與一般的 API 的差異
@@ -135,41 +135,35 @@ RESTful Web 服務允許用戶端和伺服器分離，各部件可以獨立演�
 
 - 獨立性
 
-您可以使用各種程式設計語言來編寫用戶端和伺服器應用程式，而不會影響 API 設計。
+可以使用各種程式設計語言來編寫用戶端和伺服器應用程式，而不會影響 API 設計。
 
 [^2]: https://developer.mozilla.org/zh-TW/docs/Web/API/Fetch_API/Using_Fetch
 
 ## POST Request
 
 ```js
-postData("http://example.com/answer", { answer: 42 })
+postData('http://example.com/answer', { answer: 42 })
   .then((data) => console.log(data))
   .catch((error) => console.error(error));
 
 function postData(url, data) {
-  // 預設值標記為*
   return fetch(url, {
-    body: JSON.stringify(data), // must match 'Content-Type' header
-    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: "same-origin", // include, same-origin, *omit
+    body: JSON.stringify(data),
     headers: {
-      "user-agent": "Mozilla/4.0 MDN Example",
-      "content-type": "application/json",
+      'user-agent': 'Mozilla/4.0 MDN Example',
+      'content-type': 'application/json',
     },
-    method: "POST", // *GET, POST, PUT, DELETE, etc.
-    mode: "cors", // no-cors, cors, *same-origin
-    redirect: "follow", // manual, *follow, error
-    referrer: "no-referrer", // *client, no-referrer
+    method: 'POST', // HTTP動詞，預設為GET
   }).then((response) => response.json());
 }
 ```
 
 範例程式碼[^2]中有幾個比較重要的參數
 
-1. url 是 API 的網址
-2. data 把OBJ轉成JSON字串作為Body提供給Server
-3. headers 可以放入附加訊息，通常放入 User-Agent Content-Type 等... [Header參數](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
-4. method 放入HTTP動詞
+1. **`url`** 是 API 的網址
+2. **`body`** 提供給伺服器的資訊，上面的範例為將 `data` 物件轉為JSON字串作為 body 提供給 Server
+3. **`headers`** 可以放入 Http 的 Header資訊，一般常見的屬性包含 User-Agent、Content-Type 等...，較詳細的可以參考 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers)
+4. **`method`** 放入 HTTP動詞，如 `GET`、`POST` 等
 
 ## 氣象資料開放平台 API 實作
 1. 到[氣象資料開放平台](https://opendata.cwa.gov.tw/index)註冊帳號
@@ -217,14 +211,13 @@ Scheme       API domain    BaseUrl             Path                     Query Ar
 ```js
 const baseUrl = "https://opendata.cwa.gov.tw/api/v1/"
 const path = "rest/datastore/F-D0047-063"
-const Authorization = "yourAuthorization"
-fetch( `${baseUrl}${path}?Authorization=${Authorization}`)
-  .then(function (response) {
+const authorization = "yourAuthorization"
+fetch(`${baseUrl}${path}?Authorization=${authorization}`)
+  .then((response) => {
     return response.json();
   })
-  .then(function (myJson) {
-    console.log(myJson);
-    // 輸出json資料
+  .then((myJson) => {
+    console.log(myJson); // 輸出json資料
   });
 ```
 
@@ -247,7 +240,7 @@ CORS是一種瀏覽器**安全機制**，當在網頁中使用 JavaScript 發起
 在伺服器端可以設定 CORS 的限制，確保僅允許來自特定網域的請求或限制允許的 HTTP 方法和標頭。
 這有助於防止跨站腳本攻擊(XSS)和跨站點請求偽造(CSRF)等安全風險。
 
-* 出現CORS的錯誤[^4]
+* 出現CORS的錯誤可能類似下圖情境[^4]
 [^4]:https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud
 
 ![出現CORS的錯誤](https://miro.medium.com/v2/resize:fit:1400/format:webp/0*bI2yxKryqJzyUkud)

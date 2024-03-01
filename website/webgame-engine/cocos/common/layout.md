@@ -26,7 +26,8 @@ Layout 是用於 UI 容器節點的組件。這個組件為容器提供了各種
 | **ConstraintNum**       | 約束數量，與**Constraint**屬性一起使用來指定行或列的數量                   |
 
 !!! note
-Layout 組件的部分屬性更改後會在下一幀更新，若要立即更新請使用 `layout.updateLayout();` 使其立刻更新。
+
+      Layout 組件的部分屬性更改後會在下一幀更新，若要立即更新請使用 `layout.updateLayout();` 使其立刻更新。
 
 ## Layout Type
 

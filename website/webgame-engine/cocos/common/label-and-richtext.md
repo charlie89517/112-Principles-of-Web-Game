@@ -34,12 +34,14 @@ Label 組件用來顯示一段文字，文字可以是系統字體、TrueType �
 | `RESIZE_HEIGHT` | **UITransform** `contentSize` 將進行調整，以確保文字完全顯示在其邊界中。 開發者無法手動更改 **UITransform** 中文字的高度，它是由內部演算法自動計算的。                                                                                                                                                                                                  |
 
 !!! note
-若 **Overflow** 設定為 `NONE`，`Content Size` 將自動計算，從而導致 **HorizontalAlign** 看不出效果，這時可以透過調整 `Anchor Point` 將設定`Content`的起始點達到置左置右的功能
+
+    若 **Overflow** 設定為 `NONE`，`Content Size` 將自動計算，從而導致 **HorizontalAlign** 看不出效果，這時可以透過調整 `Anchor Point` 將設定`Content`的起始點達到置左/置右的功能。
 
 ## Label 範例
 
 !!! note
-Color 有提供靜態屬性快速使用，詳情請參考[Color](https://docs.cocos.com/creator/3.6/api/zh/class/math.Color)
+
+    Color 有提供靜態屬性快速使用，詳情請參考 [Color](https://docs.cocos.com/creator/3.6/api/zh/class/math.Color)。
 
 ```ts
 import { _decorator, Color, Component, Label } from "cc";

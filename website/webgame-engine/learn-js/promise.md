@@ -1,4 +1,4 @@
-#非同步程式設計
+# 非同步程式設計
 
 一個簡單的例子，說明一下"非同步"的情境
 
@@ -28,7 +28,7 @@
 
 !!! info
 
-    在程式中，所有的Task都是不可中斷的，就可以說是同步程式設計
+    在程式中，所有的 Task 都是不可中斷的，就可以說是同步程式設計
 
 ## 現實中的狀況
 
@@ -47,7 +47,7 @@
 
 若 CPU 進行資料的運算需要 10µs，而等待硬碟把資料傳輸到記憶體需要 1 ms
 
-客觀來說，耗時約為 1ms + 10µs = 1.01ms；對於CPU來說，絕大多數的時間都在**等待**資料傳輸
+客觀來說，耗時約為 1ms + 10µs = 1.01ms；對於 CPU 來說，絕大多數的時間都在**等待**資料傳輸
 
 對於網頁設計來說，經典的例子是：當網頁上有圖片需要顯示時，不會等待圖片下載完成，而是會先渲染頁面的其餘部分
 
@@ -55,7 +55,7 @@
 
 ## AJAX
 
-政府有提供一系列的開放資料,可供查詢：[水利署](https://fhy.wra.gov.tw/WraApi#/)
+政府有提供一系列的開放資料可供查詢：[水利署](https://fhy.wra.gov.tw/WraApi#/)
 
 我們這邊就使用台灣雨量站的 API 來做舉例
 
@@ -69,9 +69,9 @@
 | 南投縣仁愛鄉   | 10008    | 24.0908333 | 121.032222 | 00H810   | 惠蓀(2)      | 1430     | 烏溪     |
 | 屏東縣屏東市   | 10013    | 22.655     | 120.466    | 00Q070   | 屏東(5)      | 1730     | 高屏溪   |
 
-倘若是將該表格做成網頁,內容可能會是：
+倘若是將該表格做成網頁．內容可能會是：
 
-```js 
+```html 
 <html>
   <body>
     <div>
@@ -121,13 +121,13 @@
 
 ```
 
-這個假設的網頁，可能還包含了該表格以外的資料，使用 <!-- 其他資料 --> 替代，
+這個假設的網頁，可能還包含了該表格以外的資料，使用 `<!-- 其他資料 -->` 替代，
 
 假設上面的表格是會更新的(Ex. 每 30 分鐘一次)，每次都需要重新要求整個頁面，是很浪費效能的
 
 因為用戶只關心**會變化的資料**，比方說上面的表格
 
-在之後，會說明什麼是 **REST API**，首先知道：
+在之後，會說明什麼是 [**REST API**](/webgame-engine/learn-js/http-request)，首先知道：
 
 !!! info 
 
@@ -162,11 +162,11 @@
 - 帳號註冊系統：表單都是一樣的，只是要檢查帳號、密碼合不合格
 - Youtube：搜尋影片時，只有下方的影片清單會改變
   
-諸多應用，因此提出一個概念：**能不能只交換需要的部分？**，或是先提交**部分資料**給伺服器進行處理
+諸多應用，因此提出一個概念：**能不能只交換需要的部分？** 或是先提交**部分資料**給伺服器進行處理。
 
 因為早期使用XML做為資料傳輸的格式(近幾年大部分使用JSON)，所以稱為 AJAX
 
-概念如下：透過背景發起 Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下
+概念如下：透過背景發起 Network I/O，並等到伺服器回應後，再把資料取出來使用，實現的程式碼如下：
 
 ```js
 const domain = "fhy.wra.gov.tw";
@@ -175,7 +175,7 @@ const query = "$top=30";
 
 const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
-let xhr = new XMLHttpRequest();
+const xhr = new XMLHttpRequest();
 
 /* xhr.open(method, url) 以特定的HTTP方法開啟某個網址 */
 xhr.open("get", targetUrl);
@@ -283,7 +283,6 @@ add 和 mul 這兩個被傳入的 function，通常叫做 `callback`
 htmlElement.addEventListener("click", (e) => {
   console.log(e);
 });
-
 ```
 
 `addEventListener` 接收兩個參數：第一個是事件種類，常用的有 `click`， `change`， `load` ... 等
@@ -295,7 +294,7 @@ htmlElement.addEventListener("click", (e) => {
 根據調用的 callback，決定 `Promise` 的狀態是成功的還是失敗的：
 
 ```js
-let promise = new Promise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
   const value = Math.random() * 1000;
   if (value > 500) resolve(value);
   else reject(value);
@@ -315,7 +314,7 @@ promise
 狀態不會改變的意思是：
 
 ```js
-let promise = new Promise((resolve, reject) => {
+const promise = new Promise((resolve, reject) => {
   const flag = true;
   resolve(true);
   reject(false); // 無效,已經呼叫了 resolve
@@ -329,10 +328,10 @@ promise
 
 這個就是 Promise 不變性的意思：
 
-- 一開始處於 pending 狀態：還未調用 `resolve` 或是 `reject` 之前, 都處於該狀態
+- 一開始處於 pending 狀態：還未調用 `resolve` 或是 `reject` 之前，都處於該狀態
 - 當 resolve 調用後：成為 fulfilled(實現) 狀態
 - 當 reject 調用後：成為 rejected(拒絕) 狀態
-  Promise 一旦被決定是 fulfilled 還是 rejected 後, 就不會變成其他狀態了
+  Promise 一旦被決定是 fulfilled 還是 rejected 後，就不會變成其他狀態了
 
 而 Promise 只會被決定**一次**狀態，意思是：
 
@@ -367,7 +366,7 @@ Promise的出現，為帶來了一個重要的進展 - 可以針對非同步事�
 
 以上個個章節的例子，要下載 fileA， fileB， fileC，且一定要依照A B C的順序
 
-在上個章節，用`arr[0]、arr[1]、arr[2]`分別存入A、B、C的值，但是使用 Promise 後，可以改為：
+在上個章節，用 `arr[0]、arr[1]、arr[2]` 分別存入A、B、C的值，但是使用 Promise 後，可以改為：
 
 ```js
 function download(url) {
@@ -406,7 +405,7 @@ downloadAll(); //依序呼叫 siteA、siteB、siteC 的下載內容
 
 **Promise.all**
 
-`Promise.all` 也是一個 promise ，且接受一組 promise 作為輸入。
+`Promise.all` 也是一個 promise，且接受一組 promise 作為輸入。
 
 當 promise 都執行或其中任何一個執行失敗時，就會改變 promise 狀態
 
@@ -868,7 +867,7 @@ fetch(targetUrl)
 
 Promise 雖然改善了 callback hell 的發生，但其實還是有一層的巢狀結構，而此時 `async/await` 的出現可以為我們解決這個問題。
 
-`async function`：在 `function` 的前方加上一個 `async` 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
+`async function`：在 `function` 的前方加上一個 **`async`** 關鍵字，來指示該函式成為非同步函式。讓其內部以”同步的方式運行非同步“程式碼。
 
 `await`：可以暫停非同步函式的運行（中止 Promise 的運行），直到非同步進入 resolve 或 reject，當接收完回傳值後繼續非同步函式的運行。
 
@@ -905,10 +904,10 @@ async function getData() {
 1. 回傳值**永遠**都是 Promise 物件
 2. 允許使用 await
 
-回傳值永遠都是 Promise 物件的意思是, 不論 return 什麼值, async function 都會包裝成 Promise
+回傳值永遠都是 Promise 物件的意思是，不論 return 什麼值，async function 都會包裝成 Promise
 
 ```js
-async function add(a, b) {
+async function add(a, b) { // return type: Promise<number>
   return a + b;
 }
 
@@ -917,11 +916,11 @@ let result = add(10, 20); // Promise Object, [[value]] = 30
 result.then((value) => console.log(value)); // print: 30
 ```
 
-特色1：指示某個 function 是非同步事件，所以使用Promise封裝，無法直接使用 `console.log` 取得其值。
+特色1：指示某個 function 是非同步事件，所以使用 Promise 封裝，無法直接使用 `console.log` 取得其值。
 
-重點是特色 2
+**重點是特色2**：
 
-await 可以取出 Promise 最後的回傳值,比方說：
+await 可以取出 Promise 最後的回傳值，比方說：
 
 ```js
 function return100() {
@@ -938,9 +937,9 @@ async function get100() {
 }
 ```
 
-async function 可以讓的非同步程式"看起來"像同步程式
+async function 可以讓的非同步程式**"看起來"**像同步程式
 
-如果以上面那個 download A、B、C 的例子,就可以改成
+如果以上面那個 download A、B、C 的例子，就可以改成
 
 ```js
 function download(url) {
@@ -956,7 +955,7 @@ async function processData() {
 
 ### 錯誤的處理
 
-await 對應到 then 方法, 那麼 catch 呢？
+await 對應到 then 方法，那麼 catch 呢？
 
 直接使用 try { ... } catch { ... } 即可
 
@@ -978,9 +977,9 @@ async function processData() {
 
 !!! note
 
-    這裡花了極大的篇幅在解釋非同步程式設計,以及 Promise 物件的使用方法
+    這裡花了極大的篇幅在解釋非同步程式設計，以及 Promise 物件的使用方法
 
-    本章節可以說是 最重要的 概念,請務必深入理解 Promise 的概念
+    本章節可以說是 **最重要的** 概念，請務必深入理解 Promise 的概念
 
     非同步事件普遍存在於 WEB 與伺服器應用中
 

@@ -4,27 +4,31 @@
 
 ![corountine](https://www.modernescpp.com/wp-content/uploads/2021/02/FunctionsVersusCoroutines-768x412.png)
 
-coroutine(協程, 或稱**共常式**)和Function（或稱為子程式, 或稱**次常式**）都是用於程式碼塊執行的概念，但它們在執行方式和用途上有著根本的差異。
+coroutine(協程，或稱**共常式**)和 Function（或稱為子程式，或稱**次常式**）都是用於程式碼塊執行的概念，但它們在執行方式和用途上有著根本的差異。
 
 1. **執行方式**:
-    - **Function**: 當你調用一個普通函式時，程序會進入該函式執行，並在函式執行完畢後返回調用處繼續執行。普通函式只有一個進入點和一個退出點，它們按照嚴格的 LIFO（後進先出）順序運行。
-    - **Coroutine**: 協程則更加靈活。它們可以在執行過程中暫停（yield），然後在之後的某個時刻從上次暫停的地方繼續執行。這意味著協程可以有多個進入點和暫停點。
+
+   - **Function**: 當你調用一個普通函式時，程序會進入該函式執行，並在函式執行完畢後返回調用處繼續執行。普通函式只有一個進入點和一個退出點，它們按照嚴格的 LIFO（後進先出）順序運行。
+   - **Coroutine**: 協程則更加靈活。它們可以在執行過程中暫停（yield），然後在之後的某個時刻從上次暫停的地方繼續執行。這意味著協程可以有多個進入點和暫停點。
 
 2. **狀態保持**:
-    - **Function**: 一旦函式執行完畢，所有的狀態都會丟失，下一次調用時會重新開始。
-    - **Coroutine**: 協程可以保持它們的狀態，這意味著變數在暫停和重新進入時保持其值。
+
+   - **Function**: 一旦函式執行完畢，所有的狀態都會丟失，下一次調用時會重新開始。
+   - **Coroutine**: 協程可以保持它們的狀態，這意味著變數在暫停和重新進入時保持其值。
 
 3. **用途**:
-    - **Function**: 適用於大多數的序列計算，當你需要一個簡單的執行流程時。
-    - **Coroutine**: 非常適合於需要協作式多任務、非阻塞 I/O 操作或當你想要更細粒度的控制執行流程時。例如，它們被廣泛用於非同步程式，特別是在現代網絡框架中。
+
+   - **Function**: 適用於大多數的序列計算，當你需要一個簡單的執行流程時。
+   - **Coroutine**: 非常適合於需要協作式多任務、非阻塞 I/O 操作或當你想要更細粒度的控制執行流程時。例如，它們被廣泛用於非同步程式，特別是在現代網絡框架中。
 
 4. **效率**:
-    - **Function**: 在調用和返回時可能會涉及到堆棧操作，這在函式呼叫非常頻繁的時候可能會影響效率。
-    - **Coroutine**: 由於能夠暫停和恢復，協程可以減少某些情況下的性能開銷，尤其是在涉及到等待操作，如**I/O 操作**時。
+
+   - **Function**: 在調用和返回時可能會涉及到堆棧操作，這在函式呼叫非常頻繁的時候可能會影響效率。
+   - **Coroutine**: 由於能夠暫停和恢復，協程可以減少某些情況下的性能開銷，尤其是在涉及到等待操作，如**I/O 操作**時。
 
 5. **控制流**:
-    - **Function**: 執行完一個函式再執行下一個，控制流是線性的。
-    - **Coroutine**: 可以分時執行，控制流可能更加複雜，因為它們可以在多個點**暫停和恢復**。
+   - **Function**: 執行完一個函式再執行下一個，控制流是線性的。
+   - **Coroutine**: 可以分時執行，控制流可能更加複雜，因為它們可以在多個點**暫停和恢復**。
 
 在其他與語言如 Python 中，`async/await` 關鍵字允許你以近乎同步的方式編寫異步代碼，這背後就是依賴於協程的概念。
 
@@ -36,11 +40,11 @@ Lua、Go 或是即將推廣的 C++ 20 標準，協程也是一個重要的概念
 
 而與**共同協作**相對的概念，就是**搶占運作**，一個典型的例子就是大部分多執行緒程式設計，必須處理 Mutex 或是 Semaphore 的持有權
 
-唯在持有`Flag`的情況下，才允許某一個Thread進入到關鍵區塊執行程式。
+唯在持有`Flag`的情況下，才允許某一個 Thread 進入到關鍵區塊執行程式。
 
 反過來說，協程的介紹就如 Wiki 所介紹的：
 
-> 共常式可以通過yield（取其「退讓」之義而非「產生」）來呼叫其它共常式，接下來的每次共常式被呼叫時，從共常式上次yield返回的位置接著執行，通過yield方式轉移執行權的共常式之間不是呼叫者與被呼叫者的關係，而是彼此對稱、平等的。
+> 共常式可以通過 yield（取其「退讓」之義而非「產生」）來呼叫其它共常式，接下來的每次共常式被呼叫時，從共常式上次 yield 返回的位置接著執行，通過 yield 方式轉移執行權的共常式之間不是呼叫者與被呼叫者的關係，而是彼此對稱、平等的。
 
 ### 協程範例
 
@@ -77,10 +81,9 @@ const compute = produce();
 const use = comsume();
 
 compute.next();
-console.log('queue:', queue);
+console.log("queue:", queue);
 use.next();
-console.log('queue:', queue);
-
+console.log("queue:", queue);
 ```
 
 ### 執行結果
@@ -133,19 +136,18 @@ queue: []
 
 ```js
 function* generator() {
-  for(let i = 1 ; i <= 10 ; ++i)
-    yield i ** 2;
+  for (let i = 1; i <= 10; ++i) yield i ** 2;
 }
 
 const seq = generator();
 
-for(const powerOfNum of seq) {
+for (const powerOfNum of seq) {
   console.log(powerOfNum); // 依序輸出 1 ~ 10 的平方
 }
 ```
 
 !!! note
-    呼叫生成器函式並不會讓裡面的程式碼立即執行，而是會回傳一個針對該函式的迭代器（iterator）物件。
+呼叫生成器函式並不會讓裡面的程式碼立即執行，而是會回傳一個針對該函式的迭代器（iterator）物件。
 
     當呼叫迭代器的 next() 方法時，生成器函式將會執行到遭遇的第一個 yield 運算式，該運算式給定的值將從迭代器中回傳，如果是 yield* 則會交給另一個生成器函式處理。
 
@@ -154,8 +156,8 @@ for(const powerOfNum of seq) {
 此例中 `for-of` 等同於
 
 ```js
-for (let i = seq.next(); !i.done ; i = seq.next()) {
-  console.log(i)
+for (let i = seq.next(); !i.done; i = seq.next()) {
+  console.log(i);
   console.log(i.value);
 }
 ```
@@ -169,8 +171,7 @@ for (let i = seq.next(); !i.done ; i = seq.next()) {
 ```js
 // modify example:
 function* generator() {
-  for(let i = 1 ; i <= 10 ; ++i)
-    yield i ** 2;
+  for (let i = 1; i <= 10; ++i) yield i ** 2;
   return 1001;
 }
 ```
@@ -194,7 +195,7 @@ function* generator() {
 由 Debug Tools 顯示，其實 Generator 就是在 `initial` , `suspend` , `close` 狀態中切換
 
 !!! note
-    參考 C++ 20 的 [coroutine 規格](https://en.cppreference.com/w/cpp/language/coroutines#co_yield)
+參考 C++ 20 的 [coroutine 規格](https://en.cppreference.com/w/cpp/language/coroutines#co_yield)
 
     ![C++20](/webgame-engine/assets/javascript/c++coroutine.png)
 
@@ -209,10 +210,10 @@ function* generator() {
 ```js
 function* dateSteper() {
   const d = new Date();
-  while(true) {
+  while (true) {
     const message = yield;
     console.log(d.toLocaleDateString(), message);
-    d.setTime(d.getTime() + 24 * 60 * 60 * 1000)
+    d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
   }
 }
 
@@ -232,7 +233,7 @@ steper.next("Third Meesage");
 2. 此時尚未為抵達`console.log` 敘述，不輸出訊息
 3. 第二次調用 `steper.next()` 時，恢復估算右值，帶入"First Message"後進行 console.log
 4. 下一次迴圈開始，每次`next()`都會恢復估算右值，並且在下一次估算右值**前**退出
-5. 可以無窮調用 `next()`，每次都會輸出下一天的日期與帶入的Message
+5. 可以無窮調用 `next()`，每次都會輸出下一天的日期與帶入的 Message
 
 此例中，因為是個無窮迴圈，所以回傳的 `{ value , done }` 恆為 `{ undefined , false }`
 

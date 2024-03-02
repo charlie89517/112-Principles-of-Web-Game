@@ -55,32 +55,24 @@
 
 ### 關鍵字(Keywords)
 
-| **JavaScript** |            |                  |             |              |             |               |            |
-| :------------: | :--------: | :--------------: | :---------: | :----------: | :---------: | :-----------: | :--------: |
-|  abstract[^1]  | arguments  |    await[^2]     | boolean[^1] |    break     |  byte[^1]   |     case      |   catch    |
-|    char[^1]    | class[^2]  |    const[^2]     |  continue   |   debugger   |   default   |    delete     |     do     |
-|   double[^1]   |    else    |     enum[^2]     |    eval     |  export[^2]  | extends[^2] |     false     | final[^1]  |
-|    finally     | float[^1]  |       for        |  function   |   goto[^1]   |     if      |  implements   | import[^2] |
-|       in       | instanceof |     int[^1]      |  interface  |   let[^2]    |  long[^1]   |  native[^1]   |    new     |
-|      null      |  package   |     private      |  protected  |    public    |   return    |   short[^1]   |   static   |
-|   super[^2]    |   switch   | synchronized[^1] |    this     |    throw     | throws[^1]  | transient[^1] |    true    |
-|      try       |   typeof   |       var        |    void     | volatile[^1] |    while    |     with      |   yield    |
+| **Typescript** |            |             |            |             |            |            |
+| :------------: | :--------: | :---------: | :--------: | :---------: | :--------: | :--------: |
+|  abstract[^1]  | await[^2]  | boolean[^1] |   break    |    case     |   catch    |    void    |
+|   class[^2]    | const[^2]  |  continue   |  debugger  |   default   |   delete   |     do     |
+|      else      |  enum[^2]  |    eval     | export[^2] | extends[^2] |   false    |    var     |
+|    finally     |    for     |  function   |  goto[^1]  |     if      | implements | import[^2] |
+|       in       | instanceof |  interface  |  let[^2]   |     new     |   while    |   typeof   |
+|      null      |  private   |  protected  |   public   |   return    |   static   |    try     |
+|   super[^2]    |   switch   |    this     |   throw    |    true     |    with    |   yield    |
 
 ### 註解(Comments)
 
-- 單行註解
-
 ```js
-// ...
-```
+// 這是單行註解
 
-- 跨行註解
-
-```js
-/* ...
-...
-...
-... */
+/**
+ 這是多行註解
+ */
 ```
 
 ### 數值(Values)
@@ -88,75 +80,48 @@
 - 不用 容器(container) 來參照數值的被稱為 [字符(Literals)](#literals)
 - 使用 容器(container) 來參照數值的被稱為 [變數(Variables)](#variables)
 
-### 字符(Literals)
+### 字面值(Literals)
 
-- 布林字符(Boolean literals)
+- 布林字面值(Boolean literals)
 
 ```js
 true;
-```
-
-```js
 false;
 ```
 
-- 整數字符(Numerical literals)
+- 整數字面值(Numerical literals)
 
 ```js
 60; // 十進制
-```
-
-```js
 0b111100; // 二進制
-```
-
-```js
 0o74; // 八進制
-```
-
-```js
 0x3c; // 十六進制(a~f 不區分大小寫)
-```
-
-```js
 999999999999999999999999999999999999999n; // BigInt
 ```
 
-- 浮點數字符(Floating-point literals)
+- 浮點數字面值(Floating-point literals)
 
 ```js
 3.1415926535;
-```
-
-```js
 -273.15;
-```
-
-```js
 6.626e-34;
 ```
 
-- 字串字符(String literals)
+- 字串字面值(String literals)
 
 ```js
 "Hello World!";
-```
-
-```js
 "bye bye~";
 ```
 
-- 陣列字符(Array literals)
+- 陣列字面值(Array literals)
 
 ```js
 ["Male", "Female"];
-```
-
-```js
 [1, "2", 3.0];
 ```
 
-- 物件字符(Object literals)
+- 物件字面值(Object literals)
 
 ```js
 { age: 25, sex: "Male", height: 182, weight: 75 }
@@ -166,7 +131,7 @@ false;
 { name: "Cindy", money: 3156721, phone: "0912-345-678" }
 ```
 
-- 正則表達式字符(RegExp literals)
+- 正則表達式字面值(RegExp literals)
 
 ```js
 /ab+c/;
@@ -176,7 +141,7 @@ false;
 /(\w+)\s+(\w+)/;
 ```
 
-- 範本字符(Template literals)[^2]
+- 樣板字面值(Template literals)[^2]
 
 ```js
 // 基本字串
@@ -218,8 +183,6 @@ const age = 18;
    - `var` | `let` | `const` `variableName` `=` `expression`
    ```js
    let num = 123 + 987;
-   ```
-   ```js
    const sex = ["Male", "Female"];
    ```
 
@@ -625,7 +588,7 @@ const x = 2;
   ```
 
   - `function*`
-    宣告生成器函式，與 `yield` 結合能簡單編寫迭代器
+    宣告生成器函式，與 `yield` 結合能簡單編寫迭代器，我們會在[這邊](/webgame-engine/learn-js/generator)詳細介紹生成器。
 
   ```js
   function* generator(upperBound) {
@@ -640,7 +603,7 @@ const x = 2;
   ```
 
   - `async function`
-    宣告非同步函式
+    宣告非同步函式，我們會在[這邊](/webgame-engine/learn-js/promise)詳細介紹非同步函式。
 
   ```js
   async function awaitFunc() {

@@ -309,6 +309,24 @@ a, b 在同一個 block，而 c 在的 block 可以看到外部(block 1)
 
 一個閉包通常由兩個部分組成：`函式本身` 和 `創建函式時的作用域`。
 
+```js
+function outer() {
+  let i = 0;
+  function inner() {
+    i += 1;
+    console.log(i);
+  }
+  return inner;
+}
+
+const inner = outer();
+
+inner(); // 1
+inner(); // 2
+inner(); // 3
+
+```
+
 如果在函式內部定義了一個函式，並且這個函式訪問了父級函式的變數或參數，那麼這個內部函式就會形成一個閉包，因為它需要在父級函式執行完畢後，仍然能夠訪問到父級函式中的變數或參數。
 
 !!! info

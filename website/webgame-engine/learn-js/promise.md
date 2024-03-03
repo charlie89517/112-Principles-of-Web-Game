@@ -545,11 +545,13 @@ invokeFn()
     (reason) => console.log(`onReject ${reason}`)
   )
   .catch((reason) => console.log(`ErrorCatch, ${reason}`));
+// outeput : onReject oops!
 
 /* Example 2 */
 invokeFn()
   .then(() => console.log("onFulfillment"))
   .catch((reason) => console.log(`ErrorCatch, ${reason}`));
+// outeput : ErrorCatch, oops!
 ```
 
 在舊一點的實作中，會特意把 `fulfill`、`reject`、`error` 三種情況分開
@@ -845,7 +847,7 @@ const targetUrl = `https://${domain}/${apiPath}?${query}`;
 
 fetch(targetUrl)
   .then((res) => {
-    return res.text(); // 這次不使用 json(),而是使用 text() 取得未 paese 的內容
+    return res.text(); // 這次不使用 json(),而是使用 text() 取得未 pause 的內容
   })
   .then((content) => {
     console.log(content);

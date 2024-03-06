@@ -33,11 +33,7 @@ graph LR
 
 ## URL 格式
 
-```
-  abc://username:password@example.com:123/path/data?key=value&key2=value2#fragid1
-  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘
-scheme  user information     host     port                  query         fragment
-```
+![](/webgame-engine/assets/HTTP-request/urlFormat.png)
 
 在該例子中：
 
@@ -106,7 +102,7 @@ scheme  user information     host     port                  query         fragme
 
 !!! note
     不建議在 GET 中使用登入帳號密碼，
-    因為在 GET 請求中，URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
+    URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
     
     例如: `/login?account=admin&password=123`
 
@@ -192,14 +188,9 @@ function postData(url, data) {
 
 
 ## 執行程式碼
-* BaseUrl
-![](/webgame-engine/assets/HTTP-request/baseUrl.png)
 
-```
-  https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=XXX-XXX-XXX
-   └┬┘   └────────┬────────┘ └┬┘    └────────────┬───────────┘  └──────────┬───────────┘
-Scheme       API domain    BaseUrl             Path                     Query Argument
-```
+* Url 格式
+![](/webgame-engine/assets/HTTP-request/CWBurlFormat.png)
 
 * BaseUrl
 ![](/webgame-engine/assets/HTTP-request/baseUrl.png)
@@ -226,7 +217,9 @@ fetch(`${baseUrl}${path}?Authorization=${authorization}`)
 
 !!! info 
     如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)的網站，為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP。
-    > 可以在HTTPS存取HTTP圖片、影片資源
+    > [混合內容](https://developer.mozilla.org/zh-TW/docs/Web/Security/Mixed_content)
+    > 有一些資源在 HTTPS 網站中可以從 HTTP 源加載，而不會被禁止，例如:圖片、影片、CSS資源
+
 
 ## CORS (Cross-Origin Resource Sharing)
 

@@ -206,7 +206,6 @@ xhr.send();
 ### 關於 Promise
 
 從語法上講：Promise 是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
-從語法上講：Promise 是一個物件，而此物件代表一個即將完成、或失敗的非同步操作，以及它所產生的值。
 
 從本意上講：它是保證，保證它過一段時間會給你一種結果
 
@@ -786,7 +785,7 @@ Savepoint 5: Fulfill: data C
 
 #### fetch API
 
-ES 6 提供了 `fetch` API，就像是上面的 `download` 的實作，只是是由瀏覽器提供的WebAPI：
+於支援ES6後，基於 Promise 所設計的 `fetch` API，就像是上面的 `download` 的實作，只是是由瀏覽器提供的WebAPI：
 
 ```js
 const result = fetch(url, {

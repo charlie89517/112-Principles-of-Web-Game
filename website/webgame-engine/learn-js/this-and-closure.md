@@ -28,14 +28,13 @@ function outerFn() {
 }
 
 obj.fn(); // 300;
-obj.fn(); // 300;
 
 obj.fn2 = outerFn;
 
 obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
-obj.fn2(); // 300, 因為此時 outerFn 繫結於 obj 的成員位址
 
 outerFn(); // Error, this 並沒有 prop 這個成員
+
 
 ```
 `this`的判斷，是先依照是不是作為某個物件的屬性或方法被調用
@@ -160,6 +159,19 @@ const obj = {
 obj.sayName(); // 輸出 "Alice"
 ```
 
+!!! note
+
+    補充：call、apply以及bind的區別
+
+    **call 和 apply 的區別**
+
+    都是用來調用函式，call 接收的是一組參數列表，而 apply 接收的是一個陣列形式的參數列表。
+    
+    **bind的區別**
+
+    bind 方法不是用來調用函式的，它與 call 和 apply 不同，它會返回一個新函式。
+
+
 ## This 指向
 
 !!! quote
@@ -215,7 +227,7 @@ const sayHello = name => `Hello, ${name}`; // 只有一個參數時, 可以省�
 
 // ex.5
 const returnObj = (user) => ({
-  name: user.first + " " + user.last,
+  name: `${user.first} ${user.last}` ,
   age: user.age,
 });
 
@@ -255,11 +267,11 @@ this 對於一般函式來說，this 有幾種可能值：
 
 ## 閉包
 
-### 語法域與詞法域
+### 動態作用域與靜態作用域
 
-通俗的解釋，語法域代表的是執行期間動態決定的行為，比方說普通函式的`this`、建構式的 `super`
+通俗的解釋，動態作用域代表的是執行期間動態決定的行為，比方說普通函式的`this`、建構式的 `super`
 
-而詞法域代表的是封閉範圍的前後文，如同變數的查找一樣，舉例來說：
+而靜態作用域代表的是封閉範圍的前後文，如同變數的查找一樣，舉例來說：
 
 ```js
 {
@@ -269,23 +281,19 @@ this 對於一般函式來說，this 有幾種可能值：
   {
     // -- block 2
     let c = 300;
+    // -- block 2.1
     function fn() {
-      // -- block 2.1
-      function fn() {
-        // -- block 2.1
-        console.log(a, b, c);
-      }
-      fn(); // 100, 200, 300
-      fn(); // 100, 200, 300
+      console.log(a, b, c);
     }
-    {
-      // -- block 3
-      function fn() {
-        // -- block 3.1
-        console.log(a, b, c);
-      }
-      fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
+    fn(); // 100, 200, 300
+  }
+  {
+    // -- block 3
+    function fn() {
+      // -- block 3.1
+      console.log(a, b, c);
     }
+    fn(); // 錯誤, c 不存於該 block 3.1 以及 block 3
   }
 }
 
@@ -294,7 +302,7 @@ this 對於一般函式來說，this 有幾種可能值：
 a, b 在同一個 block，而 c 在的 block 可以看到外部(block 1)
 所以第一個 block 2 可以看到 a, b, c, 但是第二個僅能看到 a, b
 
-這就是詞法域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
+這就是靜態作用域(其行為依照原始碼的樣子), 比較編譯器領域的說法是：Token 被宣告的位置
 
 而閉包則複雜一點，以上面的例子來說，可以觀察出：
 - block 允許巢狀
@@ -305,9 +313,27 @@ a, b 在同一個 block，而 c 在的 block 可以看到外部(block 1)
 
 !!! quote
 
-    當一個函式在訪問它所在的詞法環境之外的變數時，就形成了閉包。簡單來說，閉包就是一個函式能夠訪問其父級作用域中的變數
+    當一個函式在訪問它所在的靜態作用環境之外的變數時，就形成了閉包。簡單來說，閉包就是一個函式能夠訪問其父級作用域中的變數
 
 一個閉包通常由兩個部分組成：`函式本身` 和 `創建函式時的作用域`。
+
+```js
+function outer() {
+  let i = 0;
+  function inner() {
+    i += 1;
+    console.log(i);
+  }
+  return inner;
+}
+
+const inner = outer();
+
+inner(); // 1
+inner(); // 2
+inner(); // 3
+
+```
 
 如果在函式內部定義了一個函式，並且這個函式訪問了父級函式的變數或參數，那麼這個內部函式就會形成一個閉包，因為它需要在父級函式執行完畢後，仍然能夠訪問到父級函式中的變數或參數。
 

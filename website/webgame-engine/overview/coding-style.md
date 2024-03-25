@@ -38,14 +38,7 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
 ## 如何在 VSCode 使用 ESLint
 
-1.  安裝 [typescript](https://www.npmjs.com/package/typescript)
-    ![](https://i.imgur.com/3gSPD6d.png)
-
-    ```bash
-    npm install -D typescript
-    ```
-
-2.  在專案根目錄中使用控制台 npm 指令安裝 ESLint：
+1.  在專案根目錄中使用控制台 npm 指令安裝 ESLint：
 
     ![Prettier Extension](https://i.imgur.com/TQoaM3F.png)
 
@@ -53,7 +46,15 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
     npm install eslint -D
     ```
 
-3.  在專案根目錄中使用控制台 npm 指令安裝 [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)：
+2.  初始化 eslint 環境設定：
+
+    ![Prettier Extension](https://i.imgur.com/KJ6liUb.png)
+
+    ```bash
+    npx eslint --init
+    ```
+
+3.  在專案根目錄中使用控制台輸入指令安裝 [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)：
 
     ![Prettier Extension](https://i.imgur.com/S0Niw8r.png)
 

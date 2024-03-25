@@ -38,28 +38,27 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
 ## 如何在 VSCode 使用 ESLint
 
-1.  在專案根目錄中使用控制台 npm 指令：安裝 ESLint：
-
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint15.png)
+1.  安裝 [typescript](https://www.npmjs.com/package/typescript)
+    ![](https://i.imgur.com/3gSPD6d.png)
 
     ```bash
-    npm install eslint --save-dev
+    npm install -D typescript
     ```
 
-2.  在專案根目錄中使用控制台 npm 指令
+2.  在專案根目錄中使用控制台 npm 指令安裝 ESLint：
 
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint19.png)
+    ![Prettier Extension](https://i.imgur.com/TQoaM3F.png)
 
     ```bash
-    npm install eslint-config-airbnb-base
+    npm install eslint -D
     ```
 
-3.  在專案根目錄中使用控制台 npm 指令
+3.  在專案根目錄中使用控制台 npm 指令安裝 [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)：
 
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint20.png)
+    ![Prettier Extension](https://i.imgur.com/S0Niw8r.png)
 
     ```bash
-    npm install --save-dev eslint-config-prettier
+    npm install -D eslint-config-prettier
     ```
 
 4.  下載<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.eslintrc.js`
@@ -73,6 +72,10 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 6.  安裝完成後重啟 VSCode，之後可於`OUTPUT`頁面中的`ESLint`選項下檢查是否正常安裝
 
     ![Prettier Extension](/webgame-engine/assets/coding-style/eslint21.png)
+
+    或是可以故意輸入一些違反 eslint 原則的程式碼，來藉此確認是否設定成功。
+
+    ![Prettier Extension](https://i.imgur.com/pppedKd.png)
 
 7.  想查看 ESLint 提示，可以於 VSCode 中打開 Problems 視窗（Ctrl+Shift+M），檢查建議。
     現在，VSCode 中已配置 ESLint，將即時提醒你可能的語法錯誤和問題。

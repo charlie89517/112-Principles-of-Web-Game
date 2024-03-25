@@ -28,7 +28,7 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
    ![Prettier Extension](/webgame-engine/assets/coding-style/prettier6.png)
 
-5. 下載<a href="/webgame-engine/assets/coding-style/.prettierrc" download>.prettierrc</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.prettierrc`
+5. 下載<a href="/webgame-engine/assets/coding-style/.prettierrc.zip" download>.prettierrc</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.prettierrc`
 
    ![Prettier Extension](/webgame-engine/assets/coding-style/prettier8.png)
 
@@ -159,7 +159,7 @@ Prettier 和 ESLint 都有能力格式化程式碼，可能會導致格式衝突
 
 本堂課程繳交作業時，程式碼需符合助教所提供的 `.prettierrc` 及 `.eslintrc.js` 設定原則，檢查時若發現有警告或是錯誤，將會進行扣分。
 
-設定檔可以從這裡下載：<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a> | <a href="/webgame-engine/assets/coding-style/.prettierrc" download>.prettierrc</a>
+設定檔可以從這裡下載：<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a> | <a href="/webgame-engine/assets/coding-style/.prettierrc.zip" download>.prettierrc</a>
 
 違反 ESLint 原則時，VS Code 會標註紅色（Error）或黃色（Warning）底線，可以透過滑鼠懸浮於上找到違反原則的提示，也可以點擊超連結查看 ESLint 官方的使用範例。
 

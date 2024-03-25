@@ -16,12 +16,12 @@ WebSocket 允許伺服器和客戶端之間**建立持久的連線**，以實現
 ## 創建一個新的 WebSocket 物件
 
 ```js
-let socket = new WebSocket("ws://example.com/websocket");
+let socket = new WebSocket("ws://example.com/WebSocket");
 ```
 
 - ws://example.com
 
-- wss://example.com (有 SSL 加密的 websocket)
+- wss://example.com (有 SSL 加密的 WebSocket)
 
 - 若網站用了 http 則不能使用 wss(安全性層級不同)
 
@@ -73,14 +73,14 @@ function sendMessage(message) {
 }
 ```
 
-## Websocket readyState Value
+## WebSocket Enum Value
 
-| Value |   State    |          Description          |
-| :---: | :--------: | :---------------------------: |
-|   0   | CONNECTING | Socket 已創建，連線尚未開啟。 |
-|   1   |    OPEN    | 連線已開啟並準備好進行通訊。  |
-|   2   |  CLOSING   |    連線正在關閉的過程中。     |
-|   3   |   CLOSED   |    連線已關閉或無法開啟。     |
+| Enum Value |   State    |          Description          |
+| :--------: | :--------: | :---------------------------: |
+|     0      | CONNECTING | Socket 已創建，連線尚未開啟。   |
+|     1      |    OPEN    | 連線已開啟並準備好進行通訊。    |
+|     2      |  CLOSING   |    連線正在關閉的過程中。       |
+|     3      |   CLOSED   |    連線已關閉或無法開啟。       |
 
 ## 關閉 WebSocket 連接
 

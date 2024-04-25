@@ -2,7 +2,13 @@
 
 ## 介紹
 
-HTTP 全名為 Hyper Text Transfer Protocol 超文字傳輸協定。在 OSI 模型裡，它屬於應用層的協定，可以透過 TCP 或 TLS 來發送或接收資訊。
+HTTP 全名為 Hyper Text Transfer Protocol 超文字傳輸協定，
+是網際網路上應用最廣泛的協定之一，
+在 OSI 網路模型裡，它屬於應用層的協定。
+
+## HTTPS
+HTTPS（HTTP Secure）是HTTP的安全版本，在HTTP下加入了SSL/TLS協定，為數據傳輸提供了加密和身份驗證的保障。
+
 
 ## 流程
 
@@ -33,11 +39,7 @@ graph LR
 
 ## URL 格式
 
-```
-  abc://username:password@example.com:123/path/data?key=value&key2=value2#fragid1
-  └┬┘   └───────┬───────┘ └────┬────┘ └┬┘           └─────────┬─────────┘ └──┬──┘
-scheme  user information     host     port                  query         fragment
-```
+![](/webgame-engine/assets/HTTP-request/urlFormat.png)
 
 在該例子中：
 
@@ -50,7 +52,7 @@ scheme  user information     host     port                  query         fragme
 - ?key=value&key2=vale2 是查詢字串
 - fragid1 是 fragment
 
-## Http Code 狀態碼
+## HTTP Code 狀態碼
 
 - HTTP Status Code 1xx 訊息
 
@@ -90,25 +92,65 @@ scheme  user information     host     port                  query         fragme
 
 `502 Bad Gateway`：服務沒有正確執行
 
-## RESTful API
-
-表現層狀態轉換 REST（REpresentational State Transfer）是一種基於 HTTP 協議的**設計風格**。
-
-使用標準的 HTTP 動詞（GET、POST、PUT、DELETE 等）來操作。
-例如，使用 GET 來獲取資料，使用 POST 來新增，使用 PUT 來更新，使用 DELETE 來刪除，這些對應於 CRUD 操作。
-
-- GET (取得)
-- POST (新增)
-- PUT (修改)
-- DELETE (刪除)
+## HTTP 動詞
+* GET (取得)
+* POST (新增)
+* PUT (修改)
+* DELETE (刪除)
 
 [其他HTTP動詞](https://developer.mozilla.org/zh-TW/docs/Web/HTTP/Methods)
 
+### HTTP GET
+* HTTP GET 方法沒有請求體（ request body ）。
+
 !!! note
     不建議在 GET 中使用登入帳號密碼，
-    因為在 GET 請求中，URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
+    URL 參數是以明文形式傳輸的，在未加密的情況下帳號密碼可以在 URL 被看見。
     
     例如: `/login?account=admin&password=123`
+
+## RESTful API
+
+RESTful API 是一種基於 HTTP 協議的設計風格，
+REST 代表 Representational State Transfer（表述性狀態轉移），
+使用標準的 HTTP 動詞（GET、POST、PUT、DELETE 等）來操作。
+
+例如，使用 GET 來獲取資料，使用 POST 來新增，使用 PUT 來更新，使用 DELETE 來刪除，這些對應於 CRUD 操作。
+
+
+
+### 主從式架構 (Client-Server)
+將客戶端與服務端分離，
+任何一個客戶端實例都可以向同一服務器發出請求，
+這種架構提高了可擴展性、可移植性。
+
+### 無狀態
+單純從request決定response。
+
+意思是每一個請求都包含了該服務邏輯所需的完整訊息，
+服務端不負責記錄請求方的用戶狀態。
+
+### 分層
+1. `GET /user/{uid}/post/{postid}`
+
+2. `GET /user/{uid}/profile`
+
+3. `GET /user/{uid}/friend`
+
+4. `GET /user/{uid}/groups`
+
+這個系列 `GET /user/{uid}`
+
+可以將一些共用的邏輯抽離到中介層(middleware)來處理
+
+依`GET /user/{uid}/post/{postid}`為例
+
+驗證 uid 是否存在，如果不存在，回傳 404 Not Found。
+
+### 統一操作介面
+統一操作介面(Uniform Interface)原則是REST架構的核心，
+規定資源對應唯一URL。
+
 
     
 ## 與一般的 API 的差異
@@ -192,14 +234,9 @@ function postData(url, data) {
 
 
 ## 執行程式碼
-* BaseUrl
-![](/webgame-engine/assets/HTTP-request/baseUrl.png)
 
-```
-  https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-D0047-063?Authorization=XXX-XXX-XXX
-   └┬┘   └────────┬────────┘ └┬┘    └────────────┬───────────┘  └──────────┬───────────┘
-Scheme       API domain    BaseUrl             Path                     Query Argument
-```
+* Url 格式
+![](/webgame-engine/assets/HTTP-request/CWBurlFormat.png)
 
 * BaseUrl
 ![](/webgame-engine/assets/HTTP-request/baseUrl.png)
@@ -224,9 +261,31 @@ fetch(`${baseUrl}${path}?Authorization=${authorization}`)
 * 結果輸出
 ![](/webgame-engine/assets/HTTP-request/consoleTest.png)
 
-!!! info 
-    如果你的網站使用 HTTPS (加密) 則不能請求 HTTP (未加密)的網站，為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP。
-    > 可以在HTTPS存取HTTP圖片、影片資源
+## 混合內容（mixed content）
+一個含有 HTTP 明文內容的 HTTPS 頁面稱為混合內容[^5]（mixed content），
+這種頁面只有部份加密，沒有加密的內容，易於遭到竊聽和中間人攻擊。這會令網頁不安全。
+
+為了確保整個網站的安全性，瀏覽器禁止在使用HTTPS的網站中請求HTTP。
+
+混合內容分為2種
+
+1. 被動/顯示型混合內容
+2. 主動型混合內容
+
+瀏覽器允許部分被動/顯示型混合內容存取。
+
+* 圖片資源 ( img )
+* 音訊資源 ( audio )
+* 影片資源 ( video )
+
+主動型混合內容，可以改變 HTTPS 頁面行為、並暗自竊取用戶的敏感資訊。
+
+* JavaScript資源
+* CSS資源
+
+[^5]:https://developer.mozilla.org/zh-TW/docs/Web/Security/Mixed_content
+
+
 
 ## CORS (Cross-Origin Resource Sharing)
 

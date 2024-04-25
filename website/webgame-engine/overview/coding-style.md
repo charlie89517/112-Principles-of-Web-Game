@@ -28,7 +28,7 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
    ![Prettier Extension](/webgame-engine/assets/coding-style/prettier6.png)
 
-5. 下載<a href="/webgame-engine/assets/coding-style/.prettierrc" download>.prettierrc</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.prettierrc`
+5. 下載<a href="/webgame-engine/assets/coding-style/.prettierrc.zip" download>.prettierrc</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.prettierrc`
 
    ![Prettier Extension](/webgame-engine/assets/coding-style/prettier8.png)
 
@@ -38,28 +38,28 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 
 ## 如何在 VSCode 使用 ESLint
 
-1.  在專案根目錄中使用控制台 npm 指令：安裝 ESLint：
+1.  在專案根目錄中使用控制台 npm 指令安裝 ESLint：
 
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint15.png)
+    ![Prettier Extension](https://i.imgur.com/TQoaM3F.png)
 
     ```bash
-    npm install eslint --save-dev
+    npm install eslint -D
     ```
 
-2.  在專案根目錄中使用控制台 npm 指令
+2.  初始化 eslint 環境設定：
 
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint19.png)
+    ![Prettier Extension](https://i.imgur.com/KJ6liUb.png)
 
     ```bash
-    npm install eslint-config-airbnb-base
+    npx eslint --init
     ```
 
-3.  在專案根目錄中使用控制台 npm 指令
+3.  在專案根目錄中使用控制台輸入指令安裝 [eslint-config-prettier](https://www.npmjs.com/package/eslint-config-prettier)：
 
-    ![Prettier Extension](/webgame-engine/assets/coding-style/eslint20.png)
+    ![Prettier Extension](https://i.imgur.com/S0Niw8r.png)
 
     ```bash
-    npm install --save-dev eslint-config-prettier
+    npm install -D eslint-config-prettier
     ```
 
 4.  下載<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a>，並將其放置於專案的根目錄中。如檔案名稱開頭少了`.`，請手動重新命名為`.eslintrc.js`
@@ -73,6 +73,10 @@ ESLint 是 JavaScript 的 Linter 工具，用於即時發現程式碼品質問�
 6.  安裝完成後重啟 VSCode，之後可於`OUTPUT`頁面中的`ESLint`選項下檢查是否正常安裝
 
     ![Prettier Extension](/webgame-engine/assets/coding-style/eslint21.png)
+
+    或是可以故意輸入一些違反 eslint 原則的程式碼，來藉此確認是否設定成功。
+
+    ![Prettier Extension](https://i.imgur.com/pppedKd.png)
 
 7.  想查看 ESLint 提示，可以於 VSCode 中打開 Problems 視窗（Ctrl+Shift+M），檢查建議。
     現在，VSCode 中已配置 ESLint，將即時提醒你可能的語法錯誤和問題。
@@ -159,7 +163,7 @@ Prettier 和 ESLint 都有能力格式化程式碼，可能會導致格式衝突
 
 本堂課程繳交作業時，程式碼需符合助教所提供的 `.prettierrc` 及 `.eslintrc.js` 設定原則，檢查時若發現有警告或是錯誤，將會進行扣分。
 
-設定檔可以從這裡下載：<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a> | <a href="/webgame-engine/assets/coding-style/.prettierrc" download>.prettierrc</a>
+設定檔可以從這裡下載：<a href="/webgame-engine/assets/coding-style/.eslintrc.js" download>.eslintrc.js</a> | <a href="/webgame-engine/assets/coding-style/.prettierrc.zip" download>.prettierrc</a>
 
 違反 ESLint 原則時，VS Code 會標註紅色（Error）或黃色（Warning）底線，可以透過滑鼠懸浮於上找到違反原則的提示，也可以點擊超連結查看 ESLint 官方的使用範例。
 
